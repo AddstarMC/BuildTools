@@ -1,0 +1,17 @@
+name: BuildTools
+main: au.com.mineauz.buildtools.Main
+version: 1.0.0
+author: _Razz_
+
+commands:
+  buildtools:
+    description: The BuildTools base command.
+    usage: Invalid command. Type "/buildtools help" for help
+    permission: buildtools.command
+    permisison-message: You don't have permission to use this command <permission>
+    aliases: [bt]
+
+permissions:
+  buildtools.command:
+    description: Allows a player to use the base command.
+    default: true
