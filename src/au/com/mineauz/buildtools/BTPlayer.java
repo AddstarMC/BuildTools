@@ -184,6 +184,7 @@ public class BTPlayer {
 	}
 	
 	public boolean hasItem(ItemStack item){
+		if(item == null) return false;
 		for(ItemStack i : player.getInventory().getContents()){
 			if(i != null && i.getType() == item.getType() &&
 					i.getDurability() == item.getDurability()){
@@ -194,6 +195,7 @@ public class BTPlayer {
 	}
 	
 	public void removeItem(ItemStack item){
+		if(item == null) return;
 		ItemStack toClear = null;
 		for(ItemStack i : player.getInventory().getContents()){
 			if(i != null && i.getType() == item.getType() &&

@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUndo;
@@ -50,9 +53,12 @@ public class CuboidSelection implements BuildSelection {
 		}
 		else{
 			boolean succeed = false;
-			for(Location block : toFill){
-				succeed = BuildToolsUtils.placeBlock(player, block, 
-						player.getPoints().get(player.getPointCount() - 1).getBlock().getState().getData(), breaking, undo);
+			Block block = player.getPoints().get(player.getPointCount() - 1).getBlock();
+			ItemStack item = BuildToolsUtils.getBlockDrop(block);
+			MaterialData data = block.getState().getData();
+			for(Location loc : toFill){
+				succeed = BuildToolsUtils.placeBlock(player, loc, 
+						data, item, breaking, undo);
 				if(!succeed)
 					break;
 			}

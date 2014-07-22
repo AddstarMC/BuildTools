@@ -5,7 +5,9 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.patterns.BuildPattern;
@@ -86,7 +88,7 @@ public class BuildToolsUtils {
 		return true;
 	}
 	
-	public static boolean placeBlock(BTPlayer player, Location loc, MaterialData data, boolean breaking, BTUndo undo){
+	public static boolean placeBlock(BTPlayer player, Location loc, MaterialData data, ItemStack usedItem, boolean breaking, BTUndo undo){
 		if(!breaking && loc.getBlock().getType() == Material.AIR){
 			if(player == null || player.isInCreative()){
 				undo.addBlock(loc.getBlock().getState());
@@ -98,8 +100,8 @@ public class BuildToolsUtils {
 			}
 			else{
 				BlockState state = loc.getBlock().getState();
-				if(player.hasItem(data.toItemStack())){
-					player.removeItem(data.toItemStack());
+				if(player.hasItem(usedItem)){
+					player.removeItem(usedItem);
 					state.setType(data.getItemType());
 					state.setData(data);
 					state.update(true);
@@ -123,5 +125,11 @@ public class BuildToolsUtils {
 			}
 		}
 		return true;
+	}
+	
+	public static ItemStack getBlockDrop(Block block){
+		if(!block.getDrops().isEmpty())
+			return (ItemStack) block.getDrops().toArray()[0];
+		return null;
 	}
 }
