@@ -11,7 +11,7 @@ import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUndo;
-import au.com.mineauz.buildtools.BuildToolsUtils;
+import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
 public class CuboidSelection implements BuildSelection {
@@ -29,7 +29,7 @@ public class CuboidSelection implements BuildSelection {
 	@Override
 	public List<Location> execute(List<Location> points, BuildPattern pattern) {
 		List<Location> loc = new ArrayList<Location>();
-		Location[] mmtab = BuildToolsUtils.createMinMaxTable(points.get(0), points.get(1));
+		Location[] mmtab = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location temp = mmtab[0].clone();
 		for(int y = mmtab[0].getBlockY(); y <= mmtab[1].getBlockY(); y++){
 			temp.setY(y);
@@ -54,10 +54,10 @@ public class CuboidSelection implements BuildSelection {
 		else{
 			boolean succeed = false;
 			Block block = player.getPoints().get(player.getPointCount() - 1).getBlock();
-			ItemStack item = BuildToolsUtils.getBlockDrop(block);
+			ItemStack item = BTUtils.getBlockDrop(block);
 			MaterialData data = block.getState().getData();
 			for(Location loc : toFill){
-				succeed = BuildToolsUtils.placeBlock(player, loc, 
+				succeed = BTUtils.placeBlock(player, loc, 
 						data, item, breaking, undo);
 				if(!succeed)
 					break;

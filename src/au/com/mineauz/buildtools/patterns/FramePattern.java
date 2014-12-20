@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 
-import au.com.mineauz.buildtools.BuildToolsUtils;
+import au.com.mineauz.buildtools.BTUtils;
 
 public class FramePattern implements BuildPattern {
 
@@ -16,9 +16,9 @@ public class FramePattern implements BuildPattern {
 
 	@Override
 	public List<String> compatibleSelections() {
-		List<String> ls = new ArrayList<String>();
-		ls.add("CUBOID");
-		return ls;
+		List<String> s = new ArrayList<String>(1);
+		s.add("CUBOID");
+		return s;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class FramePattern implements BuildPattern {
 
 	@Override
 	public boolean fitsPattern(Location block, List<Location> points) {
-		Location[] locs = BuildToolsUtils.createMinMaxTable(points.get(0), points.get(1));
+		Location[] locs = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		int minx = locs[0].getBlockX();
 		int miny = locs[0].getBlockY();
 		int minz = locs[0].getBlockZ();

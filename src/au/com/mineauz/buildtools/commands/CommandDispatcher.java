@@ -13,7 +13,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.BuildToolsUtils;
+import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.PlayerData;
 
 public class CommandDispatcher implements CommandExecutor, TabCompleter{
@@ -83,7 +83,7 @@ loop:			for(ICommand ic : commands.values()){
 					sender.sendMessage(ChatColor.GREEN + "------------Command Help------------");
 					sender.sendMessage(ChatColor.AQUA + "Command: " + ChatColor.GRAY + icmd.getName());
 					if(icmd.getAliases() != null){
-						sender.sendMessage(ChatColor.AQUA + "Aliases: " + BuildToolsUtils.arrayToString(icmd.getAliases()));
+						sender.sendMessage(ChatColor.AQUA + "Aliases: " + BTUtils.arrayToString(icmd.getAliases()));
 					}
 					if(icmd.getUsage() != null){
 						sender.sendMessage(ChatColor.AQUA + "Usage:");

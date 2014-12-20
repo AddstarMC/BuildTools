@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 
-import au.com.mineauz.buildtools.BuildToolsUtils;
+import au.com.mineauz.buildtools.BTUtils;
 
 public class HollowPattern implements BuildPattern {
 
@@ -16,9 +16,9 @@ public class HollowPattern implements BuildPattern {
 
 	@Override
 	public List<String> compatibleSelections() {
-		List<String> ls = new ArrayList<String>();
-		ls.add("CUBOID");
-		return ls;
+		List<String> s = new ArrayList<String>(1);
+		s.add("CUBOID");
+		return s;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class HollowPattern implements BuildPattern {
 	@Override
 	public boolean fitsPattern(Location block,
 			List<Location> points) {
-		Location[] mmt = BuildToolsUtils.createMinMaxTable(points.get(0), points.get(1));
+		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		if(block.getBlockX() == mmt[0].getBlockX() || 
 				block.getBlockX() == mmt[1].getBlockX() ||
 				block.getBlockY() == mmt[0].getBlockY() ||

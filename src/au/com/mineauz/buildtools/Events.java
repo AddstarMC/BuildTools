@@ -33,7 +33,7 @@ public class Events implements Listener{
 					
 					@Override
 					public void run() {
-						BuildToolsUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), false);
+						BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), false);
 						fpl.clearPoints();
 					}
 				});
@@ -67,7 +67,7 @@ public class Events implements Listener{
 					
 					@Override
 					public void run() {
-						BuildToolsUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), true);
+						BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), true);
 						fpl.clearPoints();
 					}
 				});

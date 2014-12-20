@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,6 +25,8 @@ public class BTPlayer {
 	private String pattern = "NONE";
 	private List<BTUndo> undos = new ArrayList<BTUndo>();
 	private List<BTUndo> redos = new ArrayList<BTUndo>();
+	private int lowerYLimit = 0;
+	private int upperYLimit = 255;
 	
 	public BTPlayer(Player player){
 		this.player = player;
@@ -209,5 +212,40 @@ public class BTPlayer {
 		}
 		if(toClear != null)
 			player.getInventory().remove(toClear);
+	}
+	
+	public void damageItem(ItemStack item){
+		if(item == null) return;
+		if(PlayerData.hasTool(item.getType())){
+			item.setDurability((short) (item.getDurability() + 1));
+			if(item.getDurability() >= item.getType().getMaxDurability()){
+				player.playSound(getLocation(), Sound.ITEM_BREAK, 1, 1);
+				removeItem(item);
+			}
+		}
+	}
+	
+	public void setLowerYLimit(int limit){
+		if(limit < 0)
+			limit = 0;
+		else if(limit > 255)
+			limit = 248;
+		lowerYLimit = limit;
+	}
+	
+	public int getLowerYLimit(){
+		return lowerYLimit;
+	}
+	
+	public void setUpperYLimit(int limit){
+		if(limit < 0)
+			limit = 0;
+		else if(limit > 255)
+			limit = 255;
+		upperYLimit = limit;
+	}
+	
+	public int getUpperYLimit(){
+		return upperYLimit;
 	}
 }
