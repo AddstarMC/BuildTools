@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.PlayerData;
+import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
 
 public class PatternCommand implements ICommand {
@@ -45,7 +45,7 @@ public class PatternCommand implements ICommand {
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
 		if(args != null){
-			BTPlayer pl = PlayerData.getBTPlayer((Player)sender);
+			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			String pat = args[0].toUpperCase();
 			if(BuildPatterns.hasPattern(pat)){
 				boolean bool = pl.setPattern(pat);

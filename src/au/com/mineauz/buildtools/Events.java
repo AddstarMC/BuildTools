@@ -11,19 +11,21 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class Events implements Listener{
 	
+	private PlayerData pdata = Main.plugin.getPlayerData();
+	
 	@EventHandler
 	private void playerLogin(PlayerJoinEvent event){
-		PlayerData.addBTPlayer(event.getPlayer());
+		pdata.addBTPlayer(event.getPlayer());
 	}
 	
 	@EventHandler
 	private void playerLogout(PlayerQuitEvent event){
-		PlayerData.removeBTPlayer(event.getPlayer());
+		pdata.removeBTPlayer(event.getPlayer());
 	}
 	
 	@EventHandler
 	private void placeBlock(BlockPlaceEvent event){
-		BTPlayer pl = PlayerData.getBTPlayer(event.getPlayer());
+		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
 		if(pl == null) return;
 		if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
 			pl.addPoint(event.getBlockPlaced().getLocation());
@@ -51,14 +53,14 @@ public class Events implements Listener{
 	
 	@EventHandler
 	private void breakBlock(BlockBreakEvent event){
-		BTPlayer pl = PlayerData.getBTPlayer(event.getPlayer());
+		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
 		if(pl == null) return;
 		if(pl.isBuildModeActive() && pl.hasPoint(event.getBlock().getLocation())){
 			pl.removePoint(event.getBlock().getLocation());
 			pl.sendMessage("Removed point from selection.", ChatColor.RED);
 		}
 		else if(pl.isBuildModeActive() && 
-				PlayerData.hasTool(pl.getPlayer().getItemInHand().getType()) && 
+				pdata.hasTool(pl.getPlayer().getItemInHand().getType()) && 
 				!pl.getPlayer().isSneaking()){
 			pl.addPoint(event.getBlock().getLocation());
 			if(pl.getPointCount() >= pl.getSelection().getRequiredPointCount()){

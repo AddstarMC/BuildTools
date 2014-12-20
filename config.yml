@@ -1,0 +1,36 @@
+# Maximum volume allowed for players to use BuildTools.
+# More groups can be added to allow certain players to build larger.
+# Permission for added groups: buildtools.maxvolume.<groupName>
+maxVolume:
+  default: 13824
+
+# Height limits for players to use BuildTools, Min 0, Max 255.
+# More groups can be added to allow certain players to build higher/lower.
+# First item on list is minimum height, second is maximum.
+# Permission for added groups: buildtools.hightlimit.<groupName>
+heightLimits:
+  default:
+  - 0
+  - 255
+
+# Block materials that cannot be used in BuildTools.
+# More groups can be added to disallow specific blocks per group.
+# Permission for added groups: buildtools.disabledblocks.<groupName>
+disabledBlocks:
+  default:
+  - TNT
+  - CACTUS
+  - CHEST
+  - TRAPPED_CHEST
+  - SIGN_POST
+  - WALL_SIGN
+  - IRON_DOOR
+  - WOODEN_DOOR
+  - ACACIA_DOOR
+  - BIRCH_DOOR
+  - DARK_OAK_DOOR
+  - SPRUCE_DOOR
+  - TRAP_DOOR
+  - IRON_TRAPDOOR
+  - FIRE
+  - DOUBLE_PLANT

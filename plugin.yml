@@ -15,3 +15,15 @@ permissions:
   buildtools.command:
     description: Allows a player to use the base command.
     default: true
+  buildtools.bypasslimits:
+    description: Allows a player to bypass all limits.
+    children:
+      buildtools.bypassheightlimit: true
+      buildtools.bypassvolumelimit: true
+      buildtools.bypassdisabledblocks: true
+  buildtools.bypassheightlimit:
+    default: op
+  buildtools.bypassvolumelimit:
+    default: false
+  buildtools.bypassdisabledblocks:
+    default: false

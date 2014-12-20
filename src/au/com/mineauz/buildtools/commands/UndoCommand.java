@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.PlayerData;
+import au.com.mineauz.buildtools.Main;
 
 public class UndoCommand implements ICommand {
 
@@ -42,7 +42,7 @@ public class UndoCommand implements ICommand {
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		BTPlayer player = PlayerData.getBTPlayer((Player)sender);
+		BTPlayer player = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 		player.undo();
 		return true;
 	}

@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.PlayerData;
+import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.selections.BuildSelections;
 
 public class SelectionCommand implements ICommand {
@@ -45,7 +45,7 @@ public class SelectionCommand implements ICommand {
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
 		if(args != null){
-			BTPlayer pl = PlayerData.getBTPlayer((Player)sender);
+			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(BuildSelections.hasSelection(args[0])){
 				pl.setSelection(args[0].toUpperCase());
 				sender.sendMessage(ChatColor.GRAY + "Set selection type to " + args[0]);
