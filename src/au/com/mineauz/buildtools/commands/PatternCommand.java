@@ -55,7 +55,7 @@ public class PatternCommand implements ICommand {
 					pl.sendMessage("The pattern " + pat + " is not compatible with the selection " + pl.getSelection().getName(), ChatColor.RED);
 			}
 			else{
-				pl.sendMessage("No pattern found by the name " + pl, ChatColor.RED);
+				pl.sendMessage("No pattern found by the name " + pat, ChatColor.RED);
 			}
 			return true;
 		}

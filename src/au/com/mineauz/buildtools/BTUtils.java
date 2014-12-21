@@ -172,4 +172,12 @@ public class BTUtils {
 			return (ItemStack) block.getDrops().toArray()[0];
 		return null;
 	}
+	
+	public static int getVolume(Location point1, Location point2){
+		Location[] mmt = createMinMaxTable(point1, point2);
+		int xl = Math.abs(mmt[1].getBlockX() - mmt[0].getBlockX()) + 1;
+		int yl = Math.abs(mmt[1].getBlockY() - mmt[0].getBlockY()) + 1;
+		int zl = Math.abs(mmt[1].getBlockZ() - mmt[0].getBlockZ()) + 1;
+		return xl * yl * zl;
+	}
 }

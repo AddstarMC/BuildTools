@@ -24,6 +24,7 @@ public class CommandDispatcher implements CommandExecutor, TabCompleter{
 		addCommand(new PatternCommand());
 		addCommand(new UndoCommand());
 		addCommand(new RedoCommand());
+		addCommand(new DebugCommand());
 	}
 	
 	public static void addCommand(ICommand command){

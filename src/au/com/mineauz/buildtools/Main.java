@@ -62,5 +62,9 @@ public class Main extends JavaPlugin{
 	public boolean isDebugging(){
 		return debug;
 	}
+	
+	public void setDebugging(boolean debug){
+		this.debug = debug;
+	}
 
 }
