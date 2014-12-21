@@ -50,6 +50,7 @@ public class Main extends JavaPlugin{
 	@Override
 	public void onDisable(){
 		pdata.clearAllBTPlayers();
+		pdata = null;
 		
 		getLogger().info(" successfully disabled!");
 	}
