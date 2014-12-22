@@ -27,7 +27,7 @@ public class CuboidSelection implements BuildSelection {
 	}
 
 	@Override
-	public List<Location> execute(List<Location> points, BuildPattern pattern) {
+	public List<Location> execute(BTPlayer player, List<Location> points, BuildPattern pattern, String[] settings) {
 		List<Location> loc = new ArrayList<Location>();
 		Location[] mmtab = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location temp = mmtab[0].clone();

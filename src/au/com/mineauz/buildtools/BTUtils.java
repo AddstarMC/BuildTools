@@ -76,7 +76,7 @@ public class BTUtils {
 	}
 	
 	public static boolean generateBlocks(BTPlayer player, BuildSelection selection, BuildPattern pattern, List<Location> points, boolean breaking){
-		List<Location> locs = selection.execute(player.getPoints(), pattern);
+		List<Location> locs = selection.execute(player, player.getPoints(), pattern, player.getSSettings());
 		
 		boolean crUnd = false;
 		if(player == null || player.isInCreative())

@@ -54,6 +54,16 @@ public class SelectionCommand implements ICommand {
 			if(BuildSelections.hasSelection(args[0])){
 				pl.setSelection(args[0].toUpperCase());
 				pl.sendMessage("Set selection type to " + pl.getSelection().getName().toLowerCase(), ChatColor.AQUA);
+				if(args.length > 1){
+					String[] s = new String[args.length - 1];
+					for(int i = 1; i < args.length; i++){
+						s[i - 1] = args[i];
+					}
+					pl.setSSettings(s);
+				}
+				else{
+					pl.setSSettings(new String[0]);
+				}
 			}
 			else
 				pl.sendMessage(ChatColor.RED + "No selection type by the name '" + args[0] + "'", ChatColor.RED);

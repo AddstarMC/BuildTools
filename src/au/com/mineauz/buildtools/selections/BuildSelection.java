@@ -12,6 +12,6 @@ public interface BuildSelection {
 	
 	public String getName();
 	public int getRequiredPointCount();
-	public List<Location> execute(List<Location> points, BuildPattern pattern);
+	public List<Location> execute(BTPlayer player, List<Location> points, BuildPattern pattern, String[] settings);
 	public void fill(List<Location> toFill, BTPlayer player, BuildPattern pattern, boolean breaking, BTUndo undo);
 }

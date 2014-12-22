@@ -9,6 +9,7 @@ public class BuildSelections {
 	
 	static{
 		addSelection(new CuboidSelection());
+		addSelection(new TerrainSelection());
 	}
 	
 	public static BuildSelection getSelection(String name){

@@ -1,0 +1,98 @@
+package au.com.mineauz.buildtools.selections;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
+import org.bukkit.util.noise.PerlinNoiseGenerator;
+
+import au.com.mineauz.buildtools.BTPlayer;
+import au.com.mineauz.buildtools.BTUndo;
+import au.com.mineauz.buildtools.BTUtils;
+import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.patterns.BuildPattern;
+
+public class TerrainSelection implements BuildSelection{
+
+	@Override
+	public String getName() {
+		return "TERRAIN";
+	}
+
+	@Override
+	public int getRequiredPointCount() {
+		return 2;
+	}
+
+	@Override
+	public List<Location> execute(BTPlayer player, List<Location> points, BuildPattern pattern, String[] settings) {
+		List<Location> locs = new ArrayList<>();
+		int sm = new Random().nextInt(25 - 15) + 15;
+		long seed = System.currentTimeMillis();
+		if(settings.length != 0){
+			if(settings.length >= 1 && settings[0].matches("-?[0-9]+")){
+				seed = Long.valueOf(settings[0]);
+			}
+			if(settings.length >= 2 && settings[1].matches("[1-9]([0-9]+)?")){
+				sm = Integer.valueOf(settings[1]);
+			}
+		}
+		PerlinNoiseGenerator gen = new PerlinNoiseGenerator(seed);
+		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
+		Location tmp = mmt[0].clone();
+		double h = mmt[1].getBlockY() - mmt[0].getBlockY();
+		double hh = h/2;
+		for(double x = mmt[0].getX(); x <= mmt[1].getX(); x++){
+			tmp.setX(x);
+			for(double z = mmt[0].getZ(); z <= mmt[1].getZ(); z++){
+				tmp.setZ(z);
+				tmp.setY(mmt[0].getY() + hh + (hh * gen.noise(x/sm, z/sm)));
+				if(tmp.getY() < mmt[0].getY())
+					tmp.setY(mmt[0].getY());
+				else if(tmp.getY() > mmt[1].getY())
+					tmp.setY(mmt[1].getY());
+				locs.add(tmp.clone());
+				while(tmp.getBlockY() > mmt[0].getBlockY()){
+					tmp.setY(tmp.getY() - 1);
+					locs.add(tmp.clone());
+				}
+			}
+		}
+		if(player != null){
+			player.sendMessage(ChatColor.GRAY + "Generator Seed: " + seed);
+			player.sendMessage(ChatColor.GRAY + "Smoothness: " + sm);
+		}
+		else if(Main.plugin.isDebugging()){
+			Main.plugin.getLogger().info("Generator Seed: " + seed);
+			Main.plugin.getLogger().info("Smoothness: " + sm);
+		}
+		
+		return locs;
+	}
+
+	@Override
+	public void fill(List<Location> toFill, BTPlayer player,
+			BuildPattern pattern, boolean breaking, BTUndo undo) {
+		if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
+			player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
+		}
+		else{
+			boolean succeed = false;
+			Block block = player.getPoints().get(player.getPointCount() - 1).getBlock();
+			ItemStack item = BTUtils.getBlockDrop(block);
+			MaterialData data = block.getState().getData();
+			for(Location loc : toFill){
+				succeed = BTUtils.placeBlock(player, loc, 
+						data, item, breaking, undo);
+				if(!succeed)
+					break;
+			}
+		}
+	}
+
+}

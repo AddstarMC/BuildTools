@@ -25,6 +25,7 @@ public class BTPlayer {
 	private String pattern = "NONE";
 	private List<BTUndo> undos = new ArrayList<BTUndo>();
 	private List<BTUndo> redos = new ArrayList<BTUndo>();
+	private String[] sSettings = new String[]{};
 	
 	public BTPlayer(Player player){
 		this.player = player;
@@ -225,5 +226,13 @@ public class BTPlayer {
 				removeItem(item);
 			}
 		}
+	}
+	
+	public String[] getSSettings(){
+		return sSettings;
+	}
+	
+	public void setSSettings(String[] settings){
+		this.sSettings = settings;
 	}
 }
