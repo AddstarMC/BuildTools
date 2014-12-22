@@ -11,6 +11,7 @@ public interface ICommand {
 	public boolean canBeConsole();
 	public boolean canBeCommandBlock();
 	public String[] getUsage();
+	public String getPermission();
 	
 	public List<String> onTabComplete(CommandSender sender, String[] args);
 	

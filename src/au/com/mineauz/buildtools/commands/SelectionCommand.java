@@ -36,6 +36,11 @@ public class SelectionCommand implements ICommand {
 	public String[] getUsage() {
 		return new String[] {"selection <Type>"};
 	}
+	
+	@Override
+	public String getPermission(){
+		return "buildtools.command.selection";
+	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, String[] args) {

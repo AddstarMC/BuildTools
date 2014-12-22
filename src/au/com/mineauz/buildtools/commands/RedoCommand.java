@@ -34,6 +34,11 @@ public class RedoCommand implements ICommand {
 	public String[] getUsage() {
 		return new String[] {""};
 	}
+	
+	@Override
+	public String getPermission(){
+		return "buildtools.command.redo";
+	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, String[] args) {

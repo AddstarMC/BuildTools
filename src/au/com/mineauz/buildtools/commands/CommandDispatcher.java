@@ -66,37 +66,42 @@ loop:			for(ICommand ic : commands.values()){
 			}
 			
 			if(icmd != null){
-				String[] nargs = null;
-				if(args.length - 1 > 0){
-					nargs = new String[args.length - 1];
-					for(int i = 1; i < args.length; i++)
-						nargs[i - 1] = args[i];
-				}
-				
-				if((isConsole && !icmd.canBeConsole()) ||
-						(isCommandBlock && !icmd.canBeCommandBlock())){
-					sender.sendMessage(ChatColor.RED + "Sorry, this command can't be used under your conditions!");
-					return true;
-				}
-				
-				boolean ret = icmd.onCommand(sender, nargs);
-				if(!ret){
-					sender.sendMessage(ChatColor.GREEN + "------------Command Help------------");
-					sender.sendMessage(ChatColor.AQUA + "Command: " + ChatColor.GRAY + icmd.getName());
-					if(icmd.getAliases() != null){
-						sender.sendMessage(ChatColor.AQUA + "Aliases: " + BTUtils.arrayToString(icmd.getAliases()));
+				if(icmd.getPermission() == null || sender.hasPermission(icmd.getPermission())){
+					String[] nargs = null;
+					if(args.length - 1 > 0){
+						nargs = new String[args.length - 1];
+						for(int i = 1; i < args.length; i++)
+							nargs[i - 1] = args[i];
 					}
-					if(icmd.getUsage() != null){
-						sender.sendMessage(ChatColor.AQUA + "Usage:");
-						for(String use : icmd.getUsage()){
-							sender.sendMessage(ChatColor.GRAY + "/" + cmd + " " + icmd.getName() + " " + use);
+					
+					if((isConsole && !icmd.canBeConsole()) ||
+							(isCommandBlock && !icmd.canBeCommandBlock())){
+						sender.sendMessage(ChatColor.RED + "Sorry, this command can't be used under your conditions!");
+						return true;
+					}
+					
+					boolean ret = icmd.onCommand(sender, nargs);
+					if(!ret){
+						sender.sendMessage(ChatColor.GREEN + "------------Command Help------------");
+						sender.sendMessage(ChatColor.AQUA + "Command: " + ChatColor.GRAY + icmd.getName());
+						if(icmd.getAliases() != null){
+							sender.sendMessage(ChatColor.AQUA + "Aliases: " + BTUtils.arrayToString(icmd.getAliases()));
+						}
+						if(icmd.getUsage() != null){
+							sender.sendMessage(ChatColor.AQUA + "Usage:");
+							for(String use : icmd.getUsage()){
+								sender.sendMessage(ChatColor.GRAY + "/" + cmd + " " + icmd.getName() + " " + use);
+							}
 						}
 					}
+				}
+				else{
+					sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!\n" + icmd.getPermission());
 				}
 				return true;
 			}
 		}
-		if(sender instanceof Player){
+		else if(sender instanceof Player){
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(!pl.isBuildModeActive()){
 				pl.setBuildModeActive(true);

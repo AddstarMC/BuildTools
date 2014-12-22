@@ -33,6 +33,11 @@ public class DebugCommand implements ICommand{
 	public String[] getUsage() {
 		return null;
 	}
+	
+	@Override
+	public String getPermission(){
+		return "buildtools.command.debug";
+	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, String[] args) {

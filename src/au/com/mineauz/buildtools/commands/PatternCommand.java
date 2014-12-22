@@ -36,6 +36,11 @@ public class PatternCommand implements ICommand {
 	public String[] getUsage() {
 		return new String[] {"<Pattern>"};
 	}
+	
+	@Override
+	public String getPermission(){
+		return "buildtools.command.pattern";
+	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, String[] args) {

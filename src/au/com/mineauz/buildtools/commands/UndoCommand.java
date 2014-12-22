@@ -34,6 +34,11 @@ public class UndoCommand implements ICommand {
 	public String[] getUsage() {
 		return new String[] {""};
 	}
+	
+	@Override
+	public String getPermission(){
+		return "buildtools.command.undo";
+	}
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, String[] args) {
