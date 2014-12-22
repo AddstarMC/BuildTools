@@ -53,10 +53,10 @@ public class SelectionCommand implements ICommand {
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(BuildSelections.hasSelection(args[0])){
 				pl.setSelection(args[0].toUpperCase());
-				sender.sendMessage(ChatColor.GRAY + "Set selection type to " + args[0]);
+				pl.sendMessage("Set selection type to " + pl.getSelection().getName().toLowerCase(), ChatColor.AQUA);
 			}
 			else
-				sender.sendMessage(ChatColor.RED + "No selection type by the name " + args[0]);
+				pl.sendMessage(ChatColor.RED + "No selection type by the name '" + args[0] + "'", ChatColor.RED);
 			return true;
 		}
 		return false;
