@@ -1,5 +1,6 @@
 package au.com.mineauz.buildtools.commands;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,37 @@ public class CommandDispatcher implements CommandExecutor, TabCompleter{
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command,
 			String cmd, String[] args) {
+		if(args.length > 0){
+			if(args.length == 1)
+				return BTUtils.tabComplete(args[0], new ArrayList<String>(commands.keySet()));
+			else if(args.length > 1){
+				String subcomd = args[0].toLowerCase();
+				ICommand icmd = null;
+				if(commands.containsKey(subcomd))
+					icmd = commands.get(subcomd);
+				else{
+	loop:			for(ICommand ic : commands.values()){
+						if(ic.getAliases() != null){
+							for(String al : ic.getAliases()){
+								if(al.equalsIgnoreCase(subcomd)){
+									icmd = ic;
+									break loop;
+								}
+							}
+						}
+					}
+				}
+				if(icmd != null){
+					String[] nargs = null;
+					if(args.length - 1 > 0){
+						nargs = new String[args.length - 1];
+						for(int i = 1; i < args.length; i++)
+							nargs[i - 1] = args[i];
+					}
+					return icmd.onTabComplete(sender, nargs);
+				}
+			}
+		}
 		return null;
 	}
 

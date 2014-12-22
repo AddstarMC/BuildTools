@@ -1,5 +1,6 @@
 package au.com.mineauz.buildtools;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -179,5 +180,19 @@ public class BTUtils {
 		int yl = Math.abs(mmt[1].getBlockY() - mmt[0].getBlockY()) + 1;
 		int zl = Math.abs(mmt[1].getBlockZ() - mmt[0].getBlockZ()) + 1;
 		return xl * yl * zl;
+	}
+	
+	public static List<String> tabComplete(String match, List<String> options){
+		List<String> fOpts = new ArrayList<>();
+		if(match != null && !match.equals("")){
+			for(String o : options){
+				if(o.startsWith(match))
+					fOpts.add(o);
+			}
+		}
+		else{
+			fOpts.addAll(options);
+		}
+		return fOpts;
 	}
 }
