@@ -54,8 +54,19 @@ public class PatternCommand implements ICommand {
 			String pat = args[0].toUpperCase();
 			if(BuildPatterns.hasPattern(pat)){
 				boolean bool = pl.setPattern(pat);
-				if(bool)
+				if(bool){
 					pl.sendMessage("Your pattern has been set to " + pat, ChatColor.AQUA);
+					if(args.length > 1){
+						String[] s = new String[args.length - 1];
+						for(int i = 1; i < args.length; i++){
+							s[i - 1] = args[i];
+						}
+						pl.setPSettings(s);
+					}
+					else{
+						pl.setPSettings(new String[0]);
+					}
+				}
 				else
 					pl.sendMessage("The pattern " + pat + " is not compatible with the selection " + pl.getSelection().getName(), ChatColor.RED);
 			}

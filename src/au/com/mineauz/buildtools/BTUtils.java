@@ -80,7 +80,7 @@ public class BTUtils {
 			player.sendMessage("You are currently generating something else, please wait...", ChatColor.AQUA);
 			return;
 		}
-		List<Location> locs = selection.execute(player, breaking, points, pattern, player.getTSettings());
+		List<Location> locs = selection.execute(player, breaking, points, pattern, player.getTSettings(), player.getPSettings());
 		
 		boolean crUnd = false;
 		if(player == null || player.isInCreative())

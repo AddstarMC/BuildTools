@@ -24,7 +24,7 @@ public class OverlayType implements BuildType {
 
 	@Override
 	public List<Location> execute(BTPlayer player, boolean isBreaking,
-			List<Location> points, BuildPattern pattern, String[] settings) {
+			List<Location> points, BuildPattern pattern, String[] settings, String[] pSettings) {
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		List<Location> locs = new ArrayList<>();
 		Location tmp = mmt[0].clone();
@@ -40,11 +40,11 @@ public class OverlayType implements BuildType {
 					if(tmp.getBlock().getType() != Material.AIR && tmp.getBlock().getType().isSolid()){
 						if(!isBreaking)
 							tmp.setY(tmp.getY() + 1);
-						if(pattern.fitsPattern(tmp, points))
+						if(pattern.fitsPattern(tmp, points, pSettings))
 							locs.add(tmp.clone());
 					}
 				}
-				else if(isBreaking && pattern.fitsPattern(tmp, points))
+				else if(isBreaking && pattern.fitsPattern(tmp, points, pSettings))
 					locs.add(tmp);
 				tmp.setY(mmt[1].getBlockY());
 			}

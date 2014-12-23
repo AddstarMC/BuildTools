@@ -23,7 +23,7 @@ public class NonePattern implements BuildPattern {
 
 	@Override
 	public boolean fitsPattern(Location block,
-			List<Location> points) {
+			List<Location> points, String[] settings) {
 		return true;
 	}
 

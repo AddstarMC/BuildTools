@@ -12,6 +12,7 @@ public class BuildPatterns {
 		addPattern(new HollowPattern());
 		addPattern(new FramePattern());
 		addPattern(new WallPattern());
+		addPattern(new RandomPattern());
 	}
 	
 	public static void addPattern(BuildPattern pattern){

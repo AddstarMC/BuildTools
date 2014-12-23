@@ -26,7 +26,7 @@ public class TerrainType implements BuildType{
 	}
 
 	@Override
-	public List<Location> execute(BTPlayer player, boolean isBreaking, List<Location> points, BuildPattern pattern, String[] settings) {
+	public List<Location> execute(BTPlayer player, boolean isBreaking, List<Location> points, BuildPattern pattern, String[] settings, String[] pSettings) {
 		List<Location> locs = new ArrayList<>();
 		int sm = new Random().nextInt(25 - 15) + 15;
 		long seed = System.currentTimeMillis();
