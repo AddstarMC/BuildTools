@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.patterns.BuildPattern;
-import au.com.mineauz.buildtools.selections.BuildSelection;
+import au.com.mineauz.buildtools.types.BuildType;
 
 public class BTUtils {
 	
@@ -75,12 +75,12 @@ public class BTUtils {
 		return locArr;
 	}
 	
-	public static void generateBlocks(BTPlayer player, BuildSelection selection, BuildPattern pattern, List<Location> points, boolean breaking){
+	public static void generateBlocks(BTPlayer player, BuildType selection, BuildPattern pattern, List<Location> points, boolean breaking){
 		if(player != null && !player.canBuild()){
 			player.sendMessage("You are currently generating something else, please wait...", ChatColor.AQUA);
 			return;
 		}
-		List<Location> locs = selection.execute(player, points, pattern, player.getSSettings());
+		List<Location> locs = selection.execute(player, points, pattern, player.getTSettings());
 		
 		boolean crUnd = false;
 		if(player == null || player.isInCreative())

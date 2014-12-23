@@ -19,7 +19,7 @@ public class PatternCommand implements ICommand {
 
 	@Override
 	public String[] getAliases() {
-		return new String[] {"pat"};
+		return new String[] {"pat", "p"};
 	}
 
 	@Override

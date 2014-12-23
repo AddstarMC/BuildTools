@@ -1,4 +1,4 @@
-package au.com.mineauz.buildtools.selections;
+package au.com.mineauz.buildtools.types;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
-public class CuboidSelection implements BuildSelection {
+public class CuboidType implements BuildType {
 
 	@Override
 	public String getName() {

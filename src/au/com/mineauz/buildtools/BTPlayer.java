@@ -14,8 +14,8 @@ import org.bukkit.inventory.ItemStack;
 
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
-import au.com.mineauz.buildtools.selections.BuildSelection;
-import au.com.mineauz.buildtools.selections.BuildSelections;
+import au.com.mineauz.buildtools.types.BuildTypes;
+import au.com.mineauz.buildtools.types.BuildType;
 
 public class BTPlayer {
 	private Player player;
@@ -25,7 +25,7 @@ public class BTPlayer {
 	private String pattern = "NONE";
 	private List<BTUndo> undos = new ArrayList<BTUndo>();
 	private List<BTUndo> redos = new ArrayList<BTUndo>();
-	private String[] sSettings = new String[]{};
+	private String[] tSettings = new String[]{};
 	private boolean canBuild = true;
 	
 	public BTPlayer(Player player){
@@ -124,8 +124,8 @@ public class BTPlayer {
 		return points;
 	}
 	
-	public BuildSelection getSelection(){
-		return BuildSelections.getSelection(selection);
+	public BuildType getSelection(){
+		return BuildTypes.getSelection(selection);
 	}
 	
 	public void setSelection(String name){
@@ -229,12 +229,12 @@ public class BTPlayer {
 		}
 	}
 	
-	public String[] getSSettings(){
-		return sSettings;
+	public String[] getTSettings(){
+		return tSettings;
 	}
 	
-	public void setSSettings(String[] settings){
-		this.sSettings = settings;
+	public void setTSettings(String[] settings){
+		this.tSettings = settings;
 	}
 	
 	public boolean canBuild(){

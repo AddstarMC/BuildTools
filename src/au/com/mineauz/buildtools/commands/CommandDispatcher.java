@@ -21,7 +21,7 @@ public class CommandDispatcher implements CommandExecutor, TabCompleter{
 	private static Map<String, ICommand> commands = new HashMap<String, ICommand>();
 	
 	static{
-		addCommand(new SelectionCommand());
+		addCommand(new TypeCommand());
 		addCommand(new PatternCommand());
 		addCommand(new UndoCommand());
 		addCommand(new RedoCommand());

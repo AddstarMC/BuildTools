@@ -1,4 +1,4 @@
-package au.com.mineauz.buildtools.selections;
+package au.com.mineauz.buildtools.types;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.bukkit.Location;
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
-public interface BuildSelection {
+public interface BuildType {
 	
 	public String getName();
 	public int getRequiredPointCount();

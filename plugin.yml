@@ -21,14 +21,14 @@ permissions:
       buildtools.command.pattern: true
       buildtools.command.undo: true
       buildtools.command.redo: true
-      buildtools.command.selection: true
+      buildtools.command.type: true
   buildtools.command.basic:
     description: Basic command permissions for players.
     children:
       buildtools.command.pattern: true
       buildtools.command.undo: true
       buildtools.command.redo: true
-      buildtools.command.selection: true
+      buildtools.command.type: true
   buildtools.command.debug:
     default: op
   buildtools.command.pattern:
@@ -37,7 +37,7 @@ permissions:
     default: op
   buildtools.command.redo:
     default: op
-  buildtools.command.selection:
+  buildtools.command.type:
     default: op
   buildtools.bypasslimits:
     description: Allows a player to bypass all limits.
