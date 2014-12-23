@@ -8,19 +8,20 @@ public class BuildTypes {
 	private static Map<String, BuildType> selections = new HashMap<String, BuildType>();
 	
 	static{
-		addSelection(new CuboidType());
-		addSelection(new TerrainType());
+		addType(new CuboidType());
+		addType(new TerrainType());
+		addType(new OverlayType());
 	}
 	
-	public static BuildType getSelection(String name){
+	public static BuildType getType(String name){
 		return selections.get(name.toUpperCase());
 	}
 	
-	public static void addSelection(BuildType selection){
+	public static void addType(BuildType selection){
 		selections.put(selection.getName().toUpperCase().replace(" ", "_"), selection);
 	}
 	
-	public static boolean hasSelection(String name){
+	public static boolean hasType(String name){
 		return selections.containsKey(name.toUpperCase());
 	}
 

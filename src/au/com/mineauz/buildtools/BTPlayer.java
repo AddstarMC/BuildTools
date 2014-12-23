@@ -125,7 +125,7 @@ public class BTPlayer {
 	}
 	
 	public BuildType getSelection(){
-		return BuildTypes.getSelection(selection);
+		return BuildTypes.getType(selection);
 	}
 	
 	public void setSelection(String name){

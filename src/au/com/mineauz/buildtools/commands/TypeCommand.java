@@ -51,7 +51,7 @@ public class TypeCommand implements ICommand {
 	public boolean onCommand(CommandSender sender, String[] args) {
 		if(args != null){
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
-			if(BuildTypes.hasSelection(args[0])){
+			if(BuildTypes.hasType(args[0])){
 				pl.setSelection(args[0].toUpperCase());
 				pl.sendMessage("Set type to " + pl.getSelection().getName().toLowerCase(), ChatColor.AQUA);
 				if(args.length > 1){
