@@ -6,13 +6,9 @@ import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 import org.bukkit.util.noise.PerlinNoiseGenerator;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.BTUndo;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
@@ -35,11 +31,11 @@ public class TerrainSelection implements BuildSelection{
 		int sm = new Random().nextInt(25 - 15) + 15;
 		long seed = System.currentTimeMillis();
 		if(settings.length != 0){
-			if(settings.length >= 1 && settings[0].matches("-?[0-9]+")){
-				seed = Long.valueOf(settings[0]);
+			if(settings.length >= 2 && settings[1].matches("-?[0-9]+")){
+				seed = Long.valueOf(settings[1]);
 			}
-			if(settings.length >= 2 && settings[1].matches("[1-9]([0-9]+)?")){
-				sm = Integer.valueOf(settings[1]);
+			if(settings.length >= 1 && settings[0].matches("[1-9]([0-9]+)?")){
+				sm = Integer.valueOf(settings[0]);
 			}
 		}
 		PerlinNoiseGenerator gen = new PerlinNoiseGenerator(seed);
@@ -73,26 +69,6 @@ public class TerrainSelection implements BuildSelection{
 		}
 		
 		return locs;
-	}
-
-	@Override
-	public void fill(List<Location> toFill, BTPlayer player,
-			BuildPattern pattern, boolean breaking, BTUndo undo) {
-		if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
-			player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
-		}
-		else{
-			boolean succeed = false;
-			Block block = player.getPoints().get(player.getPointCount() - 1).getBlock();
-			ItemStack item = BTUtils.getBlockDrop(block);
-			MaterialData data = block.getState().getData();
-			for(Location loc : toFill){
-				succeed = BTUtils.placeBlock(player, loc, 
-						data, item, breaking, undo);
-				if(!succeed)
-					break;
-			}
-		}
 	}
 
 }

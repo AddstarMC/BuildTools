@@ -13,7 +13,7 @@ public class BuildSelections {
 	}
 	
 	public static BuildSelection getSelection(String name){
-		return selections.get(name);
+		return selections.get(name.toUpperCase());
 	}
 	
 	public static void addSelection(BuildSelection selection){

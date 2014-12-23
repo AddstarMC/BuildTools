@@ -75,19 +75,28 @@ public class BTUtils {
 		return locArr;
 	}
 	
-	public static boolean generateBlocks(BTPlayer player, BuildSelection selection, BuildPattern pattern, List<Location> points, boolean breaking){
-		List<Location> locs = selection.execute(player, player.getPoints(), pattern, player.getSSettings());
+	public static void generateBlocks(BTPlayer player, BuildSelection selection, BuildPattern pattern, List<Location> points, boolean breaking){
+		if(player != null && !player.canBuild()){
+			player.sendMessage("You are currently generating something else, please wait...", ChatColor.AQUA);
+			return;
+		}
+		List<Location> locs = selection.execute(player, points, pattern, player.getSSettings());
 		
 		boolean crUnd = false;
 		if(player == null || player.isInCreative())
 			crUnd = true;
 		BTUndo undo = new BTUndo(player, crUnd);
 		
-		selection.fill(locs, player, pattern, breaking, undo);
+		if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
+			player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
+		}
+		else{
+			player.setCanBuild(false);
+			new Generator(locs, points.get(points.size() - 1).getBlock(), player, breaking, undo);
+		}
 		
 		if(player != null)
 			player.addUndo(undo);
-		return true;
 	}
 	
 	@SuppressWarnings("deprecation")

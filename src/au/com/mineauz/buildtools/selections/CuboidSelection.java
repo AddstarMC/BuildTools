@@ -3,14 +3,9 @@ package au.com.mineauz.buildtools.selections;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.BTUndo;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
@@ -43,26 +38,6 @@ public class CuboidSelection implements BuildSelection {
 			}
 		}
 		return loc;
-	}
-
-	@Override
-	public void fill(List<Location> toFill, BTPlayer player, BuildPattern pattern, boolean breaking,
-			BTUndo undo) {
-		if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
-			player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
-		}
-		else{
-			boolean succeed = false;
-			Block block = player.getPoints().get(player.getPointCount() - 1).getBlock();
-			ItemStack item = BTUtils.getBlockDrop(block);
-			MaterialData data = block.getState().getData();
-			for(Location loc : toFill){
-				succeed = BTUtils.placeBlock(player, loc, 
-						data, item, breaking, undo);
-				if(!succeed)
-					break;
-			}
-		}
 	}
 
 }

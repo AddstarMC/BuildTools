@@ -26,6 +26,7 @@ public class BTPlayer {
 	private List<BTUndo> undos = new ArrayList<BTUndo>();
 	private List<BTUndo> redos = new ArrayList<BTUndo>();
 	private String[] sSettings = new String[]{};
+	private boolean canBuild = true;
 	
 	public BTPlayer(Player player){
 		this.player = player;
@@ -234,5 +235,13 @@ public class BTPlayer {
 	
 	public void setSSettings(String[] settings){
 		this.sSettings = settings;
+	}
+	
+	public boolean canBuild(){
+		return canBuild;
+	}
+	
+	public void setCanBuild(boolean canBuild){
+		this.canBuild = canBuild;
 	}
 }

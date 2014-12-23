@@ -30,6 +30,11 @@ public class Events implements Listener{
 		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
 		if(pl == null) return;
 		if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
+			if(!pl.canBuild()){
+				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);
+				event.setCancelled(true);
+				return;
+			}
 			if(!pdata.getPlayerBlockLimits(pl).contains(event.getBlockPlaced().getType()) ||
 					pl.hasPermission("buildtools.bypassdisabledblocks")){
 				Integer[] hl = pdata.getPlayerHightLimits(pl);
@@ -59,11 +64,12 @@ public class Events implements Listener{
 							pl.sendMessage("Volume limit exceeded.\n"
 									+ "Selected size: " + vol + " blocks.\n"
 									+ "Your limit: " + volLimit + " blocks.", ChatColor.RED);
-							pl.clearPoints();
+							pl.getPoints().remove(pl.getPointCount() - 1);
 							if(plugin.isDebugging()){
 								plugin.getLogger().info("Volume exceeded for " + pl.getName() 
 										+ ", Volume: " + vol + ", Max Volume: " + volLimit);
 							}
+							event.setCancelled(true);
 						}
 					}
 					else{
@@ -74,7 +80,7 @@ public class Events implements Listener{
 					pl.sendMessage("Notice: Block not within height limits.\n"
 							+ "Limit: Y" + hl[0] + " - Y" + hl[1] + "\n"
 							+ "Your position: Y" + event.getBlock().getLocation().getBlockY(), ChatColor.GOLD);
-					pl.clearPoints();
+					event.setCancelled(true);
 					if(plugin.isDebugging()){
 						plugin.getLogger().info("Height limit exceeded for " + pl.getName() + ", players height: " 
 								+ event.getBlock().getLocation().getBlockY() + ", Limit: " + hl[0] + "-" + hl[1]);
@@ -99,6 +105,11 @@ public class Events implements Listener{
 		else if(pl.isBuildModeActive() && 
 				pdata.hasTool(pl.getPlayer().getItemInHand().getType()) && 
 				!pl.getPlayer().isSneaking()){
+			if(!pl.canBuild()){
+				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);
+				event.setCancelled(true);
+				return;
+			}
 			if(!pdata.getPlayerBlockLimits(pl).contains(Material.AIR) || 
 					pl.hasPermission("buildtools.bypassdisabledblocks")){
 				Integer[] hl = pdata.getPlayerHightLimits(pl);
@@ -128,7 +139,8 @@ public class Events implements Listener{
 							pl.sendMessage("Volume limit exceeded.\n"
 									+ "Selected size: " + vol + " blocks.\n"
 									+ "Your limit: " + volLimit + " blocks.", ChatColor.RED);
-							pl.clearPoints();
+							pl.getPoints().remove(pl.getPointCount() - 1);
+							event.setCancelled(true);
 							if(plugin.isDebugging()){
 								plugin.getLogger().info("Volume exceeded for " + pl.getName() 
 										+ ", Volume: " + vol + ", Max Volume: " + volLimit);
