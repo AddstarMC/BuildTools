@@ -11,6 +11,7 @@ public class BuildTypes {
 		addType(new CuboidType());
 		addType(new TerrainType());
 		addType(new OverlayType());
+		addType(new CaveType());
 	}
 	
 	public static BuildType getType(String name){
