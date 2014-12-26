@@ -2,6 +2,7 @@ package au.com.mineauz.buildtools.commands;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -48,7 +49,10 @@ public class UndoCommand implements ICommand {
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
 		BTPlayer player = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
-		player.undo();
+		if(player.canBuild())
+			player.undo();
+		else
+			player.sendMessage("Still generating, please wait...", ChatColor.AQUA);
 		return true;
 	}
 
