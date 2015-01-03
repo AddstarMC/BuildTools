@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
@@ -203,5 +204,76 @@ public class BTUtils {
 			fOpts.addAll(options);
 		}
 		return fOpts;
+	}
+	
+	public static BlockFace rotate(BlockFace origin, int angle){
+		BlockFace f = origin;
+		if(angle == 90 || angle == -270){
+			switch(origin){
+			case NORTH: f = BlockFace.EAST;
+			case EAST: f = BlockFace.SOUTH;
+			case SOUTH: f = BlockFace.WEST;
+			case WEST: f = BlockFace.NORTH;
+			case NORTH_EAST: f = BlockFace.SOUTH_EAST;
+			case SOUTH_EAST: f = BlockFace.SOUTH_WEST;
+			case SOUTH_WEST: f = BlockFace.NORTH_WEST;
+			case NORTH_WEST: f = BlockFace.NORTH_EAST;
+			case NORTH_NORTH_EAST: f = BlockFace.EAST_SOUTH_EAST;
+			case SOUTH_SOUTH_EAST: f = BlockFace.WEST_SOUTH_WEST;
+			case SOUTH_SOUTH_WEST: f = BlockFace.WEST_NORTH_WEST;
+			case NORTH_NORTH_WEST: f = BlockFace.EAST_NORTH_EAST;
+			case EAST_NORTH_EAST: f = BlockFace.SOUTH_SOUTH_EAST;
+			case EAST_SOUTH_EAST: f = BlockFace.SOUTH_SOUTH_WEST;
+			case WEST_SOUTH_WEST: f = BlockFace.NORTH_NORTH_WEST;
+			case WEST_NORTH_WEST: f = BlockFace.NORTH_NORTH_EAST;
+			default:
+				break;
+			}
+		}
+		else if(angle == 180 || angle == -180){
+			switch(origin){
+			case NORTH: f = BlockFace.SOUTH;
+			case EAST: f = BlockFace.WEST;
+			case SOUTH: f = BlockFace.NORTH;
+			case WEST: f = BlockFace.EAST;
+			case NORTH_EAST: f = BlockFace.SOUTH_WEST;
+			case SOUTH_EAST: f = BlockFace.NORTH_WEST;
+			case SOUTH_WEST: f = BlockFace.NORTH_EAST;
+			case NORTH_WEST: f = BlockFace.SOUTH_EAST;
+			case NORTH_NORTH_EAST: f = BlockFace.SOUTH_SOUTH_WEST;
+			case SOUTH_SOUTH_EAST: f = BlockFace.NORTH_NORTH_WEST;
+			case SOUTH_SOUTH_WEST: f = BlockFace.NORTH_NORTH_EAST;
+			case NORTH_NORTH_WEST: f = BlockFace.SOUTH_SOUTH_EAST;
+			case EAST_NORTH_EAST: f = BlockFace.WEST_SOUTH_WEST;
+			case EAST_SOUTH_EAST: f = BlockFace.WEST_NORTH_WEST;
+			case WEST_SOUTH_WEST: f = BlockFace.EAST_NORTH_EAST;
+			case WEST_NORTH_WEST: f = BlockFace.EAST_SOUTH_EAST;
+			default:
+				break;
+			}
+		}
+		else if(angle == 270 || angle == -90){
+			switch(origin){
+			case NORTH: f = BlockFace.WEST;
+			case EAST: f = BlockFace.NORTH;
+			case SOUTH: f = BlockFace.EAST;
+			case WEST: f = BlockFace.SOUTH;
+			case NORTH_EAST: f = BlockFace.NORTH_WEST;
+			case SOUTH_EAST: f = BlockFace.NORTH_EAST;
+			case SOUTH_WEST: f = BlockFace.SOUTH_EAST;
+			case NORTH_WEST: f = BlockFace.SOUTH_WEST;
+			case NORTH_NORTH_EAST: f = BlockFace.WEST_NORTH_WEST;
+			case SOUTH_SOUTH_EAST: f = BlockFace.EAST_NORTH_EAST;
+			case SOUTH_SOUTH_WEST: f = BlockFace.EAST_SOUTH_EAST;
+			case NORTH_NORTH_WEST: f = BlockFace.WEST_SOUTH_WEST;
+			case EAST_NORTH_EAST: f = BlockFace.NORTH_NORTH_WEST;
+			case EAST_SOUTH_EAST: f = BlockFace.NORTH_NORTH_EAST;
+			case WEST_SOUTH_WEST: f = BlockFace.SOUTH_SOUTH_EAST;
+			case WEST_NORTH_WEST: f = BlockFace.SOUTH_SOUTH_WEST;
+			default:
+				break;
+			}
+		}
+		return f;
 	}
 }

@@ -12,6 +12,9 @@ public class BuildTypes {
 		addType(new TerrainType());
 		addType(new OverlayType());
 		addType(new CaveType());
+		addType(new SphereType());
+		addType(new CopyType());
+		addType(new PasteType());
 	}
 	
 	public static BuildType getType(String name){

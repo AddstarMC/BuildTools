@@ -1,5 +1,6 @@
 package au.com.mineauz.buildtools;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -24,6 +25,7 @@ public class Generator implements Runnable{
 	private boolean breaking;
 	private BTUndo undo;
 	private BTUndo nundo;
+	private BTCopy copy;
 	
 	public Generator(List<Location> locs, Block block, BTPlayer player, boolean breaking, BTUndo undo){
 		this.block = block;
@@ -57,6 +59,27 @@ public class Generator implements Runnable{
 		
 		task = Bukkit.getScheduler().runTaskTimer(Main.plugin, this, 1, 1);
 	}
+	
+	public Generator(BTCopy copy, Location reference, BTUndo undo){
+		this.copy = copy;
+		this.undo = undo;
+		
+		Location temp = reference.clone();
+		Map<IVector, MaterialData> data = copy.getMaterials();
+		List<BlockState> states = new ArrayList<>();
+		for(IVector vec : data.keySet()){
+			temp.setX(reference.getX() + vec.getX());
+			temp.setY(reference.getY() + vec.getY());
+			temp.setZ(reference.getZ() + vec.getZ());
+			BlockState state = temp.getBlock().getState();
+			state.setType(data.get(vec).getItemType());
+			state.setData(data.get(vec));
+			states.add(state);
+		}
+		this.states = states.iterator();
+		
+		task = Bukkit.getScheduler().runTaskTimer(Main.plugin, this, 1, 1);
+	}
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -71,6 +94,17 @@ public class Generator implements Runnable{
 				succeed = BTUtils.placeBlock(player, loc, data, item, breaking, undo);
 				if(!succeed)
 					break;
+				if(System.nanoTime() - time > 10000000)
+					return;
+			}
+		}
+		else if(copy != null){
+			while(states.hasNext()){
+				BlockState state = states.next();
+				if(state.getBlock().getState().getType() == Material.AIR){
+					undo.addBlock(state.getBlock().getState());
+					state.update(true);
+				}
 				if(System.nanoTime() - time > 10000000)
 					return;
 			}

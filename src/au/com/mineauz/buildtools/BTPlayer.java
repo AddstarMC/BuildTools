@@ -28,6 +28,7 @@ public class BTPlayer {
 	private String[] tSettings = new String[0];
 	private String[] pSettings = new String[0];
 	private boolean canBuild = true;
+	private BTCopy copy = null;
 	
 	public BTPlayer(Player player){
 		this.player = player;
@@ -252,5 +253,17 @@ public class BTPlayer {
 	
 	public void setCanBuild(boolean canBuild){
 		this.canBuild = canBuild;
+	}
+	
+	public void setCopy(BTCopy copy){
+		this.copy = copy;
+	}
+	
+	public boolean hasCopy(){
+		return copy != null;
+	}
+	
+	public BTCopy getCopy(){
+		return copy;
 	}
 }
