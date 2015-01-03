@@ -121,8 +121,10 @@ public class Events implements Listener{
 					pl.addPoint(event.getBlock().getLocation());
 					if(pl.getPointCount() >= pl.getSelection().getRequiredPointCount()){
 						int volLimit = pdata.getPlayerVolumeLimit(pl);
-						int vol = BTUtils.getVolume(pl.getPoint(0), pl.getPoint(1));
-						if(vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
+						int vol = -1;
+						if(pl.getPointCount() > 1)
+							vol = BTUtils.getVolume(pl.getPoint(0), pl.getPoint(1));
+						if(vol == -1 || vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
 							final BTPlayer fpl = pl;
 							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
 								

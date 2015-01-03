@@ -1,6 +1,5 @@
 package au.com.mineauz.buildtools.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
@@ -26,10 +25,14 @@ public class PasteType implements BuildType {
 	public List<Location> execute(BTPlayer player, boolean isBreaking,
 			List<Location> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
-		BTUndo undo = new BTUndo();
+		BTUndo undo = new BTUndo(player, true);
 		player.addUndo(undo);
+		if(isBreaking)
+			player.getCopy().setReplacing(true);
+		else
+			player.getCopy().setReplacing(false);
 		new Generator(player.getCopy(), points.get(0), undo);
-		return new ArrayList<>();
+		return null;
 	}
 
 }

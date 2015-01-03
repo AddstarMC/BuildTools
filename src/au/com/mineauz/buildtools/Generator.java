@@ -101,8 +101,8 @@ public class Generator implements Runnable{
 		else if(copy != null){
 			while(states.hasNext()){
 				BlockState state = states.next();
-				if(state.getBlock().getState().getType() == Material.AIR){
-					undo.addBlock(state.getBlock().getState());
+				if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
+					undo.addBlock(state.getLocation().getBlock().getState());
 					state.update(true);
 				}
 				if(System.nanoTime() - time > 10000000)

@@ -82,22 +82,24 @@ public class BTUtils {
 			return;
 		}
 		List<Location> locs = selection.execute(player, breaking, points, pattern, player.getTSettings(), player.getPSettings());
+
+		if(locs != null){
+			boolean crUnd = false;
+			if(player == null || player.isInCreative())
+				crUnd = true;
+			BTUndo undo = new BTUndo(player, crUnd);
 		
-		boolean crUnd = false;
-		if(player == null || player.isInCreative())
-			crUnd = true;
-		BTUndo undo = new BTUndo(player, crUnd);
-		
-		if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
-			player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
+			if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
+				player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
+			}
+			else{
+				player.setCanBuild(false);
+				new Generator(locs, points.get(points.size() - 1).getBlock(), player, breaking, undo);
+			}
+			
+			if(player != null)
+				player.addUndo(undo);
 		}
-		else{
-			player.setCanBuild(false);
-			new Generator(locs, points.get(points.size() - 1).getBlock(), player, breaking, undo);
-		}
-		
-		if(player != null)
-			player.addUndo(undo);
 	}
 	
 	@SuppressWarnings("deprecation")

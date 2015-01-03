@@ -7,6 +7,7 @@ import org.bukkit.material.MaterialData;
 
 public class BTCopy {
 	private Map<String, MaterialData> materials = new HashMap<>();
+	private boolean replacing = false;
 	
 	public void addState(IVector vec, MaterialData data){
 		if(!materials.containsKey(vec.toString())){
@@ -20,6 +21,14 @@ public class BTCopy {
 			mats.put(IVector.fromString(v), materials.get(v));
 		}
 		return mats;
+	}
+	
+	public boolean isReplacing(){
+		return replacing;
+	}
+	
+	public void setReplacing(boolean replacing){
+		this.replacing = replacing;
 	}
 	
 }
