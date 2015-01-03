@@ -102,8 +102,11 @@ public class Generator implements Runnable{
 			while(states.hasNext()){
 				BlockState state = states.next();
 				if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
-					undo.addBlock(state.getLocation().getBlock().getState());
-					state.update(true);
+					Integer[] lim = Main.plugin.getPlayerData().getPlayerHightLimits(player);
+					if(state.getLocation().getBlockY() >= lim[0] && state.getLocation().getY() <= lim[1]){
+						undo.addBlock(state.getLocation().getBlock().getState());
+						state.update(true);
+					}
 				}
 				if(System.nanoTime() - time > 10000000)
 					return;

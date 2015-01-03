@@ -9,6 +9,7 @@ import au.com.mineauz.buildtools.BTCopy;
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.IVector;
+import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
 public class CopyType implements BuildType{
@@ -40,7 +41,8 @@ public class CopyType implements BuildType{
 					IVector vec = new IVector(getRelativeCoord(x, points.get(0).getBlockX()), 
 							getRelativeCoord(y, points.get(0).getBlockY()), 
 							getRelativeCoord(z, points.get(0).getBlockZ()));
-					cp.addState(vec, temp.getBlock().getState().getData());
+					if(!Main.plugin.getPlayerData().getPlayerBlockLimits(player).contains(temp.getBlock().getType()))
+						cp.addState(vec, temp.getBlock().getState().getData());
 					if(isBreaking)
 						locs.add(temp.clone());
 				}
