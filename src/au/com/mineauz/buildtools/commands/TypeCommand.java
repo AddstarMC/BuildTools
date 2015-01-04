@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
+import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.types.BuildTypes;
 
@@ -53,7 +54,7 @@ public class TypeCommand implements ICommand {
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(BuildTypes.hasType(args[0])){
 				pl.setSelection(args[0].toUpperCase());
-				pl.sendMessage("Set type to " + pl.getSelection().getName().toLowerCase() + "\n"
+				pl.sendMessage("Set type to " + BTUtils.capitalize(pl.getSelection().getName()) + "\n"
 						+ "Pattern reset to None.", ChatColor.AQUA);
 				if(args.length > 1){
 					String[] s = new String[args.length - 1];

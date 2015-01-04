@@ -27,7 +27,7 @@ public class PasteType implements BuildType {
 			List<Location> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
 		if(player.hasCopy()){
-			BTUndo undo = new BTUndo(player, true);
+			BTUndo undo = new BTUndo(player);
 			player.addUndo(undo);
 			if(isBreaking)
 				player.getCopy().setReplacing(true);

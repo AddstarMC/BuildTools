@@ -102,11 +102,10 @@ public class Generator implements Runnable{
 		long time = System.nanoTime();
 		if(locs != null){
 			boolean succeed = false;
-			ItemStack item = BTUtils.getBlockDrop(block);
 			MaterialData data = block.getState().getData();
 			while(locs.hasNext()){
 				Location loc = locs.next();
-				succeed = BTUtils.placeBlock(player, loc, data, item, breaking, undo);
+				succeed = BTUtils.placeBlock(player, loc, data, breaking, undo);
 				if(!succeed)
 					break;
 				if(System.nanoTime() - time > 10000000)
@@ -131,21 +130,8 @@ public class Generator implements Runnable{
 			while(states.hasNext()){
 				BlockState state = states.next();
 				if(player != null){
-					if(nundo.isCreativeUndo()){
-						nundo.addBlock(state.getBlock().getState());
-						state.update(true);
-					}
-					else{
-						if(state.getType() != Material.AIR && player.hasItem(state.getData().toItemStack())){
-							player.removeItem(state.getData().toItemStack());
-							nundo.addBlock(state.getBlock().getState());
-							state.update(true);
-						}
-						else if(state.getType() == Material.AIR){
-							nundo.addBlock(state.getBlock().getState());
-							state.update(true);
-						}
-					}
+					nundo.addBlock(state.getBlock().getState());
+					state.update(true);
 
 					if(System.nanoTime() - time > 10000000)
 						return;

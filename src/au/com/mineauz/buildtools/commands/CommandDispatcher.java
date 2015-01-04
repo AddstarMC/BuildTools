@@ -137,10 +137,15 @@ loop:			for(ICommand ic : commands.values()){
 		else if(sender instanceof Player){
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(!pl.isBuildModeActive()){
-				pl.setBuildModeActive(true);
-				pl.sendMessage("Build mode active!", ChatColor.AQUA);
-				pl.sendMessage(ChatColor.AQUA + "Mode: " + ChatColor.WHITE + pl.getSelection().getName());
-				pl.sendMessage(ChatColor.AQUA + "Pattern: " + ChatColor.WHITE + pl.getPattern().getName());
+				if(pl.isInCreative()){
+					pl.setBuildModeActive(true);
+					pl.sendMessage("Build mode active!", ChatColor.AQUA);
+					pl.sendMessage(ChatColor.AQUA + "Mode: " + ChatColor.WHITE + BTUtils.capitalize(pl.getSelection().getName()));
+					pl.sendMessage(ChatColor.AQUA + "Pattern: " + ChatColor.WHITE + BTUtils.capitalize(pl.getPattern().getName()));
+				}
+				else{
+					pl.sendMessage("You must be in creative mode to use BuildTools!", ChatColor.RED);
+				}
 			}
 			else{
 				pl.setBuildModeActive(false);

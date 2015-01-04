@@ -2,11 +2,14 @@ package au.com.mineauz.buildtools;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -166,6 +169,26 @@ public class Events implements Listener{
 					}
 				}
 			}
+		}
+	}
+	
+	@EventHandler(ignoreCancelled = true)
+	private void gamemodeChange(PlayerGameModeChangeEvent event){
+		BTPlayer ply = pdata.getBTPlayer(event.getPlayer());
+		if(ply != null){
+			if(event.getNewGameMode() != GameMode.CREATIVE && ply.isBuildModeActive()){
+				ply.setBuildModeActive(false);
+				ply.sendMessage("Build mode deactivated.", ChatColor.RED);
+			}
+		}
+	}
+	
+	@EventHandler(ignoreCancelled = true)
+	private void worldChange(PlayerChangedWorldEvent event){
+		BTPlayer ply = pdata.getBTPlayer(event.getPlayer());
+		if(ply != null){
+			ply.setBuildModeActive(false);
+			ply.sendMessage("Build mode deactivated.", ChatColor.RED);
 		}
 	}
 }

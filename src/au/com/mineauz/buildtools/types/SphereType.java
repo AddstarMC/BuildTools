@@ -28,7 +28,7 @@ public class SphereType implements BuildType {
 		Location mid = points.get(0);
 		Location tmp = mid.clone();
 		
-		double dist = mid.distance(points.get(1));
+		double dist = mid.distance(points.get(1)) + 1;
 		tmp.setY(mid.getY() - dist);
 		tmp.setX(mid.getX() - dist);
 		tmp.setZ(mid.getZ() - dist);

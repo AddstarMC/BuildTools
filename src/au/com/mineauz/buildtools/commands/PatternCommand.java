@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
+import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
 
@@ -55,7 +56,7 @@ public class PatternCommand implements ICommand {
 			if(BuildPatterns.hasPattern(pat)){
 				boolean bool = pl.setPattern(pat);
 				if(bool){
-					pl.sendMessage("Your pattern has been set to " + pat, ChatColor.AQUA);
+					pl.sendMessage("Your pattern has been set to " + BTUtils.capitalize(pat), ChatColor.AQUA);
 					if(args.length > 1){
 						String[] s = new String[args.length - 1];
 						for(int i = 1; i < args.length; i++){
@@ -68,7 +69,8 @@ public class PatternCommand implements ICommand {
 					}
 				}
 				else
-					pl.sendMessage("The pattern " + pat + " is not compatible with the selection " + pl.getSelection().getName(), ChatColor.RED);
+					pl.sendMessage("The pattern " + pat + " is not compatible with the selection " + 
+							BTUtils.capitalize(pl.getSelection().getName()), ChatColor.RED);
 			}
 			else{
 				pl.sendMessage("No pattern found by the name " + pat, ChatColor.RED);

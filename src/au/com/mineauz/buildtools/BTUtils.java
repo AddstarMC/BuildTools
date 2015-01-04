@@ -2,15 +2,12 @@ package au.com.mineauz.buildtools;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.patterns.BuildPattern;
@@ -36,6 +33,10 @@ public class BTUtils {
 			}
 		}
 		return st;
+	}
+	
+	public static String capitalize(String input){
+		return Character.toUpperCase(input.charAt(0)) + input.substring(1).toLowerCase();
 	}
 	
 	public static Location[] createMinMaxTable(Location pos1, Location pos2){
@@ -84,10 +85,7 @@ public class BTUtils {
 		List<Location> locs = selection.execute(player, breaking, points, pattern, player.getTSettings(), player.getPSettings());
 
 		if(locs != null){
-			boolean crUnd = false;
-			if(player == null || player.isInCreative())
-				crUnd = true;
-			BTUndo undo = new BTUndo(player, crUnd);
+			BTUndo undo = new BTUndo(player);
 		
 			if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
 				player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
@@ -102,88 +100,21 @@ public class BTUtils {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
-	public static boolean placeBlock(BTPlayer player, Location loc, MaterialData data, ItemStack usedItem, boolean breaking, BTUndo undo){
-		if(!breaking && loc.getBlock().getType() == Material.AIR){
-			if(player == null || player.isInCreative()){
-				undo.addBlock(loc.getBlock().getState());
-				BlockState state = loc.getBlock().getState();
-				state.setType(data.getItemType());
-				state.setData(data);
-				state.update(true);
-				return true;
-			}
-			else{
-				BlockState state = loc.getBlock().getState();
-				boolean takenItem = false;
-				if(player.hasItem(usedItem)){
-					player.removeItem(usedItem);
-					undo.addItem(usedItem);
-					takenItem = true;
-				}
-				else if(player.hasItem(data.toItemStack())){
-					player.removeItem(data.toItemStack());
-					undo.addItem(data.toItemStack());
-					takenItem = true;
-				}
-				
-				if(takenItem){
-					undo.addBlock(state);
-					state.setType(data.getItemType());
-					state.setData(data);
-					state.update(true);
-					player.getPlayer().updateInventory();
-					return true;
-				}
-				else{
-					player.sendMessage("You do not have enough items to fill this selection!", ChatColor.RED);
-					return false;
-				}
-			}
+	public static boolean placeBlock(BTPlayer player, Location loc, MaterialData data, boolean breaking, BTUndo undo){
+		if(!breaking && (loc.getBlock().getType() == Material.AIR || loc.getBlock().isLiquid())){
+			undo.addBlock(loc.getBlock().getState());
+			BlockState state = loc.getBlock().getState();
+			state.setType(data.getItemType());
+			state.setData(data);
+			state.update(true);
+			return true;
 		}
-		else if(breaking && loc.getBlock().getType() != Material.AIR){
-			if(player == null || player.isInCreative()){
-				undo.addBlock(loc.getBlock().getState());
-				loc.getBlock().setType(Material.AIR);
-				return true;
-			}
-			else{
-				if(Main.plugin.getPlayerData().hasTool(player.getPlayer().getItemInHand().getType())){
-					player.damageItem(player.getPlayer().getItemInHand());
-					undo.addBlock(loc.getBlock().getState());
-
-					Map<Integer, ItemStack> map;
-					boolean droppedItems = false;
-					for(ItemStack it : loc.getBlock().getDrops(player.getPlayer().getItemInHand())){
-						 map = player.getPlayer().getInventory().addItem(it);
-						 player.getPlayer().updateInventory();
-						if(!map.isEmpty()){
-							player.getLocation().getWorld().dropItemNaturally(player.getLocation(), it);
-							droppedItems = true;
-						}
-					}
-					
-					loc.getBlock().setType(Material.AIR);
-					
-					if(droppedItems){
-						player.sendMessage("Your inventory is full!", ChatColor.RED);
-						return false;
-					}
-					return true;
-				}
-				else{
-					player.sendMessage("Your tool broke or has been dropped.", ChatColor.RED);
-					return false;
-				}
-			}
+		else if(breaking && loc.getBlock().getType() != Material.AIR && !loc.getBlock().isLiquid()){
+			undo.addBlock(loc.getBlock().getState());
+			loc.getBlock().setType(Material.AIR);
+			return true;
 		}
 		return true;
-	}
-	
-	public static ItemStack getBlockDrop(Block block){
-		if(!block.getDrops().isEmpty())
-			return (ItemStack) block.getDrops().toArray()[0];
-		return null;
 	}
 	
 	public static int getVolume(Location point1, Location point2){
