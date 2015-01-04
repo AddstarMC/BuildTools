@@ -63,6 +63,7 @@ public class Generator implements Runnable{
 	public Generator(BTCopy copy, Location reference, BTUndo undo){
 		this.copy = copy;
 		this.undo = undo;
+		player = undo.getPlayer();
 		
 		Location temp = reference.clone();
 		Map<IVector, MaterialData> data = copy.getMaterials();

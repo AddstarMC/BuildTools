@@ -209,25 +209,41 @@ public class BTUtils {
 	}
 	
 	public static BlockFace rotate(BlockFace origin, int angle){
-		BlockFace f = origin;
+		BlockFace f = BlockFace.valueOf(origin.toString());
 		if(angle == 90 || angle == -270){
 			switch(origin){
 			case NORTH: f = BlockFace.EAST;
+			break;
 			case EAST: f = BlockFace.SOUTH;
+			break;
 			case SOUTH: f = BlockFace.WEST;
+			break;
 			case WEST: f = BlockFace.NORTH;
+			break;
 			case NORTH_EAST: f = BlockFace.SOUTH_EAST;
+			break;
 			case SOUTH_EAST: f = BlockFace.SOUTH_WEST;
+			break;
 			case SOUTH_WEST: f = BlockFace.NORTH_WEST;
+			break;
 			case NORTH_WEST: f = BlockFace.NORTH_EAST;
+			break;
 			case NORTH_NORTH_EAST: f = BlockFace.EAST_SOUTH_EAST;
+			break;
 			case SOUTH_SOUTH_EAST: f = BlockFace.WEST_SOUTH_WEST;
+			break;
 			case SOUTH_SOUTH_WEST: f = BlockFace.WEST_NORTH_WEST;
+			break;
 			case NORTH_NORTH_WEST: f = BlockFace.EAST_NORTH_EAST;
+			break;
 			case EAST_NORTH_EAST: f = BlockFace.SOUTH_SOUTH_EAST;
+			break;
 			case EAST_SOUTH_EAST: f = BlockFace.SOUTH_SOUTH_WEST;
+			break;
 			case WEST_SOUTH_WEST: f = BlockFace.NORTH_NORTH_WEST;
+			break;
 			case WEST_NORTH_WEST: f = BlockFace.NORTH_NORTH_EAST;
+			break;
 			default:
 				break;
 			}
@@ -235,21 +251,37 @@ public class BTUtils {
 		else if(angle == 180 || angle == -180){
 			switch(origin){
 			case NORTH: f = BlockFace.SOUTH;
+			break;
 			case EAST: f = BlockFace.WEST;
+			break;
 			case SOUTH: f = BlockFace.NORTH;
+			break;
 			case WEST: f = BlockFace.EAST;
+			break;
 			case NORTH_EAST: f = BlockFace.SOUTH_WEST;
+			break;
 			case SOUTH_EAST: f = BlockFace.NORTH_WEST;
+			break;
 			case SOUTH_WEST: f = BlockFace.NORTH_EAST;
+			break;
 			case NORTH_WEST: f = BlockFace.SOUTH_EAST;
+			break;
 			case NORTH_NORTH_EAST: f = BlockFace.SOUTH_SOUTH_WEST;
+			break;
 			case SOUTH_SOUTH_EAST: f = BlockFace.NORTH_NORTH_WEST;
+			break;
 			case SOUTH_SOUTH_WEST: f = BlockFace.NORTH_NORTH_EAST;
+			break;
 			case NORTH_NORTH_WEST: f = BlockFace.SOUTH_SOUTH_EAST;
+			break;
 			case EAST_NORTH_EAST: f = BlockFace.WEST_SOUTH_WEST;
+			break;
 			case EAST_SOUTH_EAST: f = BlockFace.WEST_NORTH_WEST;
+			break;
 			case WEST_SOUTH_WEST: f = BlockFace.EAST_NORTH_EAST;
+			break;
 			case WEST_NORTH_WEST: f = BlockFace.EAST_SOUTH_EAST;
+			break;
 			default:
 				break;
 			}
@@ -257,21 +289,37 @@ public class BTUtils {
 		else if(angle == 270 || angle == -90){
 			switch(origin){
 			case NORTH: f = BlockFace.WEST;
+			break;
 			case EAST: f = BlockFace.NORTH;
+			break;
 			case SOUTH: f = BlockFace.EAST;
+			break;
 			case WEST: f = BlockFace.SOUTH;
+			break;
 			case NORTH_EAST: f = BlockFace.NORTH_WEST;
+			break;
 			case SOUTH_EAST: f = BlockFace.NORTH_EAST;
+			break;
 			case SOUTH_WEST: f = BlockFace.SOUTH_EAST;
+			break;
 			case NORTH_WEST: f = BlockFace.SOUTH_WEST;
+			break;
 			case NORTH_NORTH_EAST: f = BlockFace.WEST_NORTH_WEST;
+			break;
 			case SOUTH_SOUTH_EAST: f = BlockFace.EAST_NORTH_EAST;
+			break;
 			case SOUTH_SOUTH_WEST: f = BlockFace.EAST_SOUTH_EAST;
+			break;
 			case NORTH_NORTH_WEST: f = BlockFace.WEST_SOUTH_WEST;
+			break;
 			case EAST_NORTH_EAST: f = BlockFace.NORTH_NORTH_WEST;
+			break;
 			case EAST_SOUTH_EAST: f = BlockFace.NORTH_NORTH_EAST;
+			break;
 			case WEST_SOUTH_WEST: f = BlockFace.SOUTH_SOUTH_EAST;
+			break;
 			case WEST_NORTH_WEST: f = BlockFace.SOUTH_SOUTH_WEST;
+			break;
 			default:
 				break;
 			}
