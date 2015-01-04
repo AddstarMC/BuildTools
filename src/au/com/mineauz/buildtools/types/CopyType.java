@@ -3,6 +3,7 @@ package au.com.mineauz.buildtools.types;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 import au.com.mineauz.buildtools.BTCopy;
@@ -49,6 +50,7 @@ public class CopyType implements BuildType{
 			}
 		}
 		player.setCopy(cp);
+		player.sendMessage("Copied selection to clipboard.", ChatColor.AQUA);
 		if(locs.isEmpty())
 			return null;
 		return locs;

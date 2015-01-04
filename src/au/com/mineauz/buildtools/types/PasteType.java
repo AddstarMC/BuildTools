@@ -2,6 +2,7 @@ package au.com.mineauz.buildtools.types;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 import au.com.mineauz.buildtools.BTPlayer;
@@ -25,13 +26,19 @@ public class PasteType implements BuildType {
 	public List<Location> execute(BTPlayer player, boolean isBreaking,
 			List<Location> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
-		BTUndo undo = new BTUndo(player, true);
-		player.addUndo(undo);
-		if(isBreaking)
-			player.getCopy().setReplacing(true);
-		else
-			player.getCopy().setReplacing(false);
-		new Generator(player.getCopy(), points.get(0), undo);
+		if(player.hasCopy()){
+			BTUndo undo = new BTUndo(player, true);
+			player.addUndo(undo);
+			if(isBreaking)
+				player.getCopy().setReplacing(true);
+			else
+				player.getCopy().setReplacing(false);
+			new Generator(player.getCopy(), points.get(0), undo);
+			player.sendMessage("Pasting selection from clipboard.", ChatColor.AQUA);
+		}
+		else{
+			player.sendMessage("You have not copied anything to your clipboard!", ChatColor.RED);
+		}
 		return null;
 	}
 

@@ -54,6 +54,7 @@ public class Generator implements Runnable{
 	public Generator(BTUndo undo, BTUndo nundo){
 		this.undo = undo;
 		this.nundo = nundo;
+		Collections.reverse(undo.getBlockStates());
 		states = undo.getBlockStates().iterator();
 		player = undo.getPlayer();
 		
@@ -77,6 +78,19 @@ public class Generator implements Runnable{
 			state.setData(data.get(vec));
 			states.add(state);
 		}
+		Collections.sort(states, new Comparator<BlockState>() {
+
+			@Override
+			public int compare(BlockState o1, BlockState o2) {
+				int comp = Integer.valueOf(o1.getChunk().getX()).compareTo(o2.getChunk().getX());
+				if(comp != 0)
+					return comp;
+				comp = Integer.valueOf(o1.getChunk().getZ()).compareTo(o2.getChunk().getZ());
+				if(comp != 0)
+					return comp;
+				return Integer.valueOf(o1.getLocation().getBlockY()).compareTo(o2.getLocation().getBlockY());
+			}
+		});
 		this.states = states.iterator();
 		
 		task = Bukkit.getScheduler().runTaskTimer(Main.plugin, this, 1, 1);

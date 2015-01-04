@@ -37,7 +37,10 @@ public class BTCopy {
 			for(String s : materials.keySet()){
 				if(materials.get(s) instanceof Directional){
 					Directional d = (Directional)materials.get(s);
-					d.setFacingDirection(BTUtils.rotate(d.getFacing(), angle));
+					if(materials.get(s).getItemType().toString().contains("STAIRS"))
+						d.setFacingDirection(BTUtils.rotate(d.getFacing(), angle * -1));
+					else
+						d.setFacingDirection(BTUtils.rotate(d.getFacing(), angle));
 				}
 			}
 			

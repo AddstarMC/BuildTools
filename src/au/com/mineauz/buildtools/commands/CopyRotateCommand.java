@@ -54,8 +54,10 @@ public class CopyRotateCommand implements ICommand {
 				int angle = 0;
 				if(args[0].matches("-?[0-9]+")){
 					angle = Integer.valueOf(args[0]);
-					if(angle % 90 == 0 && angle >= -270 && angle <= 270)
+					if(angle % 90 == 0 && angle >= -270 && angle <= 270){
 						player.getCopy().rotate(angle);
+						player.sendMessage("Rotated clipboard by " + angle + " degrees.", ChatColor.AQUA);
+					}
 					else
 						player.sendMessage("Angle must be divisible by 90!", ChatColor.RED);
 				}
