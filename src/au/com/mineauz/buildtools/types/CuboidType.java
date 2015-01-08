@@ -7,6 +7,7 @@ import org.bukkit.Location;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
+import au.com.mineauz.buildtools.BuildMode;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
 public class CuboidType implements BuildType {
@@ -22,7 +23,7 @@ public class CuboidType implements BuildType {
 	}
 
 	@Override
-	public List<Location> execute(BTPlayer player, boolean isBreaking, List<Location> points, BuildPattern pattern, String[] settings, String[] pSettings) {
+	public List<Location> execute(BTPlayer player, BuildMode mode, List<Location> points, BuildPattern pattern, String[] settings, String[] pSettings) {
 		List<Location> loc = new ArrayList<Location>();
 		Location[] mmtab = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location temp = mmtab[0].clone();

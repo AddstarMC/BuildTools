@@ -22,15 +22,15 @@ public class Generator implements Runnable{
 	private BukkitTask task;
 	private Block block;
 	private BTPlayer player;
-	private boolean breaking;
+	private BuildMode mode;
 	private BTUndo undo;
 	private BTUndo nundo;
 	private BTCopy copy;
 	
-	public Generator(List<Location> locs, Block block, BTPlayer player, boolean breaking, BTUndo undo){
+	public Generator(List<Location> locs, Block block, BTPlayer player, BuildMode mode, BTUndo undo){
 		this.block = block;
 		this.player = player;
-		this.breaking = breaking;
+		this.mode = mode;
 		this.undo = undo;
 		
 		Collections.sort(locs, new Comparator<Location>() {
@@ -105,7 +105,7 @@ public class Generator implements Runnable{
 			MaterialData data = block.getState().getData();
 			while(locs.hasNext()){
 				Location loc = locs.next();
-				succeed = BTUtils.placeBlock(player, loc, data, breaking, undo);
+				succeed = BTUtils.placeBlock(player, loc, data, mode, undo);
 				if(!succeed)
 					break;
 				if(System.nanoTime() - time > 10000000)

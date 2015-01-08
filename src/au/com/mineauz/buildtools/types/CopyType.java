@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import au.com.mineauz.buildtools.BTCopy;
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
+import au.com.mineauz.buildtools.BuildMode;
 import au.com.mineauz.buildtools.IVector;
 import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
@@ -26,7 +27,7 @@ public class CopyType implements BuildType{
 	}
 
 	@Override
-	public List<Location> execute(BTPlayer player, boolean isBreaking,
+	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<Location> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
@@ -44,7 +45,7 @@ public class CopyType implements BuildType{
 							getRelativeCoord(z, points.get(0).getBlockZ()));
 					if(!Main.plugin.getPlayerData().getPlayerBlockLimits(player).contains(temp.getBlock().getType()))
 						cp.addState(vec, temp.getBlock().getState().getData());
-					if(isBreaking)
+					if(mode == BuildMode.BREAK)
 						locs.add(temp.clone());
 				}
 			}

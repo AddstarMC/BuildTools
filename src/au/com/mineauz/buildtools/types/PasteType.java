@@ -7,6 +7,7 @@ import org.bukkit.Location;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUndo;
+import au.com.mineauz.buildtools.BuildMode;
 import au.com.mineauz.buildtools.Generator;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
@@ -23,13 +24,13 @@ public class PasteType implements BuildType {
 	}
 
 	@Override
-	public List<Location> execute(BTPlayer player, boolean isBreaking,
+	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<Location> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
 		if(player.hasCopy()){
 			BTUndo undo = new BTUndo(player);
 			player.addUndo(undo);
-			if(isBreaking)
+			if(mode == BuildMode.BREAK)
 				player.getCopy().setReplacing(true);
 			else
 				player.getCopy().setReplacing(false);

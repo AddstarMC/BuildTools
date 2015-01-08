@@ -56,7 +56,7 @@ public class Events implements Listener{
 								
 								@Override
 								public void run() {
-									BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), false);
+									BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), BuildMode.PLACE);
 									fpl.clearPoints();
 								}
 							});
@@ -133,7 +133,7 @@ public class Events implements Listener{
 								
 								@Override
 								public void run() {
-									BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), true);
+									BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), BuildMode.BREAK);
 									fpl.clearPoints();
 								}
 							});

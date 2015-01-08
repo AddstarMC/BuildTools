@@ -10,6 +10,7 @@ import org.bukkit.util.noise.PerlinNoiseGenerator;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
+import au.com.mineauz.buildtools.BuildMode;
 import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
@@ -26,7 +27,7 @@ public class CaveType implements BuildType {
 	}
 
 	@Override
-	public List<Location> execute(BTPlayer player, boolean isBreaking,
+	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<Location> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
 		List<Location> locs = new ArrayList<>();

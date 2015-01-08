@@ -8,6 +8,7 @@ import org.bukkit.Material;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
+import au.com.mineauz.buildtools.BuildMode;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
 public class OverlayType implements BuildType {
@@ -23,7 +24,7 @@ public class OverlayType implements BuildType {
 	}
 
 	@Override
-	public List<Location> execute(BTPlayer player, boolean isBreaking,
+	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<Location> points, BuildPattern pattern, String[] settings, String[] pSettings) {
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		List<Location> locs = new ArrayList<>();
@@ -38,13 +39,13 @@ public class OverlayType implements BuildType {
 						tmp.setY(tmp.getY() - 1);
 					}
 					if(tmp.getBlock().getType() != Material.AIR && tmp.getBlock().getType().isSolid()){
-						if(!isBreaking)
+						if(mode == BuildMode.PLACE)
 							tmp.setY(tmp.getY() + 1);
 						if(pattern.fitsPattern(tmp, points, pSettings))
 							locs.add(tmp.clone());
 					}
 				}
-				else if(isBreaking && pattern.fitsPattern(tmp, points, pSettings))
+				else if(mode == BuildMode.BREAK && pattern.fitsPattern(tmp, points, pSettings))
 					locs.add(tmp);
 				tmp.setY(mmt[1].getBlockY());
 			}
