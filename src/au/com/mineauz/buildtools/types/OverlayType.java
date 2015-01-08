@@ -46,7 +46,7 @@ public class OverlayType implements BuildType {
 							locs.add(tmp.clone());
 					}
 				}
-				else if(mode == BuildMode.BREAK && pattern.fitsPattern(tmp, points, pSettings))
+				else if(mode != BuildMode.PLACE && pattern.fitsPattern(tmp, points, pSettings))
 					locs.add(tmp);
 				tmp.setY(mmt[1].getBlockY());
 			}

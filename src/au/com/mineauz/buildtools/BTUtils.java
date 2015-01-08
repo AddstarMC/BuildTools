@@ -86,16 +86,15 @@ public class BTUtils {
 			player.sendMessage("You are currently generating something else, please wait...", ChatColor.AQUA);
 			return;
 		}
+		if(player.getPoint(0).getMode() == BuildMode.BREAK && 
+				player.getPoint(player.getPointCount() - 1).getMode() == BuildMode.PLACE){
+			mode = BuildMode.REPLACE;
+		}
+		
 		List<Location> locs = selection.execute(player, mode, points, pattern, player.getTSettings(), player.getPSettings());
 
 		if(locs != null){
 			BTUndo undo = new BTUndo(player);
-			if((player.getPoint(0).getMode() == BuildMode.PLACE && 
-					player.getPoint(player.getPointCount() - 1).getMode() == BuildMode.BREAK)
-					|| (player.getPoint(0).getMode() == BuildMode.BREAK && 
-					player.getPoint(player.getPointCount() - 1).getMode() == BuildMode.PLACE)){
-				mode = BuildMode.REPLACE;
-			}
 			if(player != null && (mode == BuildMode.BREAK || mode == BuildMode.PLACE) && 
 					pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
 				player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
@@ -132,7 +131,7 @@ public class BTUtils {
 			state.update(true);
 			return true;
 		}
-		return false;
+		return true;
 	}
 	
 	public static int getVolume(Location point1, Location point2){
