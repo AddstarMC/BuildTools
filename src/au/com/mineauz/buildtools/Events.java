@@ -44,12 +44,13 @@ public class Events implements Listener{
 				if((event.getBlock().getLocation().getBlockY() <= hl[1] && 
 						event.getBlock().getLocation().getBlockY() >= hl[0]) ||
 						pl.hasPermission("buildtools.bypassheightlimit")){
-					pl.addPoint(event.getBlockPlaced().getLocation());
+					BlockPoint point = new BlockPoint(event.getBlockPlaced().getLocation(), event.getBlockPlaced().getType(), BuildMode.PLACE);
+					pl.addPoint(point);
 					if(pl.getPointCount() >= pl.getSelection().getRequiredPointCount()){
 						int volLimit = pdata.getPlayerVolumeLimit(pl);
 						int vol = -1;
 						if(pl.getPointCount() > 1)
-							vol = BTUtils.getVolume(pl.getPoint(0), pl.getPoint(1));
+							vol = BTUtils.getVolume(pl.getPoint(0).getPoint(), pl.getPoint(1).getPoint());
 						if(vol == -1 || vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
 							final BTPlayer fpl = pl;
 							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
@@ -121,12 +122,13 @@ public class Events implements Listener{
 				if((event.getBlock().getLocation().getBlockY() <= hl[1] && 
 						event.getBlock().getLocation().getBlockY() >= hl[0]) ||
 						pl.hasPermission("buildtools.bypassheightlimit")){
-					pl.addPoint(event.getBlock().getLocation());
+					BlockPoint point = new BlockPoint(event.getBlock().getLocation(), Material.AIR, BuildMode.BREAK);
+					pl.addPoint(point);
 					if(pl.getPointCount() >= pl.getSelection().getRequiredPointCount()){
 						int volLimit = pdata.getPlayerVolumeLimit(pl);
 						int vol = -1;
 						if(pl.getPointCount() > 1)
-							vol = BTUtils.getVolume(pl.getPoint(0), pl.getPoint(1));
+							vol = BTUtils.getVolume(pl.getPoint(0).getPoint(), pl.getPoint(1).getPoint());
 						if(vol == -1 || vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
 							final BTPlayer fpl = pl;
 							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {

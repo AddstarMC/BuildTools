@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bukkit.Location;
 
+import au.com.mineauz.buildtools.BlockPoint;
+
 public class NonePattern implements BuildPattern {
 
 	@Override
@@ -23,7 +25,7 @@ public class NonePattern implements BuildPattern {
 
 	@Override
 	public boolean fitsPattern(Location block,
-			List<Location> points, String[] settings) {
+			List<BlockPoint> points, String[] settings) {
 		return true;
 	}
 

@@ -39,6 +39,10 @@ public class BTUtils {
 		return Character.toUpperCase(input.charAt(0)) + input.substring(1).toLowerCase();
 	}
 	
+	public static Location[] createMinMaxTable(BlockPoint pos1, BlockPoint pos2){
+		return(createMinMaxTable(pos1.getPoint(), pos2.getPoint()));
+	}
+	
 	public static Location[] createMinMaxTable(Location pos1, Location pos2){
 		Location[] locArr = new Location[2];
 		int minx;
@@ -77,7 +81,7 @@ public class BTUtils {
 		return locArr;
 	}
 	
-	public static void generateBlocks(BTPlayer player, BuildType selection, BuildPattern pattern, List<Location> points, BuildMode mode){
+	public static void generateBlocks(BTPlayer player, BuildType selection, BuildPattern pattern, List<BlockPoint> points, BuildMode mode){
 		if(player != null && !player.canBuild()){
 			player.sendMessage("You are currently generating something else, please wait...", ChatColor.AQUA);
 			return;
@@ -92,7 +96,7 @@ public class BTUtils {
 			}
 			else{
 				player.setCanBuild(false);
-				new Generator(locs, points.get(points.size() - 1).getBlock(), player, mode, undo);
+				new Generator(locs, points.get(points.size() - 1).getPoint().getBlock(), player, mode, undo);
 			}
 			
 			if(player != null)
@@ -114,7 +118,15 @@ public class BTUtils {
 			loc.getBlock().setType(Material.AIR);
 			return true;
 		}
-		return true;
+		else if(mode == BuildMode.REPLACE && loc.getBlock().getType() != Material.AIR){
+			undo.addBlock(loc.getBlock().getState());
+			BlockState state = loc.getBlock().getState();
+			state.setType(data.getItemType());
+			state.setData(data);
+			state.update(true);
+			return true;
+		}
+		return false;
 	}
 	
 	public static int getVolume(Location point1, Location point2){

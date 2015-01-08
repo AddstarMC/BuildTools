@@ -20,11 +20,11 @@ import au.com.mineauz.buildtools.types.BuildType;
 public class BTPlayer {
 	private Player player;
 	private boolean buildModeActive = false;
-	private List<Location> points = new ArrayList<Location>();
+	private List<BlockPoint> points = new ArrayList<>();
 	private String selection = "CUBOID";
 	private String pattern = "NONE";
-	private List<BTUndo> undos = new ArrayList<BTUndo>();
-	private List<BTUndo> redos = new ArrayList<BTUndo>();
+	private List<BTUndo> undos = new ArrayList<>();
+	private List<BTUndo> redos = new ArrayList<>();
 	private String[] tSettings = new String[0];
 	private String[] pSettings = new String[0];
 	private boolean canBuild = true;
@@ -69,16 +69,16 @@ public class BTPlayer {
 		clearPoints();
 	}
 	
-	public void addPoint(Location loc){
-		points.add(loc);
+	public void addPoint(BlockPoint point){
+		points.add(point);
 	}
 	
 	public boolean hasPoint(Location loc){
-		for(Location point : points){
-			if(loc.getBlockX() == point.getBlockX() &&
-					loc.getBlockY() == point.getBlockY() &&
-					loc.getBlockZ() == point.getBlockZ() &&
-					loc.getWorld() == point.getWorld()){
+		for(BlockPoint point : points){
+			if(loc.getBlockX() == point.getPoint().getBlockX() &&
+					loc.getBlockY() == point.getPoint().getBlockY() &&
+					loc.getBlockZ() == point.getPoint().getBlockZ() &&
+					loc.getWorld() == point.getPoint().getWorld()){
 				return true;
 			}
 		}
@@ -86,11 +86,11 @@ public class BTPlayer {
 	}
 	
 	public void removePoint(Location loc){
-		for(Location point : new ArrayList<Location>(points)){
-			if(loc.getBlockX() == point.getBlockX() &&
-					loc.getBlockY() == point.getBlockY() &&
-					loc.getBlockZ() == point.getBlockZ() &&
-					loc.getWorld() == point.getWorld()){
+		for(BlockPoint point : new ArrayList<BlockPoint>(points)){
+			if(loc.getBlockX() == point.getPoint().getBlockX() &&
+					loc.getBlockY() == point.getPoint().getBlockY() &&
+					loc.getBlockZ() == point.getPoint().getBlockZ() &&
+					loc.getWorld() == point.getPoint().getWorld()){
 				points.remove(point);
 			}
 		}
@@ -106,23 +106,23 @@ public class BTPlayer {
 	
 	public boolean pointMaterialsMatch(){
 		Material mat = null;
-		for(Location loc : points){
+		for(BlockPoint point : points){
 			if(mat == null)
-				mat = loc.getBlock().getType();
+				mat = point.getType();
 			else
-				if(mat != loc.getBlock().getType())
+				if(mat != point.getType())
 					return false;
 		}
 		return true;
 	}
 	
-	public Location getPoint(int number){
+	public BlockPoint getPoint(int number){
 		if(number < points.size())
 			return points.get(number);
 		return null;
 	}
 	
-	public List<Location> getPoints(){
+	public List<BlockPoint> getPoints(){
 		return points;
 	}
 	

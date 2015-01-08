@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Location;
 
 import au.com.mineauz.buildtools.BTUtils;
+import au.com.mineauz.buildtools.BlockPoint;
 
 public class FramePattern implements BuildPattern {
 
@@ -27,7 +28,7 @@ public class FramePattern implements BuildPattern {
 	}
 
 	@Override
-	public boolean fitsPattern(Location block, List<Location> points, String[] settings) {
+	public boolean fitsPattern(Location block, List<BlockPoint> points, String[] settings) {
 		Location[] locs = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		int minx = locs[0].getBlockX();
 		int miny = locs[0].getBlockY();

@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.Location;
 
 import au.com.mineauz.buildtools.BTPlayer;
+import au.com.mineauz.buildtools.BlockPoint;
 import au.com.mineauz.buildtools.BuildMode;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
@@ -23,13 +24,13 @@ public class SphereType implements BuildType {
 
 	@Override
 	public List<Location> execute(BTPlayer player, BuildMode mode,
-			List<Location> points, BuildPattern pattern, String[] tSettings,
+			List<BlockPoint> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
 		List<Location> locs = new ArrayList<>();
-		Location mid = points.get(0);
+		Location mid = points.get(0).getPoint();
 		Location tmp = mid.clone();
 		
-		double dist = mid.distance(points.get(1)) + 1;
+		double dist = mid.distance(points.get(1).getPoint()) + 1;
 		tmp.setY(mid.getY() - dist);
 		tmp.setX(mid.getX() - dist);
 		tmp.setZ(mid.getZ() - dist);

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.bukkit.Location;
 
+import au.com.mineauz.buildtools.BlockPoint;
+
 public class RandomPattern implements BuildPattern {
 
 	@Override
@@ -26,7 +28,7 @@ public class RandomPattern implements BuildPattern {
 	}
 
 	@Override
-	public boolean fitsPattern(Location block, List<Location> points,
+	public boolean fitsPattern(Location block, List<BlockPoint> points,
 			String[] settings) {
 		double r = Math.random() * 100;
 		double chance = 50;
