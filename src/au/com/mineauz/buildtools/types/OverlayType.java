@@ -31,6 +31,14 @@ public class OverlayType implements BuildType {
 		List<Location> locs = new ArrayList<>();
 		Location tmp = mmt[0].clone();
 		tmp.setY(mmt[1].getY());
+		int depth = 1;
+		if(settings.length > 0){
+			if(settings[0].matches("[0-9]+")){
+				depth = Integer.valueOf(settings[0]);
+			}
+			if(depth == 0)
+				depth = 1;
+		}
 		for(int x = mmt[0].getBlockX(); x <= mmt[1].getBlockX(); x++){
 			tmp.setX(x);
 			for(int z = mmt[0].getBlockZ(); z <= mmt[1].getBlockZ(); z++){
@@ -42,8 +50,17 @@ public class OverlayType implements BuildType {
 					if(tmp.getBlock().getType() != Material.AIR && tmp.getBlock().getType().isSolid()){
 						if(mode == BuildMode.PLACE)
 							tmp.setY(tmp.getY() + 1);
-						if(pattern.fitsPattern(tmp, points, pSettings))
-							locs.add(tmp.clone());
+						for(int i = 0; i < depth; i++){
+							if(pattern.fitsPattern(tmp, points, pSettings))
+								locs.add(tmp.clone());
+							if(mode == BuildMode.PLACE)
+								tmp.setY(tmp.getY() + 1);
+							else
+								tmp.setY(tmp.getY() - 1);
+							
+							if(tmp.getY() > mmt[1].getY() || tmp.getY() < mmt[0].getY())
+								break;
+						}
 					}
 				}
 				else if(mode != BuildMode.PLACE && pattern.fitsPattern(tmp, points, pSettings))
