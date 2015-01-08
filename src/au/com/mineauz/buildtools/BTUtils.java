@@ -90,8 +90,14 @@ public class BTUtils {
 
 		if(locs != null){
 			BTUndo undo = new BTUndo(player);
-		
-			if(player != null && pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
+			if((player.getPoint(0).getMode() == BuildMode.PLACE && 
+					player.getPoint(player.getPointCount() - 1).getMode() == BuildMode.BREAK)
+					|| (player.getPoint(0).getMode() == BuildMode.BREAK && 
+					player.getPoint(player.getPointCount() - 1).getMode() == BuildMode.PLACE)){
+				mode = BuildMode.REPLACE;
+			}
+			if(player != null && (mode == BuildMode.BREAK || mode == BuildMode.PLACE) && 
+					pattern.useMaterialMatch() && !player.pointMaterialsMatch()){
 				player.sendMessage("Selection blocks aren't the same material!", ChatColor.RED);
 			}
 			else{
