@@ -23,6 +23,13 @@ public class OverlayType implements BuildType {
 	public int getRequiredPointCount() {
 		return 2;
 	}
+	
+	@Override
+	public String[] getParameters(){
+		return new String[] {
+				"<Height/Depth>"
+		};
+	}
 
 	@Override
 	public List<Location> execute(BTPlayer player, BuildMode mode,

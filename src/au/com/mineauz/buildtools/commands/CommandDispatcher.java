@@ -116,6 +116,8 @@ loop:			for(ICommand ic : commands.values()){
 					boolean ret = icmd.onCommand(sender, nargs);
 					if(!ret){
 						sender.sendMessage(ChatColor.GREEN + "------------Command Help------------");
+						if(icmd.getInfo() != null)
+							sender.sendMessage(ChatColor.AQUA + "Info: " + ChatColor.GRAY + icmd.getInfo());
 						sender.sendMessage(ChatColor.AQUA + "Command: " + ChatColor.GRAY + icmd.getName());
 						if(icmd.getAliases() != null){
 							sender.sendMessage(ChatColor.AQUA + "Aliases: " + BTUtils.arrayToString(icmd.getAliases()));
@@ -140,7 +142,7 @@ loop:			for(ICommand ic : commands.values()){
 				if(pl.isInCreative()){
 					pl.setBuildModeActive(true);
 					pl.sendMessage("Build mode active!", ChatColor.AQUA);
-					pl.sendMessage(ChatColor.AQUA + "Mode: " + ChatColor.WHITE + BTUtils.capitalize(pl.getSelection().getName()));
+					pl.sendMessage(ChatColor.AQUA + "Mode: " + ChatColor.WHITE + BTUtils.capitalize(pl.getType().getName()));
 					pl.sendMessage(ChatColor.AQUA + "Pattern: " + ChatColor.WHITE + BTUtils.capitalize(pl.getPattern().getName()));
 				}
 				else{

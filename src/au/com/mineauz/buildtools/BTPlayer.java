@@ -21,7 +21,7 @@ public class BTPlayer {
 	private Player player;
 	private boolean buildModeActive = false;
 	private List<BlockPoint> points = new ArrayList<>();
-	private String selection = "CUBOID";
+	private String type = "CUBOID";
 	private String pattern = "NONE";
 	private List<BTUndo> undos = new ArrayList<>();
 	private List<BTUndo> redos = new ArrayList<>();
@@ -126,12 +126,12 @@ public class BTPlayer {
 		return points;
 	}
 	
-	public BuildType getSelection(){
-		return BuildTypes.getType(selection);
+	public BuildType getType(){
+		return BuildTypes.getType(type);
 	}
 	
-	public void setSelection(String name){
-		selection = name;
+	public void setType(String name){
+		type = name;
 		pattern = "NONE";
 		clearPoints();
 	}
@@ -142,7 +142,7 @@ public class BTPlayer {
 	
 	public boolean setPattern(String name){
 		if(BuildPatterns.getPattern(name).compatibleSelections() == null ||
-				BuildPatterns.getPattern(name).compatibleSelections().contains(selection)){
+				BuildPatterns.getPattern(name).compatibleSelections().contains(type)){
 			pattern = name;
 			return true;
 		}

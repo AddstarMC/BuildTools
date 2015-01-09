@@ -26,6 +26,13 @@ public class RandomPattern implements BuildPattern {
 	public boolean useMaterialMatch() {
 		return true;
 	}
+	
+	@Override
+	public String[] getParameters(){
+		return new String[] {
+				"<Chance>"
+		};
+	}
 
 	@Override
 	public boolean fitsPattern(Location block, List<BlockPoint> points,

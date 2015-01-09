@@ -46,7 +46,7 @@ public class Events implements Listener{
 						pl.hasPermission("buildtools.bypassheightlimit")){
 					BlockPoint point = new BlockPoint(event.getBlockPlaced().getLocation(), event.getBlockPlaced().getType(), BuildMode.PLACE);
 					pl.addPoint(point);
-					if(pl.getPointCount() >= pl.getSelection().getRequiredPointCount()){
+					if(pl.getPointCount() >= pl.getType().getRequiredPointCount()){
 						int volLimit = pdata.getPlayerVolumeLimit(pl);
 						int vol = -1;
 						if(pl.getPointCount() > 1)
@@ -57,7 +57,7 @@ public class Events implements Listener{
 								
 								@Override
 								public void run() {
-									BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), BuildMode.PLACE);
+									BTUtils.generateBlocks(fpl, fpl.getType(), fpl.getPattern(), fpl.getPoints(), BuildMode.PLACE);
 									fpl.clearPoints();
 								}
 							});
@@ -124,7 +124,7 @@ public class Events implements Listener{
 						pl.hasPermission("buildtools.bypassheightlimit")){
 					BlockPoint point = new BlockPoint(event.getBlock().getLocation(), Material.AIR, BuildMode.BREAK);
 					pl.addPoint(point);
-					if(pl.getPointCount() >= pl.getSelection().getRequiredPointCount()){
+					if(pl.getPointCount() >= pl.getType().getRequiredPointCount()){
 						int volLimit = pdata.getPlayerVolumeLimit(pl);
 						int vol = -1;
 						if(pl.getPointCount() > 1)
@@ -135,7 +135,7 @@ public class Events implements Listener{
 								
 								@Override
 								public void run() {
-									BTUtils.generateBlocks(fpl, fpl.getSelection(), fpl.getPattern(), fpl.getPoints(), BuildMode.BREAK);
+									BTUtils.generateBlocks(fpl, fpl.getType(), fpl.getPattern(), fpl.getPoints(), BuildMode.BREAK);
 									fpl.clearPoints();
 								}
 							});

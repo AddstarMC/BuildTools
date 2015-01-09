@@ -26,6 +26,15 @@ public class TerrainType implements BuildType{
 	public int getRequiredPointCount() {
 		return 2;
 	}
+	
+	@Override
+	public String[] getParameters(){
+		return new String[] {
+				"<Smoothness>",
+				"<Smooth Edge>",
+				"<Seed>"
+		};
+	}
 
 	@Override
 	public List<Location> execute(BTPlayer player, BuildMode mode, List<BlockPoint> points, BuildPattern pattern, String[] tSettings, String[] pSettings) {

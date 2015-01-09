@@ -32,6 +32,14 @@ public class TypeCommand implements ICommand {
 	public boolean canBeCommandBlock() {
 		return false;
 	}
+	
+	@Override
+	public String getInfo(){
+		List<String> types = BuildTypes.getAllTypes();
+		return "Sets your build type for when BuildTools is enabled.\n"
+				+ "Possible Types:\n"
+				+ BTUtils.arrayToString((String[])types.toArray());
+	}
 
 	@Override
 	public String[] getUsage() {
@@ -53,22 +61,27 @@ public class TypeCommand implements ICommand {
 		if(args != null){
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(BuildTypes.hasType(args[0])){
-				pl.setSelection(args[0].toUpperCase());
-				pl.sendMessage("Set type to " + BTUtils.capitalize(pl.getSelection().getName()) + "\n"
-						+ "Pattern reset to None.", ChatColor.AQUA);
-				if(args.length > 1){
-					String[] s = new String[args.length - 1];
-					for(int i = 1; i < args.length; i++){
-						s[i - 1] = args[i];
+				if(pl.hasPermission("buildtools.type." + args[0].toLowerCase())){
+					pl.setType(args[0].toUpperCase());
+					pl.sendMessage("Set type to " + BTUtils.capitalize(pl.getType().getName()) + "\n"
+							+ "Pattern reset to None.", ChatColor.AQUA);
+					if(args.length > 1){
+						String[] s = new String[args.length - 1];
+						for(int i = 1; i < args.length; i++){
+							s[i - 1] = args[i];
+						}
+						pl.setTSettings(s);
 					}
-					pl.setTSettings(s);
+					else{
+						pl.setTSettings(new String[0]);
+					}
 				}
 				else{
-					pl.setTSettings(new String[0]);
+					pl.sendMessage("You do not have permission to use this type!", ChatColor.RED);
 				}
 			}
 			else
-				pl.sendMessage(ChatColor.RED + "No type by the name '" + args[0] + "'", ChatColor.RED);
+				pl.sendMessage("No type by the name '" + args[0] + "'", ChatColor.RED);
 			return true;
 		}
 		return false;

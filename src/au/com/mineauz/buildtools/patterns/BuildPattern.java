@@ -11,6 +11,7 @@ public interface BuildPattern {
 	public String getName();
 	public List<String> compatibleSelections();
 	public boolean useMaterialMatch();
+	public String[] getParameters();
 	public boolean fitsPattern(Location block, List<BlockPoint> points, String[] settings);
 
 }

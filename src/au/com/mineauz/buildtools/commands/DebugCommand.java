@@ -28,6 +28,11 @@ public class DebugCommand implements ICommand{
 	public boolean canBeCommandBlock() {
 		return false;
 	}
+	
+	@Override
+	public String getInfo(){
+		return null;
+	}
 
 	@Override
 	public String[] getUsage() {

@@ -1,6 +1,8 @@
 package au.com.mineauz.buildtools.types;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BuildTypes {
@@ -15,6 +17,10 @@ public class BuildTypes {
 		addType(new SphereType());
 		addType(new CopyType());
 		addType(new PasteType());
+	}
+	
+	public static List<String> getAllTypes(){
+		return new ArrayList<>(selections.keySet());
 	}
 	
 	public static BuildType getType(String name){

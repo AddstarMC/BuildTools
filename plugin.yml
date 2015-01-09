@@ -15,6 +15,7 @@ permissions:
   buildtools.command:
     description: Allows a player to use the base command.
     default: op
+  
   buildtools.command.*:
     children:
       buildtools.command.debug: true
@@ -39,6 +40,7 @@ permissions:
     default: op
   buildtools.command.type:
     default: op
+  
   buildtools.bypasslimits:
     description: Allows a player to bypass all limits.
     children:
@@ -51,3 +53,45 @@ permissions:
     default: false
   buildtools.bypassdisabledblocks:
     default: false
+  
+  buildtools.type.*:
+    children:
+      buildtools.type.cave: true
+      buildtools.type.copy: true
+      buildtools.type.cuboid: true
+      buildtools.type.overlay: true
+      buildtools.type.paste: true
+      buildtools.type.sphere: true
+      buildtools.type.terrain: true
+  buildtools.type.cave:
+    default: true
+  buildtools.type.copy:
+    default: true
+  buildtools.type.cuboid:
+    default: true
+  buildtools.type.overlay:
+    default: true
+  buildtools.type.paste:
+    default: true
+  buildtools.type.sphere:
+    default: true
+  buildtools.type.terrain:
+    default: true
+    
+  buildtools.pattern.*:
+    children:
+      buildtools.pattern.frame: true
+      buildtools.pattern.hollow: true
+      buildtools.pattern.none: true
+      buildtools.pattern.random: true
+      buildtools.pattern.wall: true
+  buildtools.pattern.frame:
+    default: true
+  buildtools.pattern.hollow:
+    default: true
+  buildtools.pattern.none:
+    default: true
+  buildtools.pattern.random:
+    default: true
+  buildtools.pattern.wall:
+    default: true

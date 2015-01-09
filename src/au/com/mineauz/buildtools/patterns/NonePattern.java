@@ -22,6 +22,11 @@ public class NonePattern implements BuildPattern {
 	public boolean useMaterialMatch() {
 		return true;
 	}
+	
+	@Override
+	public String[] getParameters(){
+		return null;
+	}
 
 	@Override
 	public boolean fitsPattern(Location block,

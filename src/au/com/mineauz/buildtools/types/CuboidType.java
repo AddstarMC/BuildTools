@@ -22,6 +22,11 @@ public class CuboidType implements BuildType {
 	public int getRequiredPointCount() {
 		return 2;
 	}
+	
+	@Override
+	public String[] getParameters(){
+		return null;
+	}
 
 	@Override
 	public List<Location> execute(BTPlayer player, BuildMode mode, List<BlockPoint> points, BuildPattern pattern, String[] settings, String[] pSettings) {

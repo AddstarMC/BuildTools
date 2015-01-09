@@ -13,6 +13,7 @@ public interface BuildType {
 	
 	public String getName();
 	public int getRequiredPointCount();
+	public String[] getParameters();
 	public List<Location> execute(BTPlayer player, BuildMode mode, List<BlockPoint> points, 
 			BuildPattern pattern, String[] tSettings, String[] pSettings);
 }

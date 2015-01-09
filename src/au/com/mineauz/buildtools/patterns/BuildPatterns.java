@@ -1,6 +1,8 @@
 package au.com.mineauz.buildtools.patterns;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BuildPatterns {
@@ -13,6 +15,10 @@ public class BuildPatterns {
 		addPattern(new FramePattern());
 		addPattern(new WallPattern());
 		addPattern(new RandomPattern());
+	}
+	
+	public static List<String> getAllPatterns(){
+		return new ArrayList<>(patterns.keySet());
 	}
 	
 	public static void addPattern(BuildPattern pattern){

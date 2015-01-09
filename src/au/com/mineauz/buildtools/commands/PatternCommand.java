@@ -32,6 +32,14 @@ public class PatternCommand implements ICommand {
 	public boolean canBeCommandBlock() {
 		return false;
 	}
+	
+	@Override
+	public String getInfo(){
+		List<String> patterns = BuildPatterns.getAllPatterns();
+		return "Sets your build pattern for when BuildTools is enabled.\n"
+				+ "Possible Patterns:\n"
+				+ BTUtils.arrayToString((String[])patterns.toArray());
+	}
 
 	@Override
 	public String[] getUsage() {
@@ -54,23 +62,27 @@ public class PatternCommand implements ICommand {
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			String pat = args[0].toUpperCase();
 			if(BuildPatterns.hasPattern(pat)){
-				boolean bool = pl.setPattern(pat);
-				if(bool){
-					pl.sendMessage("Your pattern has been set to " + BTUtils.capitalize(pat), ChatColor.AQUA);
-					if(args.length > 1){
-						String[] s = new String[args.length - 1];
-						for(int i = 1; i < args.length; i++){
-							s[i - 1] = args[i];
+				if(pl.hasPermission("buildtools.pattern." + args[0].toLowerCase())){
+					boolean bool = pl.setPattern(pat);
+					if(bool){
+						pl.sendMessage("Your pattern has been set to " + BTUtils.capitalize(pat), ChatColor.AQUA);
+						if(args.length > 1){
+							String[] s = new String[args.length - 1];
+							for(int i = 1; i < args.length; i++){
+								s[i - 1] = args[i];
+							}
+							pl.setPSettings(s);
 						}
-						pl.setPSettings(s);
+						else{
+							pl.setPSettings(new String[0]);
+						}
 					}
-					else{
-						pl.setPSettings(new String[0]);
-					}
+					else
+						pl.sendMessage("The pattern " + pat + " is not compatible with the selection " + 
+								BTUtils.capitalize(pl.getType().getName()), ChatColor.RED);
 				}
 				else
-					pl.sendMessage("The pattern " + pat + " is not compatible with the selection " + 
-							BTUtils.capitalize(pl.getSelection().getName()), ChatColor.RED);
+					pl.sendMessage("You do not have permission to use this pattern!", ChatColor.RED);
 			}
 			else{
 				pl.sendMessage("No pattern found by the name " + pat, ChatColor.RED);

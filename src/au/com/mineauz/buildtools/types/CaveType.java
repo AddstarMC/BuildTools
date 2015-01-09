@@ -26,6 +26,15 @@ public class CaveType implements BuildType {
 	public int getRequiredPointCount() {
 		return 2;
 	}
+	
+	@Override
+	public String[] getParameters(){
+		return new String[] {
+				"<Smoothness>",
+				"<Smooth Edge>",
+				"<Seed>"
+		};
+	}
 
 	@Override
 	public List<Location> execute(BTPlayer player, BuildMode mode,
@@ -37,7 +46,7 @@ public class CaveType implements BuildType {
 		boolean soft = true;
 		if(tSettings.length != 0){
 			if(tSettings.length >= 3 && tSettings[2].matches("-?[0-9]+")){
-				seed = Long.valueOf(tSettings[2]);
+				seed = Long.valueOf(tSettings[2].hashCode());
 			}
 			if(tSettings.length >= 2 && tSettings[1].matches("true|false")){
 				soft = Boolean.parseBoolean(tSettings[1]);

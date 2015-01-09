@@ -23,11 +23,11 @@ public class BTUtils {
 			if(!arr[arr.length - 1 ].equals(s)){
 				st += ", ";
 				if(alt){
-					st += ChatColor.GRAY;
+					st += ChatColor.LIGHT_PURPLE;
 					alt = false;
 				}
 				else{
-					st += ChatColor.WHITE;
+					st += ChatColor.DARK_PURPLE;
 					alt = true;
 				}
 			}

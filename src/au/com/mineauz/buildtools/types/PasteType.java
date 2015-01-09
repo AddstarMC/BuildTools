@@ -23,6 +23,11 @@ public class PasteType implements BuildType {
 	public int getRequiredPointCount() {
 		return 1;
 	}
+	
+	@Override
+	public String[] getParameters(){
+		return null;
+	}
 
 	@Override
 	public List<Location> execute(BTPlayer player, BuildMode mode,

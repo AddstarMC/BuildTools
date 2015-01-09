@@ -10,6 +10,7 @@ public interface ICommand {
 	public String[] getAliases();
 	public boolean canBeConsole();
 	public boolean canBeCommandBlock();
+	public String getInfo();
 	public String[] getUsage();
 	public String getPermission();
 	
