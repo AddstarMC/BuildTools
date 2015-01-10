@@ -24,6 +24,11 @@ public class NonePattern implements BuildPattern {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Default generation, nothing will change what the type looks like.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}

@@ -24,6 +24,11 @@ public class CuboidType implements BuildType {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Creates a basic cuboid between your two points.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}

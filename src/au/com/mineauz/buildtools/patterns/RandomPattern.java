@@ -3,6 +3,7 @@ package au.com.mineauz.buildtools.patterns;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 import au.com.mineauz.buildtools.BlockPoint;
@@ -28,9 +29,14 @@ public class RandomPattern implements BuildPattern {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Randomizes block placing.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Chance>"
+				"<Chance> " + ChatColor.GRAY + "Chance of a block placing. (50 by default)"
 		};
 	}
 

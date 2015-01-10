@@ -28,6 +28,11 @@ public class FramePattern implements BuildPattern {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Creates a frame around the selected area.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}

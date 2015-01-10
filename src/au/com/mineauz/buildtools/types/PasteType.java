@@ -25,6 +25,12 @@ public class PasteType implements BuildType {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Pastes the last thing you copied to your clipboard. The first block you placed in the copy "
+				+ "is the reference point for where the paste will go.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}

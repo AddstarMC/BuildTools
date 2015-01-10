@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.patterns.BuildPattern;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
 
 public class PatternCommand implements ICommand {
@@ -61,7 +62,30 @@ public class PatternCommand implements ICommand {
 		if(args != null){
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			String pat = args[0].toUpperCase();
-			if(BuildPatterns.hasPattern(pat)){
+			if(args[0].equalsIgnoreCase("help") && args.length >= 2){
+				if(BuildPatterns.hasPattern(args[1])){
+					BuildPattern p = BuildPatterns.getPattern(args[1]);
+					pl.sendMessage(ChatColor.GREEN + "--------------Pattern Help--------------");
+					pl.sendMessage(ChatColor.AQUA + "Name: " + ChatColor.GRAY + BTUtils.capitalize(p.getName()));
+					if(p.getHelpInfo() != null){
+						pl.sendMessage(ChatColor.AQUA + "Help Info: " + ChatColor.GRAY + p.getHelpInfo());
+					}
+					if(p.getParameters() != null){
+						pl.sendMessage(ChatColor.AQUA + "Parameters: ");
+						for(String par : p.getParameters()){
+							pl.sendMessage(ChatColor.GOLD + par);
+						}
+					}
+					if(p.compatibleSelections() != null){
+						pl.sendMessage(ChatColor.AQUA + "Compatible Types: " + BTUtils.listToString(p.compatibleSelections()));
+					}
+					pl.sendMessage(ChatColor.AQUA + "Match Materials: " + ChatColor.GRAY + p.useMaterialMatch());
+				}
+				else{
+					pl.sendMessage("No type by the name '" + args[1] + "'", ChatColor.RED);
+				}
+			}
+			else if(BuildPatterns.hasPattern(pat)){
 				if(pl.hasPermission("buildtools.pattern." + args[0].toLowerCase())){
 					boolean bool = pl.setPattern(pat);
 					if(bool){

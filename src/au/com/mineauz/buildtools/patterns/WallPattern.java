@@ -29,6 +29,11 @@ public class WallPattern implements BuildPattern {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Creates a wall around the selected area. If 'overlay' type is used, will act like fencing.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}

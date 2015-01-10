@@ -28,6 +28,11 @@ public class CopyType implements BuildType{
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Copies the blocks within the selected area to your clipboard.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}

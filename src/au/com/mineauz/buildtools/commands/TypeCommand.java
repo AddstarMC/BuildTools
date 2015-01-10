@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.types.BuildType;
 import au.com.mineauz.buildtools.types.BuildTypes;
 
 public class TypeCommand implements ICommand {
@@ -36,14 +37,15 @@ public class TypeCommand implements ICommand {
 	@Override
 	public String getInfo(){
 		List<String> types = BuildTypes.getAllTypes();
-		return "Sets your build type for when BuildTools is enabled.\n"
+		return "Sets your build type for when BuildTools is enabled. You can run '/bt type help <type>' for "
+				+ "more information on that type.\n"
 				+ ChatColor.AQUA + "Possible Types: "
 				+ BTUtils.listToString(types);
 	}
 
 	@Override
 	public String[] getUsage() {
-		return new String[] {"<Type>"};
+		return new String[] {"<Type>", "help <type>"};
 	}
 	
 	@Override
@@ -60,7 +62,27 @@ public class TypeCommand implements ICommand {
 	public boolean onCommand(CommandSender sender, String[] args) {
 		if(args != null){
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
-			if(BuildTypes.hasType(args[0])){
+			if(args[0].equalsIgnoreCase("help") && args.length >= 2){
+				if(BuildTypes.hasType(args[1])){
+					BuildType t = BuildTypes.getType(args[1]);
+					pl.sendMessage(ChatColor.GREEN + "--------------Type Help--------------");
+					pl.sendMessage(ChatColor.AQUA + "Name: " + ChatColor.GRAY + BTUtils.capitalize(t.getName()));
+					if(t.getHelpInfo() != null){
+						pl.sendMessage(ChatColor.AQUA + "Help Info: " + ChatColor.GRAY + t.getHelpInfo());
+					}
+					if(t.getParameters() != null){
+						pl.sendMessage(ChatColor.AQUA + "Parameters: ");
+						for(String p : t.getParameters()){
+							pl.sendMessage(ChatColor.GOLD + p);
+						}
+					}
+					pl.sendMessage(ChatColor.AQUA + "Required Points: " + ChatColor.GRAY + t.getRequiredPointCount());
+				}
+				else{
+					pl.sendMessage("No type by the name '" + args[1] + "'", ChatColor.RED);
+				}
+			}
+			else if(BuildTypes.hasType(args[0])){
 				if(pl.hasPermission("buildtools.type." + args[0].toLowerCase())){
 					pl.setType(args[0].toUpperCase());
 					pl.sendMessage("Set type to " + BTUtils.capitalize(pl.getType().getName()) + "\n"

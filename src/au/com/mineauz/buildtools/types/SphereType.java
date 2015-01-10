@@ -23,6 +23,12 @@ public class SphereType implements BuildType {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Creates a sphere, the first block you place/break will be the centre, the second will be the radius from the "
+				+ "centre.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}

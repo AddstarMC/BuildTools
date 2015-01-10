@@ -3,6 +3,7 @@ package au.com.mineauz.buildtools.types;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 
@@ -25,9 +26,17 @@ public class OverlayType implements BuildType {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Overlays blocks in the area of the two points. The overlay will not go above or below "
+				+ "your selected area, therefore if BuildTools can't find a block at the bottom of the selection, "
+				+ "no block will be placed. Breaking away the terrain will remove the top layer of blocks, placing "
+				+ "will put the blocks on top of the already existing blocks.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Height/Depth>"
+				"<Height/Depth> " + ChatColor.GRAY + "How high/deep to overlay blocks."
 		};
 	}
 

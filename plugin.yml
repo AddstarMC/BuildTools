@@ -23,6 +23,7 @@ permissions:
       buildtools.command.undo: true
       buildtools.command.redo: true
       buildtools.command.type: true
+      buildtools.command.help: true
   buildtools.command.basic:
     description: Basic command permissions for players.
     children:
@@ -30,6 +31,7 @@ permissions:
       buildtools.command.undo: true
       buildtools.command.redo: true
       buildtools.command.type: true
+      buildtools.command.help: true
   buildtools.command.debug:
     default: op
   buildtools.command.pattern:
@@ -39,6 +41,8 @@ permissions:
   buildtools.command.redo:
     default: op
   buildtools.command.type:
+    default: op
+  buildtools.command.help:
     default: op
   
   buildtools.bypasslimits:

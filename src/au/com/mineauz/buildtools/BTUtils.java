@@ -337,7 +337,7 @@ public class BTUtils {
 		int ind = 0;
 		List<String> out = new ArrayList<>();
 		
-		while(ind < entry.length()){
+		while(ind <= entry.length()){
 			int nind = ind + 245;
 			if(nind < entry.length()){
 				if(entry.charAt(nind) != " ".charAt(0)){

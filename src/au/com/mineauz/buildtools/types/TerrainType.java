@@ -28,11 +28,18 @@ public class TerrainType implements BuildType{
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Creates terrain between your selected area. The height difference between the two placed "
+				+ "blocks will determine how hilly the terrain will be. Not all paramaters are required, but "
+				+ "must be filled out in order (you can't enter the seed without smoothness and smooth edge).";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Smoothness>",
-				"<Smooth Edge>",
-				"<Seed>"
+				"<Smoothness> " + ChatColor.GRAY + "The smoothness of the terrain. (15 - 25 by default)",
+				"<Smooth Edge> " + ChatColor.GRAY + "Should the edge of the terrain be smoothed out. (defaults to 'false')",
+				"<Seed> " + ChatColor.GRAY + "The seed of the terrain."
 		};
 	}
 

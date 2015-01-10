@@ -28,11 +28,18 @@ public class CaveType implements BuildType {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Creates cave-like blobs. These aren't quite the Minecraft styled vanilla caves, more for cutting "
+				+ "into the terrain to create cliffs or pockets. Not all parameters are required but must be filled "
+				+ "out in order (you can't have seed without smoothness and smooth edge).";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Smoothness>",
-				"<Smooth Edge>",
-				"<Seed>"
+				"<Smoothness> " + ChatColor.GRAY + "The smoothness of the cave. (15 - 25 default)",
+				"<Smooth Edge> " + ChatColor.GRAY + "Should the edge of the cave selection be smoothed out. (defaults to 'true')",
+				"<Seed> " + ChatColor.GRAY + "The seed of the cave."
 		};
 	}
 

@@ -68,7 +68,16 @@ public class HelpCommand implements ICommand {
 				ply.sendMessage("You have been given the basic help book.", ChatColor.AQUA);
 			}
 			else if(args[0].equalsIgnoreCase("commands")){
-				
+				ply.sendMessage(ChatColor.AQUA + "/buildtools type");
+				ply.sendMessage(ChatColor.GRAY + "Sets your building type.");
+				ply.sendMessage(ChatColor.AQUA + "/buildtools pattern");
+				ply.sendMessage(ChatColor.GRAY + "Sets your building pattern.");
+				ply.sendMessage(ChatColor.AQUA + "/buildtools undo");
+				ply.sendMessage(ChatColor.GRAY + "Undo your last build.");
+				ply.sendMessage(ChatColor.AQUA + "/buildtools redo");
+				ply.sendMessage(ChatColor.GRAY + "Redoes your last undo.");
+				ply.sendMessage(ChatColor.AQUA + "/buildtools copyrotate");
+				ply.sendMessage(ChatColor.GRAY + "Rotates the last copy on your clipboard.");
 			}
 			else{
 				List<ICommand> commands = CommandDispatcher.getAllCommands();
@@ -99,7 +108,7 @@ public class HelpCommand implements ICommand {
 					if(icmd.getUsage() != null){
 						sender.sendMessage(ChatColor.AQUA + "Usage:");
 						for(String use : icmd.getUsage()){
-							sender.sendMessage(ChatColor.GRAY + "/" + args[0] + " " + icmd.getName() + " " + use);
+							sender.sendMessage(ChatColor.GRAY + "/buildtools" + " " + icmd.getName() + " " + use);
 						}
 					}
 				}

@@ -28,6 +28,11 @@ public class HollowPattern implements BuildPattern {
 	}
 	
 	@Override
+	public String getHelpInfo(){
+		return "Creates a hollow shape.";
+	}
+	
+	@Override
 	public String[] getParameters(){
 		return null;
 	}
