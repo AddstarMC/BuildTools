@@ -37,8 +37,8 @@ public class PatternCommand implements ICommand {
 	public String getInfo(){
 		List<String> patterns = BuildPatterns.getAllPatterns();
 		return "Sets your build pattern for when BuildTools is enabled.\n"
-				+ "Possible Patterns:\n"
-				+ BTUtils.arrayToString((String[])patterns.toArray());
+				+ ChatColor.AQUA + "Possible Patterns: "
+				+ BTUtils.listToString(patterns);
 	}
 
 	@Override

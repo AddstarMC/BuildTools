@@ -37,8 +37,8 @@ public class TypeCommand implements ICommand {
 	public String getInfo(){
 		List<String> types = BuildTypes.getAllTypes();
 		return "Sets your build type for when BuildTools is enabled.\n"
-				+ "Possible Types:\n"
-				+ BTUtils.arrayToString((String[])types.toArray());
+				+ ChatColor.AQUA + "Possible Types: "
+				+ BTUtils.listToString(types);
 	}
 
 	@Override

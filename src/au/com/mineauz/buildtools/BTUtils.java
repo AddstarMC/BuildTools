@@ -8,12 +8,22 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 import au.com.mineauz.buildtools.types.BuildType;
 
 public class BTUtils {
+	
+	public static String listToString(List<String> list){
+		String[] str = new String[list.size()];
+		for(int i = 0; i < list.size(); i++){
+			str[i] = list.get(i);
+		}
+		return arrayToString(str);
+	}
 	
 	public static String arrayToString(String[] arr){
 		String st = ChatColor.GRAY + "";
@@ -23,11 +33,11 @@ public class BTUtils {
 			if(!arr[arr.length - 1 ].equals(s)){
 				st += ", ";
 				if(alt){
-					st += ChatColor.LIGHT_PURPLE;
+					st += ChatColor.GRAY;
 					alt = false;
 				}
 				else{
-					st += ChatColor.DARK_PURPLE;
+					st += ChatColor.WHITE;
 					alt = true;
 				}
 			}
@@ -273,5 +283,80 @@ public class BTUtils {
 			}
 		}
 		return f;
+	}
+	
+	public static ItemStack getHelpBook(){
+		ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+		BookMeta meta = (BookMeta) book.getItemMeta();
+		meta.setAuthor("BuildTools");
+		meta.setTitle("BuildTools Help");
+		String intro = "" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "Basic Help:\n" + ChatColor.RESET
+						+ "BuildTools is made around placing and breaking blocks rather than using commands to "
+						+ "build structures. To enable BuildTools, simply type '/buildtools' or '/bt'. "
+						+ "To disable it again, simply type this command again.\n"
+						+ "By default, you'll have the 'Cuboid' type and 'None' pattern selected, this will "
+						+ "generate a basic cuboid, depending on your selection type, more on these on the next "
+						+ "page. While having BuildTools enabled, you can sneak to be able to place blocks without "
+						+ "using the BuildTools functions. This is useful if you need to tower up to a point to fill "
+						+ "your selection in.";
+		String selections = "" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "Selection Types:\n" + ChatColor.RESET
+							+ "Depending on what you doing, you may want to remove blocks, place blocks, or "
+							+ "replace blocks in your selection area. This is where selection types come in.";
+		String fill = ChatColor.LIGHT_PURPLE + "Fill Type:\n" + ChatColor.RESET
+							+ "You can fill an area by simply placing blocks, for a cuboid, place a block at one "
+							+ "corner of your area, and then again at the second. The block you placed at both points "
+							+ "will then fill in the area. This does not remove any blocks already in the area.";
+		String remove = ChatColor.LIGHT_PURPLE + "Remove Type:\n" + ChatColor.RESET
+							+ "To remove blocks instead of place them, use an axe, pickaxe or shovel (any of these) "
+							+ "and break the blocks at each corner of your selection. This will remove all blocks (excluding "
+							+ "liquids like water and lava) from the area.";
+		String replace = ChatColor.LIGHT_PURPLE + "Replace Type:\n" + ChatColor.RESET
+							+ "You can replace the blocks in an area too (excluding air blocks). To do this, break a block "
+							+ "in the first corner of the selection, then place a block in the second corner. This will replace "
+							+ "all the blocks with the block you placed at the end.";
+		for(String page : makePages(intro)){
+			meta.addPage(page);
+		}
+		for(String page : makePages(selections)){
+			meta.addPage(page);
+		}
+		for(String page : makePages(fill)){
+			meta.addPage(page);
+		}
+		for(String page : makePages(remove)){
+			meta.addPage(page);
+		}
+		for(String page : makePages(replace)){
+			meta.addPage(page);
+		}
+		book.setItemMeta(meta);
+		return book;
+	}
+	
+	public static List<String> makePages(String entry){
+		int ind = 0;
+		List<String> out = new ArrayList<>();
+		
+		while(ind < entry.length()){
+			int nind = ind + 245;
+			if(nind < entry.length()){
+				if(entry.charAt(nind) != " ".charAt(0)){
+					while(entry.charAt(nind) != " ".charAt(0) && nind != 0){
+						nind--;
+					}
+					if(nind == 0){
+						nind = ind + 245;
+					}
+				}
+				out.add(entry.substring(ind, nind));
+				ind = nind + 1;
+			}
+			else{
+				out.add(entry.substring(ind, entry.length() - 1));
+				break;
+			}
+		}
+		
+		return out;
 	}
 }

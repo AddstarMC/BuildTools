@@ -27,6 +27,7 @@ public class CommandDispatcher implements CommandExecutor, TabCompleter{
 		addCommand(new RedoCommand());
 		addCommand(new DebugCommand());
 		addCommand(new CopyRotateCommand());
+		addCommand(new HelpCommand());
 	}
 	
 	public static void addCommand(ICommand command){
@@ -156,6 +157,10 @@ loop:			for(ICommand ic : commands.values()){
 			return true;
 		}
 		return false;
+	}
+	
+	public static List<ICommand> getAllCommands(){
+		return new ArrayList<>(commands.values());
 	}
 
 }
