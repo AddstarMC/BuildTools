@@ -12,7 +12,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -95,19 +94,15 @@ public class Generator implements Runnable{
 		
 		task = Bukkit.getScheduler().runTaskTimer(Main.plugin, this, 1, 1);
 	}
-
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public void run() {
 		long time = System.nanoTime();
 		if(locs != null){
-			boolean succeed = false;
 			MaterialData data = block.getState().getData();
 			while(locs.hasNext()){
 				Location loc = locs.next();
-				succeed = BTUtils.placeBlock(player, loc, data, mode, undo);
-				if(!succeed)
-					break;
+				BTUtils.placeBlock(player, loc, data, mode, undo);
 				if(System.nanoTime() - time > 10000000)
 					return;
 			}
@@ -118,8 +113,7 @@ public class Generator implements Runnable{
 				if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
 					Integer[] lim = Main.plugin.getPlayerData().getPlayerHightLimits(player);
 					if(state.getLocation().getBlockY() >= lim[0] && state.getLocation().getY() <= lim[1]){
-						undo.addBlock(state.getLocation().getBlock().getState());
-						state.update(true);
+						BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, undo);
 					}
 				}
 				if(System.nanoTime() - time > 10000000)
@@ -130,8 +124,7 @@ public class Generator implements Runnable{
 			while(states.hasNext()){
 				BlockState state = states.next();
 				if(player != null){
-					nundo.addBlock(state.getBlock().getState());
-					state.update(true);
+					BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, nundo);
 
 					if(System.nanoTime() - time > 10000000)
 						return;
@@ -139,17 +132,6 @@ public class Generator implements Runnable{
 				else{
 					break;
 				}
-			}
-			if(player != null){
-				for(ItemStack i : undo.getItems()){
-					Map<Integer, ItemStack> its = player.getPlayer().getInventory().addItem(i);
-					nundo.addItem(i);
-					if(!its.isEmpty()){
-						for(ItemStack it : its.values())
-							player.getLocation().getWorld().dropItemNaturally(player.getLocation(), it);
-					}
-				}
-				player.getPlayer().updateInventory();
 			}
 		}
 		if(player != null)

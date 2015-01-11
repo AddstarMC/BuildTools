@@ -4,29 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.block.BlockState;
-import org.bukkit.inventory.ItemStack;
 
 public class BTUndo {
 	private BTPlayer player = null;
 	private List<BlockState> blocks = new ArrayList<BlockState>();
-	private List<ItemStack> items = new ArrayList<ItemStack>();
 	
 	public BTUndo(BTPlayer player){
 		this.player = player;
 	}
 	
-	public BTUndo(BTPlayer player, List<BlockState> blocks, List<ItemStack> items){
+	public BTUndo(BTPlayer player, List<BlockState> blocks){
 		this.player = player;
 		this.blocks = blocks;
-		this.items = items;
 	}
 	
 	public void addBlock(BlockState state){
 		blocks.add(state);
-	}
-	
-	public void addItem(ItemStack usedItem){
-		items.add(usedItem);
 	}
 	
 	public BTUndo restoreBlocks(){
@@ -45,12 +38,8 @@ public class BTUndo {
 		return player;
 	}
 	
-	public List<ItemStack> getItems(){
-		return items;
-	}
-	
 	@Override
 	public BTUndo clone(){
-		return new BTUndo(player, new ArrayList<>(blocks), new ArrayList<>(items));
+		return new BTUndo(player, new ArrayList<>(blocks));
 	}
 }

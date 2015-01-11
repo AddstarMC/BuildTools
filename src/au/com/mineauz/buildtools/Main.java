@@ -3,17 +3,26 @@ package au.com.mineauz.buildtools;
 import java.io.File;
 import java.io.IOException;
 
+import me.ryanhamshire.GriefPrevention.GriefPrevention;
+
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+
 import au.com.mineauz.buildtools.commands.CommandDispatcher;
+import au.com.mineauz.buildtools.protection.GPPlugin;
+import au.com.mineauz.buildtools.protection.ProtectionPlugins;
+import au.com.mineauz.buildtools.protection.WGPlugin;
 
 public class Main extends JavaPlugin{
 	
 	public static Main plugin;
 	private PlayerData pdata;
 	private boolean debug;
+	
+	private ProtectionPlugins pplugins;
 	
 	@Override
 	public void onEnable(){
@@ -44,6 +53,19 @@ public class Main extends JavaPlugin{
 		
 		getServer().getPluginManager().registerEvents(new Events(), this);
 		
+		pplugins = new ProtectionPlugins();
+		
+		if(plugin.getServer().getPluginManager().isPluginEnabled("WorldGuard")){
+			pplugins.addProtectionPlugin(new WGPlugin((WorldGuardPlugin) plugin.getServer().getPluginManager().getPlugin("WorldGuard")));
+			if(isDebugging())
+				getLogger().info("WorldGuard protection enabled.");
+		}
+		if(plugin.getServer().getPluginManager().isPluginEnabled("GriefPrevention")){
+			pplugins.addProtectionPlugin(new GPPlugin((GriefPrevention) plugin.getServer().getPluginManager().getPlugin("GriefPrevention")));
+			if(isDebugging())
+				getLogger().info("GriefPrevention protection enabled.");
+		}
+		
 		getLogger().info(" successfully enabled!");
 	}
 	
@@ -65,6 +87,10 @@ public class Main extends JavaPlugin{
 	
 	public void setDebugging(boolean debug){
 		this.debug = debug;
+	}
+	
+	public ProtectionPlugins getProtectionPlugins(){
+		return pplugins;
 	}
 
 }

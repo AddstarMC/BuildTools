@@ -2,6 +2,7 @@ name: BuildTools
 main: au.com.mineauz.buildtools.Main
 version: 1.0.0
 author: _Razz_
+softdepend: [GriefPrevention, WorldGuard]
 
 commands:
   buildtools:
