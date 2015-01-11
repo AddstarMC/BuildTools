@@ -65,6 +65,12 @@ public class BTPlayer {
 	public void setBuildModeActive(boolean active){
 		buildModeActive = active;
 		clearPoints();
+		if(Main.plugin.isDebugging()){
+			if(buildModeActive)
+				Main.plugin.getLogger().info(getName() + " enabled Build Mode.");
+			else
+				Main.plugin.getLogger().info(getName() + " disabled Build Mode.");
+		}
 	}
 	
 	public void addPoint(BlockPoint point){
