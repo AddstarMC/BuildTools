@@ -13,8 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import au.com.mineauz.buildtools.patterns.BuildPattern;
-import au.com.mineauz.buildtools.patterns.BuildPatterns;
-import au.com.mineauz.buildtools.types.BuildTypes;
 import au.com.mineauz.buildtools.types.BuildType;
 
 public class BTPlayer {
@@ -127,7 +125,7 @@ public class BTPlayer {
 	}
 	
 	public BuildType getType(){
-		return BuildTypes.getType(type);
+		return Main.plugin.getBuildTypes().getType(type);
 	}
 	
 	public void setType(String name){
@@ -137,12 +135,12 @@ public class BTPlayer {
 	}
 	
 	public BuildPattern getPattern(){
-		return BuildPatterns.getPattern(pattern);
+		return Main.plugin.getBuildPatterns().getPattern(pattern);
 	}
 	
 	public boolean setPattern(String name){
-		if(BuildPatterns.getPattern(name).compatibleSelections() == null ||
-				BuildPatterns.getPattern(name).compatibleSelections().contains(type)){
+		if(Main.plugin.getBuildPatterns().getPattern(name).compatibleSelections() == null ||
+				Main.plugin.getBuildPatterns().getPattern(name).compatibleSelections().contains(type)){
 			pattern = name;
 			return true;
 		}

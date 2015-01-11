@@ -10,7 +10,6 @@ import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.types.BuildType;
-import au.com.mineauz.buildtools.types.BuildTypes;
 
 public class TypeCommand implements ICommand {
 
@@ -36,7 +35,7 @@ public class TypeCommand implements ICommand {
 	
 	@Override
 	public String getInfo(){
-		List<String> types = BuildTypes.getAllTypes();
+		List<String> types = Main.plugin.getBuildTypes().getAllTypes();
 		return "Sets your build type for when BuildTools is enabled. You can run '/bt type help <type>' for "
 				+ "more information on that type.\n"
 				+ ChatColor.AQUA + "Possible Types: "
@@ -63,8 +62,8 @@ public class TypeCommand implements ICommand {
 		if(args != null){
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(args[0].equalsIgnoreCase("help") && args.length >= 2){
-				if(BuildTypes.hasType(args[1])){
-					BuildType t = BuildTypes.getType(args[1]);
+				if(Main.plugin.getBuildTypes().hasType(args[1])){
+					BuildType t = Main.plugin.getBuildTypes().getType(args[1]);
 					pl.sendMessage(ChatColor.GREEN + "--------------Type Help--------------");
 					pl.sendMessage(ChatColor.AQUA + "Name: " + ChatColor.GRAY + BTUtils.capitalize(t.getName()));
 					if(t.getHelpInfo() != null){
@@ -82,7 +81,7 @@ public class TypeCommand implements ICommand {
 					pl.sendMessage("No type by the name '" + args[1] + "'", ChatColor.RED);
 				}
 			}
-			else if(BuildTypes.hasType(args[0])){
+			else if(Main.plugin.getBuildTypes().hasType(args[0])){
 				if(pl.hasPermission("buildtools.type." + args[0].toLowerCase())){
 					pl.setType(args[0].toUpperCase());
 					pl.sendMessage("Set type to " + BTUtils.capitalize(pl.getType().getName()) + "\n"

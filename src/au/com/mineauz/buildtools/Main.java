@@ -12,9 +12,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import au.com.mineauz.buildtools.commands.CommandDispatcher;
+import au.com.mineauz.buildtools.patterns.BuildPatterns;
 import au.com.mineauz.buildtools.protection.GPPlugin;
 import au.com.mineauz.buildtools.protection.ProtectionPlugins;
 import au.com.mineauz.buildtools.protection.WGPlugin;
+import au.com.mineauz.buildtools.types.BuildTypes;
 
 public class Main extends JavaPlugin{
 	
@@ -23,6 +25,8 @@ public class Main extends JavaPlugin{
 	private boolean debug;
 	
 	private ProtectionPlugins pplugins;
+	private BuildPatterns patterns;
+	private BuildTypes types;
 	
 	@Override
 	public void onEnable(){
@@ -66,6 +70,9 @@ public class Main extends JavaPlugin{
 				getLogger().info("GriefPrevention protection enabled.");
 		}
 		
+		types = new BuildTypes();
+		patterns = new BuildPatterns();
+		
 		getLogger().info(" successfully enabled!");
 	}
 	
@@ -73,6 +80,9 @@ public class Main extends JavaPlugin{
 	public void onDisable(){
 		pdata.clearAllBTPlayers();
 		pdata = null;
+		pplugins = null;
+		types = null;
+		patterns = null;
 		
 		getLogger().info(" successfully disabled!");
 	}
@@ -91,6 +101,14 @@ public class Main extends JavaPlugin{
 	
 	public ProtectionPlugins getProtectionPlugins(){
 		return pplugins;
+	}
+	
+	public BuildTypes getBuildTypes(){
+		return types;
+	}
+	
+	public BuildPatterns getBuildPatterns(){
+		return patterns;
 	}
 
 }

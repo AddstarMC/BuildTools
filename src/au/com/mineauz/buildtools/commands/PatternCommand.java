@@ -10,7 +10,6 @@ import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.Main;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
-import au.com.mineauz.buildtools.patterns.BuildPatterns;
 
 public class PatternCommand implements ICommand {
 
@@ -36,7 +35,7 @@ public class PatternCommand implements ICommand {
 	
 	@Override
 	public String getInfo(){
-		List<String> patterns = BuildPatterns.getAllPatterns();
+		List<String> patterns = Main.plugin.getBuildPatterns().getAllPatterns();
 		return "Sets your build pattern for when BuildTools is enabled.\n"
 				+ ChatColor.AQUA + "Possible Patterns: "
 				+ BTUtils.listToString(patterns);
@@ -63,8 +62,8 @@ public class PatternCommand implements ICommand {
 			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
 			String pat = args[0].toUpperCase();
 			if(args[0].equalsIgnoreCase("help") && args.length >= 2){
-				if(BuildPatterns.hasPattern(args[1])){
-					BuildPattern p = BuildPatterns.getPattern(args[1]);
+				if(Main.plugin.getBuildPatterns().hasPattern(args[1])){
+					BuildPattern p = Main.plugin.getBuildPatterns().getPattern(args[1]);
 					pl.sendMessage(ChatColor.GREEN + "--------------Pattern Help--------------");
 					pl.sendMessage(ChatColor.AQUA + "Name: " + ChatColor.GRAY + BTUtils.capitalize(p.getName()));
 					if(p.getHelpInfo() != null){
@@ -85,7 +84,7 @@ public class PatternCommand implements ICommand {
 					pl.sendMessage("No type by the name '" + args[1] + "'", ChatColor.RED);
 				}
 			}
-			else if(BuildPatterns.hasPattern(pat)){
+			else if(Main.plugin.getBuildPatterns().hasPattern(pat)){
 				if(pl.hasPermission("buildtools.pattern." + args[0].toLowerCase())){
 					boolean bool = pl.setPattern(pat);
 					if(bool){

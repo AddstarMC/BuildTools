@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class BuildTypes {
 	
-	private static Map<String, BuildType> selections = new HashMap<String, BuildType>();
+	private Map<String, BuildType> selections = new HashMap<String, BuildType>();
 	
-	static{
+	public BuildTypes(){
 		addType(new CuboidType());
 		addType(new TerrainType());
 		addType(new OverlayType());
@@ -19,19 +19,19 @@ public class BuildTypes {
 		addType(new PasteType());
 	}
 	
-	public static List<String> getAllTypes(){
+	public List<String> getAllTypes(){
 		return new ArrayList<>(selections.keySet());
 	}
 	
-	public static BuildType getType(String name){
+	public BuildType getType(String name){
 		return selections.get(name.toUpperCase());
 	}
 	
-	public static void addType(BuildType selection){
+	public void addType(BuildType selection){
 		selections.put(selection.getName().toUpperCase().replace(" ", "_"), selection);
 	}
 	
-	public static boolean hasType(String name){
+	public boolean hasType(String name){
 		return selections.containsKey(name.toUpperCase());
 	}
 
