@@ -189,7 +189,7 @@ public class Events implements Listener{
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void worldChange(PlayerChangedWorldEvent event){
 		BTPlayer ply = pdata.getBTPlayer(event.getPlayer());
-		if(ply != null){
+		if(ply != null && ply.isBuildModeActive()){
 			ply.setBuildModeActive(false);
 			ply.sendMessage("Build mode deactivated.", ChatColor.RED);
 		}
