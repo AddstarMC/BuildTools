@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -28,7 +29,7 @@ public class Events implements Listener{
 		pdata.removeBTPlayer(event.getPlayer());
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void placeBlock(BlockPlaceEvent event){
 		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
 		if(pl == null) return;
@@ -100,7 +101,7 @@ public class Events implements Listener{
 		}
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void breakBlock(BlockBreakEvent event){
 		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
 		if(pl == null) return;
@@ -174,7 +175,7 @@ public class Events implements Listener{
 		}
 	}
 	
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void gamemodeChange(PlayerGameModeChangeEvent event){
 		BTPlayer ply = pdata.getBTPlayer(event.getPlayer());
 		if(ply != null){
@@ -185,7 +186,7 @@ public class Events implements Listener{
 		}
 	}
 	
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void worldChange(PlayerChangedWorldEvent event){
 		BTPlayer ply = pdata.getBTPlayer(event.getPlayer());
 		if(ply != null){
