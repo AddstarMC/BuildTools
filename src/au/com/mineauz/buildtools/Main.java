@@ -10,10 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.worldcretornica.plotme_core.bukkit.PlotMe_CorePlugin;
 
 import au.com.mineauz.buildtools.commands.CommandDispatcher;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
 import au.com.mineauz.buildtools.protection.GPPlugin;
+import au.com.mineauz.buildtools.protection.PMPlugin;
 import au.com.mineauz.buildtools.protection.ProtectionPlugins;
 import au.com.mineauz.buildtools.protection.WGPlugin;
 import au.com.mineauz.buildtools.types.BuildTypes;
@@ -68,6 +70,11 @@ public class Main extends JavaPlugin{
 			pplugins.addProtectionPlugin(new GPPlugin((GriefPrevention) plugin.getServer().getPluginManager().getPlugin("GriefPrevention")));
 			if(isDebugging())
 				getLogger().info("GriefPrevention protection enabled.");
+		}
+		if(plugin.getServer().getPluginManager().isPluginEnabled("PlotMe")){
+			pplugins.addProtectionPlugin(new PMPlugin((PlotMe_CorePlugin) plugin.getServer().getPluginManager().getPlugin("PlotMe")));
+			if(isDebugging())
+				getLogger().info("PlotMe protection enabled.");
 		}
 		
 		types = new BuildTypes();
