@@ -23,9 +23,9 @@ public class GPPlugin implements ProtectionPlugin {
 	@Override
 	public boolean canBuild(Player player, Location location) {
 		Claim claim = plugin.dataStore.getClaimAt(location, false, null);
+		if(claim == null) return true;
 		String msg = claim.allowBuild(player, Material.STONE);
-		if(msg == null)
-			return true;
+		if(msg == null) return true;
 		return false;
 	}
 
