@@ -16,8 +16,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class Events implements Listener{
 	
-	private PlayerData pdata = Main.plugin.getPlayerData();
-	private Main plugin = Main.plugin;
+	private PlayerData pdata = BTPlugin.plugin.getPlayerData();
+	private BTPlugin plugin = BTPlugin.plugin;
 	
 	@EventHandler
 	private void playerLogin(PlayerJoinEvent event){
@@ -54,7 +54,7 @@ public class Events implements Listener{
 							vol = BTUtils.getVolume(pl.getPoint(0).getPoint(), pl.getPoint(1).getPoint());
 						if(vol == -1 || vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
 							final BTPlayer fpl = pl;
-							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
+							Bukkit.getScheduler().scheduleSyncDelayedTask(BTPlugin.plugin, new Runnable() {
 								
 								@Override
 								public void run() {
@@ -132,7 +132,7 @@ public class Events implements Listener{
 							vol = BTUtils.getVolume(pl.getPoint(0).getPoint(), pl.getPoint(1).getPoint());
 						if(vol == -1 || vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
 							final BTPlayer fpl = pl;
-							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() {
+							Bukkit.getScheduler().scheduleSyncDelayedTask(BTPlugin.plugin, new Runnable() {
 								
 								@Override
 								public void run() {

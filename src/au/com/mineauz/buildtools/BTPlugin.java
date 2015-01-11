@@ -20,9 +20,9 @@ import au.com.mineauz.buildtools.protection.ProtectionPlugins;
 import au.com.mineauz.buildtools.protection.WGPlugin;
 import au.com.mineauz.buildtools.types.BuildTypes;
 
-public class Main extends JavaPlugin{
+public class BTPlugin extends JavaPlugin{
 	
-	public static Main plugin;
+	public static BTPlugin plugin;
 	private PlayerData pdata;
 	private boolean debug;
 	

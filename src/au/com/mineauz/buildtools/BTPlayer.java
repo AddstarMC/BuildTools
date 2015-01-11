@@ -65,11 +65,11 @@ public class BTPlayer {
 	public void setBuildModeActive(boolean active){
 		buildModeActive = active;
 		clearPoints();
-		if(Main.plugin.isDebugging()){
+		if(BTPlugin.plugin.isDebugging()){
 			if(buildModeActive)
-				Main.plugin.getLogger().info(getName() + " enabled Build Mode.");
+				BTPlugin.plugin.getLogger().info(getName() + " enabled Build Mode.");
 			else
-				Main.plugin.getLogger().info(getName() + " disabled Build Mode.");
+				BTPlugin.plugin.getLogger().info(getName() + " disabled Build Mode.");
 		}
 	}
 	
@@ -131,27 +131,27 @@ public class BTPlayer {
 	}
 	
 	public BuildType getType(){
-		return Main.plugin.getBuildTypes().getType(type);
+		return BTPlugin.plugin.getBuildTypes().getType(type);
 	}
 	
 	public void setType(String name){
 		type = name;
 		pattern = "NONE";
 		clearPoints();
-		if(Main.plugin.isDebugging())
-			Main.plugin.getLogger().info(getName() + " changed type: " + type);
+		if(BTPlugin.plugin.isDebugging())
+			BTPlugin.plugin.getLogger().info(getName() + " changed type: " + type);
 	}
 	
 	public BuildPattern getPattern(){
-		return Main.plugin.getBuildPatterns().getPattern(pattern);
+		return BTPlugin.plugin.getBuildPatterns().getPattern(pattern);
 	}
 	
 	public boolean setPattern(String name){
-		if(Main.plugin.getBuildPatterns().getPattern(name).compatibleSelections() == null ||
-				Main.plugin.getBuildPatterns().getPattern(name).compatibleSelections().contains(type)){
+		if(BTPlugin.plugin.getBuildPatterns().getPattern(name).compatibleSelections() == null ||
+				BTPlugin.plugin.getBuildPatterns().getPattern(name).compatibleSelections().contains(type)){
 			pattern = name;
-			if(Main.plugin.isDebugging())
-				Main.plugin.getLogger().info(getName() + " changed pattern: " + pattern);
+			if(BTPlugin.plugin.isDebugging())
+				BTPlugin.plugin.getLogger().info(getName() + " changed pattern: " + pattern);
 			return true;
 		}
 		return false;
@@ -184,8 +184,8 @@ public class BTPlayer {
 			undos.remove(undos.size() - 1);
 			redos.add(redo);
 			sendMessage("Last change undone", ChatColor.AQUA);
-			if(Main.plugin.isDebugging())
-				Main.plugin.getLogger().info(getName() + " made an undo");
+			if(BTPlugin.plugin.isDebugging())
+				BTPlugin.plugin.getLogger().info(getName() + " made an undo");
 		}
 		else
 			sendMessage("Nothing to undo!", ChatColor.RED);
@@ -197,8 +197,8 @@ public class BTPlayer {
 			redos.remove(redos.size() - 1);
 			undos.add(undo);
 			sendMessage("Last change redone", ChatColor.AQUA);
-			if(Main.plugin.isDebugging())
-				Main.plugin.getLogger().info(getName() + " made an redo");
+			if(BTPlugin.plugin.isDebugging())
+				BTPlugin.plugin.getLogger().info(getName() + " made an redo");
 		}
 		else
 			sendMessage("Nothing to redo!", ChatColor.RED);
@@ -234,7 +234,7 @@ public class BTPlayer {
 	
 	public void damageItem(ItemStack item){
 		if(item == null) return;
-		if(Main.plugin.getPlayerData().hasTool(item.getType())){
+		if(BTPlugin.plugin.getPlayerData().hasTool(item.getType())){
 			item.setDurability((short) (item.getDurability() + 1));
 			if(item.getDurability() >= item.getType().getMaxDurability()){
 				player.playSound(getLocation(), Sound.ITEM_BREAK, 1, 1);

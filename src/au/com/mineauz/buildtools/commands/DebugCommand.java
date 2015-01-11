@@ -5,7 +5,7 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.BTPlugin;
 
 public class DebugCommand implements ICommand{
 
@@ -51,12 +51,12 @@ public class DebugCommand implements ICommand{
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		if(Main.plugin.isDebugging()){
-			Main.plugin.setDebugging(false);
+		if(BTPlugin.plugin.isDebugging()){
+			BTPlugin.plugin.setDebugging(false);
 			sender.sendMessage(ChatColor.RED + "Stopped Debugging");
 		}
 		else{
-			Main.plugin.setDebugging(true);
+			BTPlugin.plugin.setDebugging(true);
 			sender.sendMessage(ChatColor.GOLD + "Started Debugging.");
 		}
 		return true;

@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.BTPlugin;
 
 public class RedoCommand implements ICommand {
 
@@ -53,7 +53,7 @@ public class RedoCommand implements ICommand {
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		BTPlayer player = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
+		BTPlayer player = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
 		if(player.canBuild())
 			player.redo();
 		else

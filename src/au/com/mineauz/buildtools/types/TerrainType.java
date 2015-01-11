@@ -12,7 +12,7 @@ import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.BlockPoint;
 import au.com.mineauz.buildtools.BuildMode;
-import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.BTPlugin;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
 public class TerrainType implements BuildType{
@@ -106,9 +106,9 @@ public class TerrainType implements BuildType{
 			player.sendMessage(ChatColor.GRAY + "Generator Seed: " + seed);
 			player.sendMessage(ChatColor.GRAY + "Smoothness: " + sm);
 		}
-		else if(Main.plugin.isDebugging()){
-			Main.plugin.getLogger().info("Generator Seed: " + seed);
-			Main.plugin.getLogger().info("Smoothness: " + sm);
+		else if(BTPlugin.plugin.isDebugging()){
+			BTPlugin.plugin.getLogger().info("Generator Seed: " + seed);
+			BTPlugin.plugin.getLogger().info("Smoothness: " + sm);
 		}
 		
 		return locs;

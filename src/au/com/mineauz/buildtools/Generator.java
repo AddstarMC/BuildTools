@@ -47,7 +47,7 @@ public class Generator implements Runnable{
 		});
 		this.locs = locs.iterator();
 		
-		task = Bukkit.getScheduler().runTaskTimer(Main.plugin, this, 1, 1);
+		task = Bukkit.getScheduler().runTaskTimer(BTPlugin.plugin, this, 1, 1);
 	}
 	
 	public Generator(BTUndo undo, BTUndo nundo){
@@ -57,7 +57,7 @@ public class Generator implements Runnable{
 		states = undo.getBlockStates().iterator();
 		player = undo.getPlayer();
 		
-		task = Bukkit.getScheduler().runTaskTimer(Main.plugin, this, 1, 1);
+		task = Bukkit.getScheduler().runTaskTimer(BTPlugin.plugin, this, 1, 1);
 	}
 	
 	public Generator(BTCopy copy, Location reference, BTUndo undo){
@@ -92,7 +92,7 @@ public class Generator implements Runnable{
 		});
 		this.states = states.iterator();
 		
-		task = Bukkit.getScheduler().runTaskTimer(Main.plugin, this, 1, 1);
+		task = Bukkit.getScheduler().runTaskTimer(BTPlugin.plugin, this, 1, 1);
 	}
 	
 	@Override
@@ -111,7 +111,7 @@ public class Generator implements Runnable{
 			while(states.hasNext()){
 				BlockState state = states.next();
 				if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
-					Integer[] lim = Main.plugin.getPlayerData().getPlayerHightLimits(player);
+					Integer[] lim = BTPlugin.plugin.getPlayerData().getPlayerHightLimits(player);
 					if(state.getLocation().getBlockY() >= lim[0] && state.getLocation().getY() <= lim[1]){
 						BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, undo);
 					}

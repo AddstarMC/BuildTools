@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
-import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.BTPlugin;
 
 public class CommandDispatcher implements CommandExecutor, TabCompleter{
 	private static Map<String, ICommand> commands = new HashMap<String, ICommand>();
@@ -138,7 +138,7 @@ loop:			for(ICommand ic : commands.values()){
 			}
 		}
 		else if(sender instanceof Player){
-			BTPlayer pl = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
+			BTPlayer pl = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(!pl.isBuildModeActive()){
 				if(pl.isInCreative()){
 					pl.setBuildModeActive(true);

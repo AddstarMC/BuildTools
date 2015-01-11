@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
-import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.BTPlugin;
 
 public class HelpCommand implements ICommand {
 
@@ -56,7 +56,7 @@ public class HelpCommand implements ICommand {
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		BTPlayer ply = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
+		BTPlayer ply = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
 		if(args == null){
 			ply.sendMessage("For basic info on usage, type '/bt help basics'\n"
 					+ "For info on a command, type '/bt help <Command>'\n"

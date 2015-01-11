@@ -1,5 +1,5 @@
 name: BuildTools
-main: au.com.mineauz.buildtools.Main
+main: au.com.mineauz.buildtools.BTPlugin
 version: 1.0.0
 author: _Razz_
 softdepend: [GriefPrevention, WorldGuard, PlotMe]

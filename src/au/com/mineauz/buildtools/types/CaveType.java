@@ -12,7 +12,7 @@ import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.BlockPoint;
 import au.com.mineauz.buildtools.BuildMode;
-import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.BTPlugin;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
 public class CaveType implements BuildType {
@@ -109,10 +109,10 @@ public class CaveType implements BuildType {
 			player.sendMessage(ChatColor.GRAY + "Soft Edge: " + soft);
 			player.sendMessage(ChatColor.GRAY + "Generator Seed: " + seed);
 		}
-		else if(Main.plugin.isDebugging()){
-			Main.plugin.getLogger().info("Smoothness: " + sm);
-			Main.plugin.getLogger().info("Soft Edge: " + soft);
-			Main.plugin.getLogger().info("Generator Seed: " + seed);
+		else if(BTPlugin.plugin.isDebugging()){
+			BTPlugin.plugin.getLogger().info("Smoothness: " + sm);
+			BTPlugin.plugin.getLogger().info("Soft Edge: " + soft);
+			BTPlugin.plugin.getLogger().info("Generator Seed: " + seed);
 		}
 		
 		return locs;

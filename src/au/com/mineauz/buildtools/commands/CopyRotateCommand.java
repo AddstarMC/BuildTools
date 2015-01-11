@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
-import au.com.mineauz.buildtools.Main;
+import au.com.mineauz.buildtools.BTPlugin;
 
 public class CopyRotateCommand implements ICommand {
 
@@ -54,7 +54,7 @@ public class CopyRotateCommand implements ICommand {
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
 		if(args != null){
-			BTPlayer player = Main.plugin.getPlayerData().getBTPlayer((Player)sender);
+			BTPlayer player = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
 			if(player.hasCopy()){
 				int angle = 0;
 				if(args[0].matches("-?[0-9]+")){

@@ -40,7 +40,7 @@ public class PlayerData {
 		tools.add(Material.DIAMOND_SPADE);
 		tools.add(Material.DIAMOND_PICKAXE);
 		
-		FileConfiguration conf = Main.plugin.getConfig();
+		FileConfiguration conf = BTPlugin.plugin.getConfig();
 		Set<String> vols = conf.getConfigurationSection("maxVolume").getKeys(false);;
 		Set<String> heis = conf.getConfigurationSection("heightLimits").getKeys(false);;
 		Set<String> blks = conf.getConfigurationSection("disabledBlocks").getKeys(false);
@@ -66,8 +66,8 @@ public class PlayerData {
 			}
 			addBlockLimits(b, mats);
 		}
-		if(Main.plugin.isDebugging()){
-			Logger log = Main.plugin.getLogger();
+		if(BTPlugin.plugin.isDebugging()){
+			Logger log = BTPlugin.plugin.getLogger();
 			log.info("Loaded " + heightLimits.size() + " height limit settings.");
 			log.info("Loaded " + volumeLimits.size() + " volume limit settings.");
 			log.info("Loaded " + blockLimits.size() + " disabled blocks settings.");
