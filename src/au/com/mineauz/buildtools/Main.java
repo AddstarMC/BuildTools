@@ -73,7 +73,7 @@ public class Main extends JavaPlugin{
 		types = new BuildTypes();
 		patterns = new BuildPatterns();
 		
-		getLogger().info(" successfully enabled!");
+		getLogger().info("Successfully enabled!");
 	}
 	
 	@Override
