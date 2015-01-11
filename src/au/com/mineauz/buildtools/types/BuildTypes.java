@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import au.com.mineauz.buildtools.exceptions.DuplicateTypeException;
+import au.com.mineauz.buildtools.exceptions.UnknownTypeException;
+
 public class BuildTypes {
 	
 	private Map<String, BuildType> selections = new HashMap<String, BuildType>();
@@ -23,12 +26,18 @@ public class BuildTypes {
 		return new ArrayList<>(selections.keySet());
 	}
 	
-	public BuildType getType(String name){
-		return selections.get(name.toUpperCase());
+	public BuildType getType(String name) throws UnknownTypeException{
+		if(hasType(name))
+			return selections.get(name.toUpperCase());
+		else
+			throw new UnknownTypeException(name);
 	}
 	
-	public void addType(BuildType selection){
-		selections.put(selection.getName().toUpperCase().replace(" ", "_"), selection);
+	public void addType(BuildType type) throws DuplicateTypeException{
+		if(!hasType(type.getName()))
+			selections.put(type.getName().toUpperCase().replace(" ", "_"), type);
+		else
+			throw new DuplicateTypeException(type.getName());
 	}
 	
 	public boolean hasType(String name){

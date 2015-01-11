@@ -132,6 +132,8 @@ public class BTPlayer {
 		type = name;
 		pattern = "NONE";
 		clearPoints();
+		if(Main.plugin.isDebugging())
+			Main.plugin.getLogger().info(getName() + " changed type: " + type);
 	}
 	
 	public BuildPattern getPattern(){
@@ -142,6 +144,8 @@ public class BTPlayer {
 		if(Main.plugin.getBuildPatterns().getPattern(name).compatibleSelections() == null ||
 				Main.plugin.getBuildPatterns().getPattern(name).compatibleSelections().contains(type)){
 			pattern = name;
+			if(Main.plugin.isDebugging())
+				Main.plugin.getLogger().info(getName() + " changed pattern: " + pattern);
 			return true;
 		}
 		return false;
@@ -174,6 +178,8 @@ public class BTPlayer {
 			undos.remove(undos.size() - 1);
 			redos.add(redo);
 			sendMessage("Last change undone", ChatColor.AQUA);
+			if(Main.plugin.isDebugging())
+				Main.plugin.getLogger().info(getName() + " made an undo");
 		}
 		else
 			sendMessage("Nothing to undo!", ChatColor.RED);
@@ -185,6 +191,8 @@ public class BTPlayer {
 			redos.remove(redos.size() - 1);
 			undos.add(undo);
 			sendMessage("Last change redone", ChatColor.AQUA);
+			if(Main.plugin.isDebugging())
+				Main.plugin.getLogger().info(getName() + " made an redo");
 		}
 		else
 			sendMessage("Nothing to redo!", ChatColor.RED);
