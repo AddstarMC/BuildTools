@@ -39,6 +39,8 @@ public class CaveType implements BuildType {
 		return new String[] {
 				"<Smoothness> " + ChatColor.GRAY + "The smoothness of the cave. (15 - 25 default)",
 				"<Smooth Edge> " + ChatColor.GRAY + "Should the edge of the cave selection be smoothed out. (defaults to 'true')",
+				"<Invert>" + ChatColor.GRAY + "Should the cave generation be inverted (defaults to false)",
+				"<Density> " + ChatColor.GRAY + "How big the caves should be, values between -1 and 1, -1 being most dense (defaults to 0.3)",
 				"<Seed> " + ChatColor.GRAY + "The seed of the cave."
 		};
 	}
@@ -51,15 +53,27 @@ public class CaveType implements BuildType {
 		int sm = new Random().nextInt(25 - 15) + 15;
 		long seed = System.currentTimeMillis();
 		boolean soft = true;
+		double dens = 0.3;
+		boolean invert = false;
 		if(tSettings.length != 0){
-			if(tSettings.length >= 3 && tSettings[2].matches("-?[0-9]+")){
-				seed = Long.valueOf(tSettings[2].hashCode());
+			if(tSettings.length >= 1 && tSettings[0].matches("[1-9]([0-9]+)?")){
+				sm = Integer.valueOf(tSettings[0]);
 			}
 			if(tSettings.length >= 2 && tSettings[1].matches("true|false")){
 				soft = Boolean.parseBoolean(tSettings[1]);
 			}
-			if(tSettings.length >= 1 && tSettings[0].matches("[1-9]([0-9]+)?")){
-				sm = Integer.valueOf(tSettings[0]);
+			if(tSettings.length >= 3 && tSettings[2].matches("true|false")){
+				invert = Boolean.parseBoolean(tSettings[2]);
+			}
+			if(tSettings.length >= 4 && tSettings[3].matches("-?[0-1]+(.[0-9]+)?")){
+				dens = Double.valueOf(tSettings[3]);
+				if(dens > 1)
+					dens = 1;
+				else if(dens < -1)
+					dens = -1;
+			}
+			if(tSettings.length >= 5){
+				seed = Long.valueOf(tSettings[4].hashCode());
 			}
 		}
 		PerlinNoiseGenerator gen = new PerlinNoiseGenerator(seed);
@@ -98,8 +112,15 @@ public class CaveType implements BuildType {
 							n = n - 0.05 * (6 - zd);
 						}
 					}
-					if(n > 0.3){
-						locs.add(tmp.clone());
+					if(invert){
+						if(n < dens){
+							locs.add(tmp.clone());
+						}
+					}
+					else{
+						if(n > dens){
+							locs.add(tmp.clone());
+						}
 					}
 				}
 			}
@@ -107,11 +128,15 @@ public class CaveType implements BuildType {
 		if(player != null){
 			player.sendMessage(ChatColor.GRAY + "Smoothness: " + sm);
 			player.sendMessage(ChatColor.GRAY + "Soft Edge: " + soft);
+			player.sendMessage(ChatColor.GRAY + "Invert: " + invert);
+			player.sendMessage(ChatColor.GRAY + "Density: " + dens);
 			player.sendMessage(ChatColor.GRAY + "Generator Seed: " + seed);
 		}
 		else if(BTPlugin.plugin.isDebugging()){
 			BTPlugin.plugin.getLogger().info("Smoothness: " + sm);
 			BTPlugin.plugin.getLogger().info("Soft Edge: " + soft);
+			BTPlugin.plugin.getLogger().info("Invert: " + invert);
+			BTPlugin.plugin.getLogger().info("Density: " + dens);
 			BTPlugin.plugin.getLogger().info("Generator Seed: " + seed);
 		}
 		
