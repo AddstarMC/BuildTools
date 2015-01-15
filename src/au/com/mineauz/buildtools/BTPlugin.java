@@ -29,6 +29,7 @@ public class BTPlugin extends JavaPlugin{
 	private ProtectionPlugins pplugins;
 	private BuildPatterns patterns;
 	private BuildTypes types;
+	private GeneratingChunks chunks;
 	
 	@Override
 	public void onEnable(){
@@ -79,6 +80,7 @@ public class BTPlugin extends JavaPlugin{
 		
 		types = new BuildTypes();
 		patterns = new BuildPatterns();
+		chunks = new GeneratingChunks();
 		
 		getLogger().info("Successfully enabled!");
 	}
@@ -116,6 +118,10 @@ public class BTPlugin extends JavaPlugin{
 	
 	public BuildPatterns getBuildPatterns(){
 		return patterns;
+	}
+	
+	public GeneratingChunks getGeneratingChunks(){
+		return chunks;
 	}
 
 }

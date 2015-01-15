@@ -9,6 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -192,6 +193,13 @@ public class Events implements Listener{
 		if(ply != null && ply.isBuildModeActive()){
 			ply.setBuildModeActive(false);
 			ply.sendMessage("Build mode deactivated.", ChatColor.RED);
+		}
+	}
+	
+	@EventHandler(ignoreCancelled = true)
+	private void itemDrop(ItemSpawnEvent event){
+		if(plugin.getGeneratingChunks().hasChunk(event.getLocation().getChunk())){
+			event.setCancelled(true);
 		}
 	}
 }
