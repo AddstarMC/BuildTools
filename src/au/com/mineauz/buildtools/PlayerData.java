@@ -111,6 +111,15 @@ public class PlayerData {
 			throw new DuplicateLimitException(name);
 	}
 	
+	public void modifyHeightLimits(String name, int min, int max) throws UnknownLimitException{
+		Integer[] lim = new Integer[]{min, max};
+		name = name.toLowerCase();
+		if(heightLimits.containsKey(name))
+			heightLimits.put(name, lim);
+		else
+			throw new UnknownLimitException(name);
+	}
+	
 	public Integer[] getHeightLimits(String name) throws UnknownLimitException{
 		name = name.toLowerCase();
 		if(heightLimits.containsKey(name))
@@ -120,7 +129,11 @@ public class PlayerData {
 		throw new UnknownLimitException(name);
 	}
 	
-	public boolean hasHightLimits(String name){
+	public List<String> getAllHeightLimits(){
+		return new ArrayList<>(heightLimits.keySet());
+	}
+	
+	public boolean hasHeightLimits(String name){
 		name = name.toLowerCase();
 		return heightLimits.containsKey(name);
 	}
@@ -131,6 +144,18 @@ public class PlayerData {
 			heightLimits.remove(name);
 		else
 			throw new UnknownLimitException(name);
+	}
+	
+	public void saveHeightLimits(){
+		BTPlugin plugin = BTPlugin.plugin;
+		plugin.getConfig().set("heightLimits", null);
+		for(String hln : heightLimits.keySet()){
+			List<String> lm = new ArrayList<>(2);
+			for(int i = 0; i < 2; i++)
+				lm.add(heightLimits.get(hln)[i].toString());
+			plugin.getConfig().set("heightLimits." + hln, lm);
+		}
+		plugin.saveConfig();
 	}
 	
 	public Integer[] getPlayerHightLimits(BTPlayer player){
