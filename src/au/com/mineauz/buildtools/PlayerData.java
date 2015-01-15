@@ -120,6 +120,11 @@ public class PlayerData {
 		throw new UnknownLimitException(name);
 	}
 	
+	public boolean hasHightLimits(String name){
+		name = name.toLowerCase();
+		return heightLimits.containsKey(name);
+	}
+	
 	public void removeHeightLimits(String name) throws UnknownLimitException{
 		name = name.toLowerCase();
 		if(heightLimits.containsKey(name))
@@ -145,6 +150,14 @@ public class PlayerData {
 			throw new DuplicateLimitException(name);
 	}
 	
+	public void modifyVolumeLimit(String name, int limit) throws UnknownLimitException{
+		name = name.toLowerCase();
+		if(volumeLimits.containsKey(name))
+			volumeLimits.put(name, limit);
+		else
+			throw new UnknownLimitException(name);
+	}
+	
 	public int getVolumeLimit(String name) throws UnknownLimitException{
 		name = name.toLowerCase();
 		if(volumeLimits.containsKey(name))
@@ -154,12 +167,30 @@ public class PlayerData {
 		throw new UnknownLimitException(name);
 	}
 	
+	public List<String> getVolumeLimits(){
+		return new ArrayList<>(volumeLimits.keySet());
+	}
+	
+	public boolean hasVolumeLimit(String name){
+		name = name.toLowerCase();
+		return volumeLimits.containsKey(name);
+	}
+	
 	public void removeVolumeLimit(String name) throws UnknownLimitException{
 		name = name.toLowerCase();
 		if(volumeLimits.containsKey(name))
 			volumeLimits.remove(name);
 		else
 			throw new UnknownLimitException(name);
+	}
+	
+	public void saveVolumeLimits(){
+		BTPlugin plugin = BTPlugin.plugin;
+		plugin.getConfig().set("maxVolume", null);
+		for(String vln : volumeLimits.keySet()){
+			plugin.getConfig().set("maxVolume." + vln, volumeLimits.get(vln));
+		}
+		plugin.saveConfig();
 	}
 	
 	public int getPlayerVolumeLimit(BTPlayer player){
@@ -185,6 +216,11 @@ public class PlayerData {
 		else if(blockLimits.containsKey("default"))
 			return blockLimits.get("default");
 		throw new UnknownLimitException(name);
+	}
+	
+	public boolean hasBlockLimits(String name){
+		name = name.toLowerCase();
+		return blockLimits.containsKey(name);
 	}
 	
 	public void removeBlockLimits(String name) throws UnknownLimitException{

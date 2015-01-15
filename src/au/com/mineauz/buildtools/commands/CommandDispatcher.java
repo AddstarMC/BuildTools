@@ -28,6 +28,7 @@ public class CommandDispatcher implements CommandExecutor, TabCompleter{
 		addCommand(new DebugCommand());
 		addCommand(new CopyRotateCommand());
 		addCommand(new HelpCommand());
+		addCommand(new VolumeLimitCommand());
 	}
 	
 	public static void addCommand(ICommand command){
