@@ -248,12 +248,29 @@ public class PlayerData {
 		return blockLimits.containsKey(name);
 	}
 	
+	public void saveBlockLimits(){
+		BTPlugin plugin = BTPlugin.plugin;
+		plugin.getConfig().set("disabledBlocks", null);
+		for(String bln : blockLimits.keySet()){
+			List<String> mts = new ArrayList<>();
+			for(Material mat : blockLimits.get(bln)){
+				mts.add(mat.toString());
+			}
+			plugin.getConfig().set("disabledBlocks." + bln, mts);
+		}
+		plugin.saveConfig();
+	}
+	
 	public void removeBlockLimits(String name) throws UnknownLimitException{
 		name = name.toLowerCase();
 		if(blockLimits.containsKey(name))
 			blockLimits.remove(name);
 		else
 			throw new UnknownLimitException(name);
+	}
+	
+	public List<String> getAllBlockLimits(){
+		return new ArrayList<>(blockLimits.keySet());
 	}
 	
 	public List<Material> getPlayerBlockLimits(BTPlayer player){

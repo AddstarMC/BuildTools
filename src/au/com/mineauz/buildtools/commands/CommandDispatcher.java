@@ -30,6 +30,7 @@ public class CommandDispatcher implements CommandExecutor, TabCompleter{
 		addCommand(new HelpCommand());
 		addCommand(new VolumeLimitCommand());
 		addCommand(new HeightLimitCommand());
+		addCommand(new BlockLimitCommand());
 	}
 	
 	public static void addCommand(ICommand command){
