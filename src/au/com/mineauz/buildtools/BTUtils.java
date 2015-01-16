@@ -114,6 +114,10 @@ public class BTUtils {
 				new Generator(locs, points.get(points.size() - 1).getPoint().getBlock(), player, mode, undo);
 			}
 			
+			for(BlockPoint p : player.getPoints()){
+				undo.addBlock(p.getPreviousState());
+			}
+			
 			if(player != null)
 				player.addUndo(undo);
 		}

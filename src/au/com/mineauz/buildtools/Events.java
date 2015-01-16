@@ -46,7 +46,8 @@ public class Events implements Listener{
 				if((event.getBlock().getLocation().getBlockY() <= hl[1] && 
 						event.getBlock().getLocation().getBlockY() >= hl[0]) ||
 						pl.hasPermission("buildtools.bypassheightlimit")){
-					BlockPoint point = new BlockPoint(event.getBlockPlaced().getLocation(), event.getBlockPlaced().getType(), BuildMode.PLACE);
+					BlockPoint point = new BlockPoint(event.getBlockPlaced().getLocation(), event.getBlockPlaced().getType(), 
+							event.getBlockReplacedState(), BuildMode.PLACE);
 					pl.addPoint(point);
 					if(pl.getPointCount() >= pl.getType().getRequiredPointCount()){
 						int volLimit = pdata.getPlayerVolumeLimit(pl);
@@ -124,7 +125,8 @@ public class Events implements Listener{
 				if((event.getBlock().getLocation().getBlockY() <= hl[1] && 
 						event.getBlock().getLocation().getBlockY() >= hl[0]) ||
 						pl.hasPermission("buildtools.bypassheightlimit")){
-					BlockPoint point = new BlockPoint(event.getBlock().getLocation(), Material.AIR, BuildMode.BREAK);
+					BlockPoint point = new BlockPoint(event.getBlock().getLocation(), Material.AIR, 
+							event.getBlock().getState(), BuildMode.BREAK);
 					pl.addPoint(point);
 					if(pl.getPointCount() >= pl.getType().getRequiredPointCount()){
 						int volLimit = pdata.getPlayerVolumeLimit(pl);
