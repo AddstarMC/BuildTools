@@ -143,7 +143,7 @@ public class HeightLimitCommand implements ICommand{
 				for(String limit : pd.getAllHeightLimits()){
 					int min = pd.getHeightLimits(limit)[0];
 					int max = pd.getHeightLimits(limit)[1];
-					sender.sendMessage(ChatColor.AQUA + limit + ": " + min + "-" + max);
+					sender.sendMessage(ChatColor.AQUA + limit + ": "+ ChatColor.GRAY + min + "-" + max);
 				}
 				return true;
 			}
