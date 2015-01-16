@@ -111,7 +111,7 @@ public class HeightLimitCommand implements ICommand{
 				}
 				return true;
 			}
-			else if(args[0].equalsIgnoreCase("add") && args.length >= 4 && args[2].matches("[0-9]+") && args[3].matches("[0-9]+")){
+			else if(args[0].equalsIgnoreCase("set") && args.length >= 4 && args[2].matches("[0-9]+") && args[3].matches("[0-9]+")){
 				String hln = args[1];
 				int min = Integer.valueOf(args[2]);
 				int max = Integer.valueOf(args[3]);
