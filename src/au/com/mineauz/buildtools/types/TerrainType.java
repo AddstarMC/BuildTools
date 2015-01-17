@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.util.noise.PerlinNoiseGenerator;
+import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
@@ -60,7 +60,7 @@ public class TerrainType implements BuildType{
 				sm = Integer.valueOf(tSettings[0]);
 			}
 		}
-		PerlinNoiseGenerator gen = new PerlinNoiseGenerator(seed);
+		SimplexNoiseGenerator gen = new SimplexNoiseGenerator(seed);
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location tmp = mmt[0].clone();
 		double h = mmt[1].getBlockY() - mmt[0].getBlockY();
@@ -93,6 +93,8 @@ public class TerrainType implements BuildType{
 				tmp.setY(mmt[0].getY() + hh + (hh * n));
 				if(tmp.getY() > mmt[1].getY())
 					tmp.setY(mmt[1].getY());
+				if(tmp.getY() < mmt[0].getY())
+					tmp.setY(mmt[0].getY());
 				if(tmp.getY() > mmt[0].getY()){
 					locs.add(tmp.clone());
 					while(tmp.getBlockY() > mmt[0].getBlockY()){
