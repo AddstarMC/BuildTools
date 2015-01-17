@@ -67,7 +67,7 @@ public class OverlayType implements BuildType {
 						if(mode == BuildMode.PLACE)
 							tmp.setY(tmp.getY() + 1);
 						for(int i = 0; i < depth; i++){
-							if(pattern.fitsPattern(tmp, points, pSettings))
+							if(pattern.fitsPattern(player, tmp, points, pSettings))
 								locs.add(tmp.clone());
 							if(mode == BuildMode.PLACE)
 								tmp.setY(tmp.getY() + 1);
@@ -79,7 +79,7 @@ public class OverlayType implements BuildType {
 						}
 					}
 				}
-				else if(mode != BuildMode.PLACE && pattern.fitsPattern(tmp, points, pSettings))
+				else if(mode != BuildMode.PLACE && pattern.fitsPattern(player, tmp, points, pSettings))
 					locs.add(tmp);
 				tmp.setY(mmt[1].getBlockY());
 			}

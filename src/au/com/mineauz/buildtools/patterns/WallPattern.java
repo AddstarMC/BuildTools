@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 
+import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.BlockPoint;
 
@@ -39,7 +40,7 @@ public class WallPattern implements BuildPattern {
 	}
 
 	@Override
-	public boolean fitsPattern(Location block, List<BlockPoint> points, String[] settings) {
+	public boolean fitsPattern(BTPlayer player, Location block, List<BlockPoint> points, String[] settings) {
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		if(block.getBlockX() == mmt[0].getBlockX() || 
 				block.getBlockX() == mmt[1].getBlockX() ||

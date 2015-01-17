@@ -42,6 +42,12 @@ public class SphereType implements BuildType {
 		Location tmp = mid.clone();
 		
 		double dist = mid.distance(points.get(1).getPoint()) + 1;
+		
+		String[] npSettings = new String[pSettings.length + 1];
+		for(int i = 0; i < pSettings.length; i++)
+			npSettings[i] = pSettings[i];
+		npSettings[npSettings.length - 1] = String.valueOf(dist);
+		
 		tmp.setY(mid.getY() - dist);
 		tmp.setX(mid.getX() - dist);
 		tmp.setZ(mid.getZ() - dist);
@@ -57,7 +63,7 @@ public class SphereType implements BuildType {
 					double m = Math.pow(tmp.getX() - mid.getX(), 2) + Math.pow(tmp.getY() - mid.getY(), 2) + Math.pow(tmp.getZ() - mid.getZ(), 2);
 					double r2 = Math.pow(dist, 2);
 					if(m < r2){
-						if(pattern.fitsPattern(tmp, points, pSettings))
+						if(pattern.fitsPattern(player, tmp, points, npSettings))
 							locs.add(tmp.clone());
 					}
 				}

@@ -44,7 +44,7 @@ public class CuboidType implements BuildType {
 				temp.setX(x);
 				for(int z = mmtab[0].getBlockZ(); z <= mmtab[1].getBlockZ(); z++){
 					temp.setZ(z);
-					if(pattern.fitsPattern(temp, points, pSettings))
+					if(pattern.fitsPattern(player, temp, points, pSettings))
 						loc.add(temp.clone());
 				}
 			}
