@@ -79,6 +79,9 @@ public class CaveType implements BuildType {
 		SimplexNoiseGenerator gen = new SimplexNoiseGenerator(seed);
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location tmp = mmt[0].clone();
+		double l = getDistance(mmt[0].getBlockX(), mmt[1].getBlockX());
+		double w = getDistance(mmt[0].getBlockZ(), mmt[1].getBlockZ());
+		double h = getDistance(mmt[0].getBlockY(), mmt[1].getBlockY());
 		for(double x = mmt[0].getX(); x <= mmt[1].getX(); x++){
 			tmp.setX(x);
 			for(double z = mmt[0].getZ(); z <= mmt[1].getZ(); z++){
@@ -93,23 +96,23 @@ public class CaveType implements BuildType {
 						int xd = getDistance(new Double(x).intValue(), mmt[0].getBlockX());
 						int zmd = getDistance(new Double(z).intValue(), mmt[1].getBlockZ());
 						int zd = getDistance(new Double(z).intValue(), mmt[0].getBlockZ());
-						if(ud < 6){
-							n = n - 0.05 * (6 - ud);
+						if(ud < h/6d){
+							n = n - (1d / (h/6d)) * (h/6d - ud);
 						}
-						if(dd < 6){
-							n = n - 0.05 * (6 - dd);
+						if(dd < h/6d){
+							n = n - (1d / (h/6d)) * (h/6d - dd);
 						}
-						if(xmd < 6){
-							n = n - 0.05 * (6 - xmd);
+						if(xmd < l/6d){
+							n = n - (1d / (l/6d)) * (l/6d - xmd);
 						}
-						if(xd < 6){
-							n = n - 0.05 * (6 - xd);
+						if(xd < l/6d){
+							n = n - (1d / (l/6d)) * (l/6d - xd);
 						}
-						if(zmd < 6){
-							n = n - 0.05 * (6 - zmd);
+						if(zmd < w/6d){
+							n = n - (1d / (w/6d)) * (w/6d - zmd);
 						}
-						if(zd < 6){
-							n = n - 0.05 * (6 - zd);
+						if(zd < w/6d){
+							n = n - (1d / (w/6d)) * (w/6d - zd);
 						}
 					}
 					if(invert){

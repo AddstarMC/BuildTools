@@ -83,10 +83,10 @@ public class TerrainType implements BuildType{
 					if(xd < l/6d){
 						n = n - (1d / (l/6d)) * (l/6d - xd);
 					}
-					if(zmd < l/6d){
+					if(zmd < w/6d){
 						n = n - (1d / (w/6d)) * (w/6d - zmd);
 					}
-					if(zd < l/6d){
+					if(zd < w/6d){
 						n = n - (1d / (w/6d)) * (w/6d - zd);
 					}
 				}
