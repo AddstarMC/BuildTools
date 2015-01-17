@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.util.noise.PerlinNoiseGenerator;
+import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
@@ -76,7 +76,7 @@ public class CaveType implements BuildType {
 				seed = Long.valueOf(tSettings[4].hashCode());
 			}
 		}
-		PerlinNoiseGenerator gen = new PerlinNoiseGenerator(seed);
+		SimplexNoiseGenerator gen = new SimplexNoiseGenerator(seed);
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location tmp = mmt[0].clone();
 		for(double x = mmt[0].getX(); x <= mmt[1].getX(); x++){
