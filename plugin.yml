@@ -82,6 +82,7 @@ permissions:
       buildtools.type.cave: true
       buildtools.type.copy: true
       buildtools.type.cuboid: true
+      buildtools.type.cylinder: true
       buildtools.type.overlay: true
       buildtools.type.paste: true
       buildtools.type.sphere: true
@@ -91,6 +92,8 @@ permissions:
   buildtools.type.copy:
     default: true
   buildtools.type.cuboid:
+    default: true
+  buildtools.type.cylinder:
     default: true
   buildtools.type.overlay:
     default: true

@@ -368,4 +368,13 @@ public class BTUtils {
 		
 		return out;
 	}
+	
+	public static int getDistance(int pos1, int pos2){
+		if(pos1 > pos2){
+			return Math.abs(pos1 - pos2);
+		}
+		else{
+			return Math.abs(pos2 - pos1);
+		}
+	}
 }

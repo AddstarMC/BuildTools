@@ -20,6 +20,7 @@ public class BuildTypes {
 		addType(new SphereType());
 		addType(new CopyType());
 		addType(new PasteType());
+		addType(new CylinderType());
 	}
 	
 	public List<String> getAllTypes(){

@@ -22,6 +22,7 @@ public class HollowPattern implements BuildPattern {
 		List<String> s = new ArrayList<String>(1);
 		s.add("CUBOID");
 		s.add("SPHERE");
+		s.add("CYLINDER");
 		return s;
 	}
 
@@ -54,12 +55,31 @@ public class HollowPattern implements BuildPattern {
 				return true;
 			}
 		}
-		else{
+		else if(player.getType() == BTPlugin.plugin.getBuildTypes().getType("SPHERE")){
 			double rad = Double.valueOf(settings[settings.length - 1]);
 			double rad2 = rad - 1;
 			double m = Math.pow(block.getX() - points.get(0).getPoint().getX(), 2) + 
 						Math.pow(block.getY() - points.get(0).getPoint().getY(), 2) + 
 						Math.pow(block.getZ() - points.get(0).getPoint().getZ(), 2);
+			double r = Math.pow(rad, 2);
+			double r2 = Math.pow(rad2, 2);
+			if((m < r && m > r2) || m == Math.ceil(r2))
+				return true;
+		}
+		else{
+			String dir = settings[settings.length - 1];
+			double rad = Double.valueOf(settings[settings.length - 2]);
+			double rad2 = rad - 1;
+			double m;
+			if(dir.equals("y"))
+				m = Math.pow(block.getX() - points.get(0).getPoint().getX(), 2) + 
+					Math.pow(block.getZ() - points.get(0).getPoint().getZ(), 2);
+			else if(dir.equals("z"))
+				m = Math.pow(block.getX() - points.get(0).getPoint().getX(), 2) + 
+					Math.pow(block.getY() - points.get(0).getPoint().getY(), 2);
+			else
+				m = Math.pow(block.getY() - points.get(0).getPoint().getY(), 2) + 
+					Math.pow(block.getZ() - points.get(0).getPoint().getZ(), 2);
 			double r = Math.pow(rad, 2);
 			double r2 = Math.pow(rad2, 2);
 			if((m < r && m > r2) || m == Math.ceil(r2))
