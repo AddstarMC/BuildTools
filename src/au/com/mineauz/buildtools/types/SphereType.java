@@ -59,7 +59,7 @@ public class SphereType implements BuildType {
 		int mz = tmp.getBlockZ();
 		int vol = BTUtils.getVolume(mid.clone().subtract(dist, dist, dist), mid.clone().add(dist, dist, dist));
 		int vollimit = BTPlugin.plugin.getPlayerData().getPlayerVolumeLimit(player);
-		if(vol <= vollimit){
+		if(vol <= vollimit || player.hasPermission("buildtools.bypassvolumelimit")){
 			for(int x = mx; x <= mid.getBlockX() + dist; x++){
 				tmp.setX(x);
 				for(int z = mz; z <= mid.getBlockZ() + dist; z++){
