@@ -34,3 +34,12 @@ disabledBlocks:
   - IRON_TRAPDOOR
   - FIRE
   - DOUBLE_PLANT
+
+# Maximum amount of time the generator can lag the server in milliseconds.
+# This is to prevent large generations from lagging the server. A larger
+# number may lag the server more but also generate more blocks per tick,
+# smaller numbers will generate less blocks per tick but also lag less.
+# (Bigger number = faster block generation but more lag, 
+# smaller number = slower block gereation but less lag) 
+# 10 milliseconds default.
+generatorMaxDelay: 10

@@ -113,7 +113,7 @@ public class Generator implements Runnable{
 				}
 				
 				BTUtils.placeBlock(player, loc, data, mode, undo);
-				if(System.nanoTime() - time > 10000000)
+				if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
 					return;
 			}
 		}
@@ -134,7 +134,7 @@ public class Generator implements Runnable{
 						BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, undo);
 					}
 				}
-				if(System.nanoTime() - time > 10000000)
+				if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
 					return;
 			}
 		}
@@ -152,7 +152,7 @@ public class Generator implements Runnable{
 				if(player != null){
 					BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, nundo);
 
-					if(System.nanoTime() - time > 10000000)
+					if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
 						return;
 				}
 				else{

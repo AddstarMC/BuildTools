@@ -30,6 +30,7 @@ public class BTPlugin extends JavaPlugin{
 	private BuildPatterns patterns;
 	private BuildTypes types;
 	private GeneratingChunks chunks;
+	private int generatorDelay = 10;
 	
 	@Override
 	public void onEnable(){
@@ -49,6 +50,7 @@ public class BTPlugin extends JavaPlugin{
 		if(getConfig().contains("debug"))
 			if(getConfig().getBoolean("debug"))
 				debug = true;
+		generatorDelay = getConfig().getInt("generatorMaxDelay");
 		
 		pdata = new PlayerData();
 		for(Player pl : getServer().getOnlinePlayers())
@@ -122,6 +124,10 @@ public class BTPlugin extends JavaPlugin{
 	
 	public GeneratingChunks getGeneratingChunks(){
 		return chunks;
+	}
+	
+	public int getMaxGeneratorDelay(){
+		return generatorDelay;
 	}
 
 }
