@@ -126,11 +126,14 @@ public class BTUtils {
 	public static void placeBlock(BTPlayer player, Location loc, MaterialData data, BuildMode mode, BTUndo undo){
 		if(BTPlugin.plugin.getProtectionPlugins().canBuild(player, loc)){
 			if(mode == BuildMode.PLACE && (loc.getBlock().getType() == Material.AIR || loc.getBlock().isLiquid())){
-				undo.addBlock(loc.getBlock().getState());
-				BlockState state = loc.getBlock().getState();
-				state.setType(data.getItemType());
-				state.setData(data);
-				state.update(true);
+				if(!data.getItemType().hasGravity() ||
+						loc.clone().subtract(0, 1, 0).getBlock().getType().isSolid()){
+					undo.addBlock(loc.getBlock().getState());
+					BlockState state = loc.getBlock().getState();
+					state.setType(data.getItemType());
+					state.setData(data);
+					state.update(true);
+				}
 			}
 			else if(mode == BuildMode.BREAK && loc.getBlock().getType() != Material.AIR && !loc.getBlock().isLiquid()){
 				undo.addBlock(loc.getBlock().getState());
