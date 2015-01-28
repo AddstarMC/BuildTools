@@ -16,12 +16,12 @@ public class BuildTypes {
 		addType(new CuboidType());
 		addType(new TerrainType());
 		addType(new OverlayType());
-		addType(new CaveType());
+		addType(new TerrainBlobType());
 		addType(new SphereType());
 		addType(new CopyType());
 		addType(new PasteType());
 		addType(new CylinderType());
-		addType(new Cave2Type());
+		addType(new CaveType());
 	}
 	
 	public List<String> getAllTypes(){

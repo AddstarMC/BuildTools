@@ -1,7 +1,9 @@
 package au.com.mineauz.buildtools.types;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -9,13 +11,14 @@ import org.bukkit.Location;
 import org.bukkit.util.noise.SimplexNoiseGenerator;
 
 import au.com.mineauz.buildtools.BTPlayer;
+import au.com.mineauz.buildtools.BTPlugin;
 import au.com.mineauz.buildtools.BTUtils;
 import au.com.mineauz.buildtools.BlockPoint;
 import au.com.mineauz.buildtools.BuildMode;
-import au.com.mineauz.buildtools.BTPlugin;
+import au.com.mineauz.buildtools.IVector;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 
-public class CaveType implements BuildType {
+public class CaveType implements BuildType{
 
 	@Override
 	public String getName() {
@@ -26,22 +29,16 @@ public class CaveType implements BuildType {
 	public int getRequiredPointCount() {
 		return 2;
 	}
-	
+
 	@Override
-	public String getHelpInfo(){
-		return "Creates cave-like blobs. These aren't quite the Minecraft styled vanilla caves, more for cutting "
-				+ "into the terrain to create cliffs or pockets. Not all parameters are required but must be filled "
-				+ "out in order (you can't have seed without smoothness and smooth edge).";
+	public String getHelpInfo() {
+		return null;
 	}
-	
+
 	@Override
-	public String[] getParameters(){
+	public String[] getParameters() {
 		return new String[] {
-				"<Smoothness> " + ChatColor.GRAY + "The smoothness of the cave. (15 - 25 default)",
-				"<Smooth Edge> " + ChatColor.GRAY + "Should the edge of the cave selection be smoothed out. (defaults to 'true')",
-				"<Invert>" + ChatColor.GRAY + "Should the cave generation be inverted (defaults to false)",
-				"<Density> " + ChatColor.GRAY + "How big the caves should be, values between -1 and 1, -1 being most dense (defaults to 0.3)",
-				"<Seed> " + ChatColor.GRAY + "The seed of the cave."
+				"<length> " + ChatColor.GRAY + "The length of the cave. (defaults to 200, max 500)"
 		};
 	}
 
@@ -49,98 +46,127 @@ public class CaveType implements BuildType {
 	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<BlockPoint> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
+		Map<String, IVector> cpoints = new HashMap<>();
 		List<Location> locs = new ArrayList<>();
 		int sm = new Random().nextInt(25 - 15) + 15;
 		long seed = System.currentTimeMillis();
-		boolean soft = true;
-		double dens = 0.3;
-		boolean invert = false;
+		int length = 200;
+		
 		if(tSettings.length != 0){
 			if(tSettings.length >= 1 && tSettings[0].matches("[1-9]([0-9]+)?")){
-				sm = Integer.valueOf(tSettings[0]);
-			}
-			if(tSettings.length >= 2 && tSettings[1].matches("true|false")){
-				soft = Boolean.parseBoolean(tSettings[1]);
-			}
-			if(tSettings.length >= 3 && tSettings[2].matches("true|false")){
-				invert = Boolean.parseBoolean(tSettings[2]);
-			}
-			if(tSettings.length >= 4 && tSettings[3].matches("-?[0-1]+(.[0-9]+)?")){
-				dens = Double.valueOf(tSettings[3]);
-				if(dens > 1)
-					dens = 1;
-				else if(dens < -1)
-					dens = -1;
-			}
-			if(tSettings.length >= 5){
-				seed = Long.valueOf(tSettings[4].hashCode());
+				length = Integer.valueOf(tSettings[0]);
 			}
 		}
+		if(length > 500)
+			length = 500;
+		
 		SimplexNoiseGenerator gen = new SimplexNoiseGenerator(seed);
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location tmp = mmt[0].clone();
-		double l = getDistance(mmt[0].getBlockX(), mmt[1].getBlockX());
-		double w = getDistance(mmt[0].getBlockZ(), mmt[1].getBlockZ());
-		double h = getDistance(mmt[0].getBlockY(), mmt[1].getBlockY());
-		for(double x = mmt[0].getX(); x <= mmt[1].getX(); x++){
-			tmp.setX(x);
-			for(double z = mmt[0].getZ(); z <= mmt[1].getZ(); z++){
-				tmp.setZ(z);
-				for(double y = mmt[0].getY(); y <= mmt[1].getY(); y++){
-					tmp.setY(y);
-					double n = gen.noise(x/sm, y/sm, z/sm);
-					if(soft){
-						int ud = getDistance(new Double(y).intValue(), mmt[1].getBlockY());
-						int dd = getDistance(new Double(y).intValue(), mmt[0].getBlockY());
-						int xmd = getDistance(new Double(x).intValue(), mmt[1].getBlockX());
-						int xd = getDistance(new Double(x).intValue(), mmt[0].getBlockX());
-						int zmd = getDistance(new Double(z).intValue(), mmt[1].getBlockZ());
-						int zd = getDistance(new Double(z).intValue(), mmt[0].getBlockZ());
-						if(ud < h/6d){
-							n = n - (1d / (h/6d)) * (h/6d - ud);
-						}
-						if(dd < h/6d){
-							n = n - (1d / (h/6d)) * (h/6d - dd);
-						}
-						if(xmd < l/6d){
-							n = n - (1d / (l/6d)) * (l/6d - xmd);
-						}
-						if(xd < l/6d){
-							n = n - (1d / (l/6d)) * (l/6d - xd);
-						}
-						if(zmd < w/6d){
-							n = n - (1d / (w/6d)) * (w/6d - zmd);
-						}
-						if(zd < w/6d){
-							n = n - (1d / (w/6d)) * (w/6d - zd);
-						}
-					}
-					if(invert){
-						if(n < dens){
-							locs.add(tmp.clone());
-						}
-					}
-					else{
-						if(n > dens){
-							locs.add(tmp.clone());
-						}
-					}
+		Double l = Double.valueOf(getDistance(mmt[0].getBlockX(), mmt[1].getBlockX()));
+		Double w = Double.valueOf(getDistance(mmt[0].getBlockZ(), mmt[1].getBlockZ()));
+		Double h = Double.valueOf(getDistance(mmt[0].getBlockY(), mmt[1].getBlockY()));
+		
+		Random rand = new Random(seed);
+		
+		tmp.setX(mmt[0].getX() + (mmt[1].getBlockX() - mmt[0].getBlockX()) / 2);
+		tmp.setY(mmt[0].getY() + (mmt[1].getBlockY() - mmt[0].getBlockY()) / 2);
+		tmp.setZ(mmt[0].getZ() + (mmt[1].getBlockZ() - mmt[0].getBlockZ()) / 2);
+		tmp.setPitch(rand.nextFloat() * 90 - 45);
+		tmp.setYaw(rand.nextFloat() * 720 - 360);
+		
+		IVector vec = new IVector(tmp.getBlockX(), tmp.getBlockY(), tmp.getBlockZ());
+		cpoints.put(vec.toString(), vec);
+		
+		Double n1;
+		Double n2;
+		
+		int rep = 0;
+		
+		for(int i = 0; i < length; i++){
+			rep++;
+			if(rep == 1){
+				n1 = gen.noise(tmp.getX()/sm, tmp.getY()/sm);
+				n2 = gen.noise(tmp.getX()/sm, tmp.getZ()/sm);
+				
+				float angle = n1.floatValue() * 45f;
+				float angle2 = n2.floatValue() * 10f;
+				tmp.setYaw(addAngle(tmp.getYaw(), angle));
+				tmp.setPitch(addAngle(tmp.getPitch(), angle2));
+			}
+			else if(rep >= 4){
+				rep = 0;
+			}
+			//y
+			if(getDistance(tmp.getBlockY(), mmt[0].getBlockY()) <= h/6){
+				if(tmp.getPitch() <= 90 && tmp.getPitch() > 0)
+					tmp.setPitch(addAngle(tmp.getPitch(), -40));
+				else if(tmp.getPitch() >= 90 && tmp.getPitch() < 180)
+					tmp.setPitch(addAngle(tmp.getPitch(), 40));
+			}
+			if(getDistance(tmp.getBlockY(), mmt[1].getBlockY()) <= h/6){
+				if(tmp.getPitch() >= -90 && tmp.getPitch() < 0)
+					tmp.setPitch(addAngle(tmp.getPitch(), 40));
+				else if(tmp.getPitch() <= -90 && tmp.getPitch() > -180)
+					tmp.setPitch(addAngle(tmp.getPitch(), -40));
+			}
+			//x
+			if(getDistance(tmp.getBlockX(), mmt[0].getBlockX()) <= l/6){
+				if(tmp.getYaw() <= 90 && tmp.getYaw() > 0)
+					tmp.setYaw(addAngle(tmp.getYaw(), -40));
+				else if(tmp.getYaw() > 90 && tmp.getYaw() < 180)
+					tmp.setYaw(addAngle(tmp.getYaw(), 40));
+			}
+			if(getDistance(tmp.getBlockX(), mmt[1].getBlockX()) <= l/6){
+				if(tmp.getYaw() >= -90 && tmp.getYaw() < 0)
+					tmp.setYaw(addAngle(tmp.getYaw(), 40));
+				else if(tmp.getYaw() <= -90 && tmp.getYaw() > -180)
+					tmp.setYaw(addAngle(tmp.getYaw(), -40));
+			}
+			//z
+			if(getDistance(tmp.getBlockZ(), mmt[0].getBlockZ()) <= w/6){
+				if(tmp.getYaw() >= -90 && tmp.getYaw() < -180)
+					tmp.setYaw(addAngle(tmp.getYaw(), 40));
+				else if(tmp.getYaw() >= 90 && tmp.getYaw() < 180)
+					tmp.setYaw(addAngle(tmp.getYaw(), -40));
+			}
+			if(getDistance(tmp.getBlockZ(), mmt[1].getBlockZ()) <= w/6){
+				if(tmp.getYaw() >= 0 && tmp.getYaw() < 90)
+					tmp.setYaw(addAngle(tmp.getYaw(), 40));
+				else if(tmp.getYaw() <= 0 && tmp.getYaw() > -90)
+					tmp.setYaw(addAngle(tmp.getYaw(), -40));
+			}
+				
+			tmp.add(tmp.getDirection());
+			if(isBetween(tmp.getBlockX(), mmt[0].getBlockX(), mmt[0].getBlockX() + l.intValue()) && 
+					isBetween(tmp.getBlockY(), mmt[0].getBlockY(), mmt[0].getBlockY() + h.intValue()) && 
+					isBetween(tmp.getBlockZ(), mmt[0].getBlockZ(), mmt[0].getBlockZ() + w.intValue())){
+				vec = new IVector(tmp.getBlockX(), tmp.getBlockY(), tmp.getBlockZ());
+				if(!cpoints.containsKey(vec.toString())){
+					cpoints.put(vec.toString(), vec);
+					
+					int size = Double.valueOf(Math.abs(gen.noise(vec.getX()/sm, vec.getY()/sm, vec.getZ()/sm) * 3)).intValue();
+					if(size < 2)
+						size = 2;
+					
+					createFakeSphere(size, cpoints, tmp, mmt, l, w, h);
 				}
 			}
 		}
+		
+		tmp.setX(mmt[0].getX());
+		tmp.setY(mmt[0].getY());
+		tmp.setZ(mmt[0].getZ());
+		
+		for(IVector v : cpoints.values()){
+			locs.add(new Location(tmp.getWorld(), v.getX(), v.getY(), v.getZ()));
+		}
+		
 		if(player != null){
-			player.sendMessage(ChatColor.GRAY + "Smoothness: " + sm);
-			player.sendMessage(ChatColor.GRAY + "Soft Edge: " + soft);
-			player.sendMessage(ChatColor.GRAY + "Invert: " + invert);
-			player.sendMessage(ChatColor.GRAY + "Density: " + dens);
-			player.sendMessage(ChatColor.GRAY + "Generator Seed: " + seed);
+			player.sendMessage(ChatColor.GRAY + "Length: " + length);
 		}
 		else if(BTPlugin.plugin.isDebugging()){
-			BTPlugin.plugin.getLogger().info("Smoothness: " + sm);
-			BTPlugin.plugin.getLogger().info("Soft Edge: " + soft);
-			BTPlugin.plugin.getLogger().info("Invert: " + invert);
-			BTPlugin.plugin.getLogger().info("Density: " + dens);
-			BTPlugin.plugin.getLogger().info("Generator Seed: " + seed);
+			BTPlugin.plugin.getLogger().info("Length: " + length);
 		}
 		
 		return locs;
@@ -154,5 +180,74 @@ public class CaveType implements BuildType {
 			return Math.abs(pos2 - pos1);
 		}
 	}
-
+	
+	private boolean isBetween(int pos, int min, int max){
+		if(pos >= min && pos <= max) return true;
+		return false;
+	}
+	
+	private float addAngle(float orig, float add){
+		orig = orig + add;
+		if(orig > 180f){
+			orig = orig - 360f;
+		}
+		if(orig < -180f){
+			orig = orig + 360f;
+		}
+		return orig;
+	}
+	
+	private void createFakeSphere(int size, Map<String, IVector> cpoints, Location tmp, 
+									Location[] mmt, Double l, Double w, Double h){
+		Location tmp2 = tmp.clone();
+		IVector vec;
+		for(int cy = tmp.getBlockY() - size; cy <= tmp.getBlockY() + size; cy++){
+			tmp2.setY(cy);
+			for(int cx = tmp.getBlockX() - size/2; cx <= tmp.getBlockX() + size/2; cx++){
+				tmp2.setX(cx);
+				for(int cz = tmp.getBlockZ() - size/2; cz <= tmp.getBlockZ() + size/2; cz++){
+					tmp2.setZ(cz);
+					vec = new IVector(tmp2.getBlockX(), tmp2.getBlockY(), tmp2.getBlockZ());
+					if(!cpoints.containsKey(vec.toString()) && 
+							isBetween(tmp2.getBlockX(), mmt[0].getBlockX(), mmt[0].getBlockX() + l.intValue()) && 
+							isBetween(tmp2.getBlockY(), mmt[0].getBlockY(), mmt[0].getBlockY() + h.intValue()) && 
+							isBetween(tmp2.getBlockZ(), mmt[0].getBlockZ(), mmt[0].getBlockZ() + w.intValue())){
+						cpoints.put(vec.toString(), vec);
+					}
+				}
+			}
+		}
+		for(int cy = tmp.getBlockY() - size/2; cy <= tmp.getBlockY() + size/2; cy++){
+			tmp2.setY(cy);
+			for(int cx = tmp.getBlockX() - size; cx <= tmp.getBlockX() + size; cx++){
+				tmp2.setX(cx);
+				for(int cz = tmp.getBlockZ() - size/2; cz <= tmp.getBlockZ() + size/2; cz++){
+					tmp2.setZ(cz);
+					vec = new IVector(tmp2.getBlockX(), tmp2.getBlockY(), tmp2.getBlockZ());
+					if(!cpoints.containsKey(vec.toString()) && 
+							isBetween(tmp2.getBlockX(), mmt[0].getBlockX(), mmt[0].getBlockX() + l.intValue()) && 
+							isBetween(tmp2.getBlockY(), mmt[0].getBlockY(), mmt[0].getBlockY() + h.intValue()) && 
+							isBetween(tmp2.getBlockZ(), mmt[0].getBlockZ(), mmt[0].getBlockZ() + w.intValue())){
+						cpoints.put(vec.toString(), vec);
+					}
+				}
+			}
+		}
+		for(int cy = tmp.getBlockY() - size/2; cy <= tmp.getBlockY() + size/2; cy++){
+			tmp2.setY(cy);
+			for(int cx = tmp.getBlockX() - size/2; cx <= tmp.getBlockX() + size/2; cx++){
+				tmp2.setX(cx);
+				for(int cz = tmp.getBlockZ() - size; cz <= tmp.getBlockZ() + size; cz++){
+					tmp2.setZ(cz);
+					vec = new IVector(tmp2.getBlockX(), tmp2.getBlockY(), tmp2.getBlockZ());
+					if(!cpoints.containsKey(vec.toString()) && 
+							isBetween(tmp2.getBlockX(), mmt[0].getBlockX(), mmt[0].getBlockX() + l.intValue()) && 
+							isBetween(tmp2.getBlockY(), mmt[0].getBlockY(), mmt[0].getBlockY() + h.intValue()) && 
+							isBetween(tmp2.getBlockZ(), mmt[0].getBlockZ(), mmt[0].getBlockZ() + w.intValue())){
+						cpoints.put(vec.toString(), vec);
+					}
+				}
+			}
+		}
+	}
 }
