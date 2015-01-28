@@ -21,6 +21,7 @@ public class BuildTypes {
 		addType(new CopyType());
 		addType(new PasteType());
 		addType(new CylinderType());
+		addType(new Cave2Type());
 	}
 	
 	public List<String> getAllTypes(){
