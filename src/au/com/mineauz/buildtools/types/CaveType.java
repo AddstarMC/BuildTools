@@ -145,7 +145,7 @@ public class CaveType implements BuildType{
 				if(!cpoints.containsKey(vec.toString())){
 					cpoints.put(vec.toString(), vec);
 					
-					int size = Double.valueOf(Math.abs(gen.noise(vec.getX()/sm, vec.getY()/sm, vec.getZ()/sm) * 3)).intValue();
+					int size = Double.valueOf(Math.abs(gen.noise(vec.getX()/sm, vec.getY()/sm, vec.getZ()/sm) * 5)).intValue();
 					if(size < 2)
 						size = 2;
 					
@@ -201,11 +201,11 @@ public class CaveType implements BuildType{
 									Location[] mmt, Double l, Double w, Double h){
 		Location tmp2 = tmp.clone();
 		IVector vec;
-		for(int cy = tmp.getBlockY() - size; cy <= tmp.getBlockY() + size; cy++){
+		for(int cy = tmp.getBlockY() - (size - 1); cy <= tmp.getBlockY() + (size - 1); cy++){
 			tmp2.setY(cy);
-			for(int cx = tmp.getBlockX() - size/2; cx <= tmp.getBlockX() + size/2; cx++){
+			for(int cx = tmp.getBlockX() - (size - 1); cx <= tmp.getBlockX() + (size - 1); cx++){
 				tmp2.setX(cx);
-				for(int cz = tmp.getBlockZ() - size/2; cz <= tmp.getBlockZ() + size/2; cz++){
+				for(int cz = tmp.getBlockZ() - (size - 1); cz <= tmp.getBlockZ() + (size - 1); cz++){
 					tmp2.setZ(cz);
 					vec = new IVector(tmp2.getBlockX(), tmp2.getBlockY(), tmp2.getBlockZ());
 					if(!cpoints.containsKey(vec.toString()) && 
@@ -217,11 +217,27 @@ public class CaveType implements BuildType{
 				}
 			}
 		}
-		for(int cy = tmp.getBlockY() - size/2; cy <= tmp.getBlockY() + size/2; cy++){
+		for(int cy = tmp.getBlockY() - size; cy <= tmp.getBlockY() + size; cy++){
+			tmp2.setY(cy);
+			for(int cx = tmp.getBlockX() - (size - size/2); cx <= tmp.getBlockX() + (size - size/2); cx++){
+				tmp2.setX(cx);
+				for(int cz = tmp.getBlockZ() - (size - size/2); cz <= tmp.getBlockZ() + (size - size/2); cz++){
+					tmp2.setZ(cz);
+					vec = new IVector(tmp2.getBlockX(), tmp2.getBlockY(), tmp2.getBlockZ());
+					if(!cpoints.containsKey(vec.toString()) && 
+							isBetween(tmp2.getBlockX(), mmt[0].getBlockX(), mmt[0].getBlockX() + l.intValue()) && 
+							isBetween(tmp2.getBlockY(), mmt[0].getBlockY(), mmt[0].getBlockY() + h.intValue()) && 
+							isBetween(tmp2.getBlockZ(), mmt[0].getBlockZ(), mmt[0].getBlockZ() + w.intValue())){
+						cpoints.put(vec.toString(), vec);
+					}
+				}
+			}
+		}
+		for(int cy = tmp.getBlockY() - (size - size/2); cy <= tmp.getBlockY() + (size - size/2); cy++){
 			tmp2.setY(cy);
 			for(int cx = tmp.getBlockX() - size; cx <= tmp.getBlockX() + size; cx++){
 				tmp2.setX(cx);
-				for(int cz = tmp.getBlockZ() - size/2; cz <= tmp.getBlockZ() + size/2; cz++){
+				for(int cz = tmp.getBlockZ() - (size - size/2); cz <= tmp.getBlockZ() + (size - size/2); cz++){
 					tmp2.setZ(cz);
 					vec = new IVector(tmp2.getBlockX(), tmp2.getBlockY(), tmp2.getBlockZ());
 					if(!cpoints.containsKey(vec.toString()) && 
@@ -233,9 +249,9 @@ public class CaveType implements BuildType{
 				}
 			}
 		}
-		for(int cy = tmp.getBlockY() - size/2; cy <= tmp.getBlockY() + size/2; cy++){
+		for(int cy = tmp.getBlockY() - (size - size/2); cy <= tmp.getBlockY() + (size - size/2); cy++){
 			tmp2.setY(cy);
-			for(int cx = tmp.getBlockX() - size/2; cx <= tmp.getBlockX() + size/2; cx++){
+			for(int cx = tmp.getBlockX() - (size - size/2); cx <= tmp.getBlockX() + (size - size/2); cx++){
 				tmp2.setX(cx);
 				for(int cz = tmp.getBlockZ() - size; cz <= tmp.getBlockZ() + size; cz++){
 					tmp2.setZ(cz);
