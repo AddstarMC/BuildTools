@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.worldcretornica.plotme_core.bukkit.PlotMe_CorePlugin;
 
 import au.com.mineauz.buildtools.commands.CommandDispatcher;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
@@ -75,7 +74,7 @@ public class BTPlugin extends JavaPlugin{
 				getLogger().info("GriefPrevention protection enabled.");
 		}
 		if(plugin.getServer().getPluginManager().isPluginEnabled("PlotMe")){
-			pplugins.addProtectionPlugin(new PMPlugin((PlotMe_CorePlugin) plugin.getServer().getPluginManager().getPlugin("PlotMe")));
+			pplugins.addProtectionPlugin(new PMPlugin());
 			if(isDebugging())
 				getLogger().info("PlotMe protection enabled.");
 		}
