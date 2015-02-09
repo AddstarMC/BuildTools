@@ -111,7 +111,7 @@ public class BTUtils {
 			}
 			else{
 				player.setCanBuild(false);
-				new Generator(locs, points.get(points.size() - 1).getPoint().getBlock(), player, mode, undo);
+				new Generator(locs, points.get(points.size() - 1).getPoint().getBlock().getState(), player, mode, undo);
 			}
 			
 			for(BlockPoint p : player.getPoints()){

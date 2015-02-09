@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.scheduler.BukkitTask;
@@ -20,7 +19,7 @@ public class Generator implements Runnable{
 	private Iterator<Location> locs;
 	private Iterator<BlockState> states;
 	private BukkitTask task;
-	private Block block;
+	private BlockState block;
 	private BTPlayer player;
 	private BuildMode mode;
 	private BTUndo undo;
@@ -28,7 +27,7 @@ public class Generator implements Runnable{
 	private BTCopy copy;
 	private Chunk curChunk = null;
 	
-	public Generator(List<Location> locs, Block block, BTPlayer player, BuildMode mode, BTUndo undo){
+	public Generator(List<Location> locs, BlockState block, BTPlayer player, BuildMode mode, BTUndo undo){
 		this.block = block;
 		this.player = player;
 		this.mode = mode;
@@ -101,7 +100,7 @@ public class Generator implements Runnable{
 	public void run() {
 		long time = System.nanoTime();
 		if(locs != null){
-			MaterialData data = block.getState().getData();
+			MaterialData data = block.getData();
 			while(locs.hasNext()){
 				Location loc = locs.next();
 				
