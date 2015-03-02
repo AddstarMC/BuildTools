@@ -18,11 +18,11 @@ import au.com.mineauz.buildtools.types.BuildType;
 public class BTPlayer {
 	private Player player;
 	private boolean buildModeActive = false;
-	private List<BlockPoint> points = new ArrayList<>();
+	private List<BlockPoint> points = new ArrayList<BlockPoint>();
 	private String type = "CUBOID";
 	private String pattern = "NONE";
-	private List<BTUndo> undos = new ArrayList<>();
-	private List<BTUndo> redos = new ArrayList<>();
+	private List<BTUndo> undos = new ArrayList<BTUndo>();
+	private List<BTUndo> redos = new ArrayList<BTUndo>();
 	private String[] tSettings = new String[0];
 	private String[] pSettings = new String[0];
 	private boolean canBuild = true;

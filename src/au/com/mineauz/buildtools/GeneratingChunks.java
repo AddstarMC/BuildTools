@@ -7,7 +7,7 @@ import org.bukkit.Chunk;
 
 public class GeneratingChunks {
 	
-	private Map<String, BTChunk> genChunks = new HashMap<>();
+	private Map<String, BTChunk> genChunks = new HashMap<String, BTChunk>();
 	
 	public void addGeneratingChunk(Chunk chunk){
 		String cid = getChunkID(chunk);

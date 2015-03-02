@@ -40,6 +40,6 @@ public class BTUndo {
 	
 	@Override
 	public BTUndo clone(){
-		return new BTUndo(player, new ArrayList<>(blocks));
+		return new BTUndo(player, new ArrayList<BlockState>(blocks));
 	}
 }

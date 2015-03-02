@@ -44,7 +44,7 @@ public class OverlayType implements BuildType {
 	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<BlockPoint> points, BuildPattern pattern, String[] settings, String[] pSettings) {
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
-		List<Location> locs = new ArrayList<>();
+		List<Location> locs = new ArrayList<Location>();
 		Location tmp = mmt[0].clone();
 		tmp.setY(mmt[1].getY());
 		int depth = 1;

@@ -21,7 +21,7 @@ public class BuildPatterns {
 	}
 	
 	public List<String> getAllPatterns(){
-		return new ArrayList<>(patterns.keySet());
+		return new ArrayList<String>(patterns.keySet());
 	}
 	
 	public void addPattern(BuildPattern pattern) throws DuplicatePatternException{

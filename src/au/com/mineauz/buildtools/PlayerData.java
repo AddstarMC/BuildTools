@@ -130,7 +130,7 @@ public class PlayerData {
 	}
 	
 	public List<String> getAllHeightLimits(){
-		return new ArrayList<>(heightLimits.keySet());
+		return new ArrayList<String>(heightLimits.keySet());
 	}
 	
 	public boolean hasHeightLimits(String name){
@@ -150,7 +150,7 @@ public class PlayerData {
 		BTPlugin plugin = BTPlugin.plugin;
 		plugin.getConfig().set("heightLimits", null);
 		for(String hln : heightLimits.keySet()){
-			List<String> lm = new ArrayList<>(2);
+			List<String> lm = new ArrayList<String>(2);
 			for(int i = 0; i < 2; i++)
 				lm.add(heightLimits.get(hln)[i].toString());
 			plugin.getConfig().set("heightLimits." + hln, lm);
@@ -193,7 +193,7 @@ public class PlayerData {
 	}
 	
 	public List<String> getVolumeLimits(){
-		return new ArrayList<>(volumeLimits.keySet());
+		return new ArrayList<String>(volumeLimits.keySet());
 	}
 	
 	public boolean hasVolumeLimit(String name){
@@ -252,7 +252,7 @@ public class PlayerData {
 		BTPlugin plugin = BTPlugin.plugin;
 		plugin.getConfig().set("disabledBlocks", null);
 		for(String bln : blockLimits.keySet()){
-			List<String> mts = new ArrayList<>();
+			List<String> mts = new ArrayList<String>();
 			for(Material mat : blockLimits.get(bln)){
 				mts.add(mat.toString());
 			}
@@ -270,7 +270,7 @@ public class PlayerData {
 	}
 	
 	public List<String> getAllBlockLimits(){
-		return new ArrayList<>(blockLimits.keySet());
+		return new ArrayList<String>(blockLimits.keySet());
 	}
 	
 	public List<Material> getPlayerBlockLimits(BTPlayer player){

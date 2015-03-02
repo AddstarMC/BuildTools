@@ -11,7 +11,7 @@ import au.com.mineauz.buildtools.exceptions.UnknownProtectionPluginException;
 
 public class ProtectionPlugins {
 	
-	public Map<String, ProtectionPlugin> pp = new HashMap<>();
+	public Map<String, ProtectionPlugin> pp = new HashMap<String, ProtectionPlugin>();
 	
 	public void addProtectionPlugin(ProtectionPlugin plugin) throws DuplicateProtectionPluginException{
 		if(!hasProtectionPlugin(plugin.getName()))

@@ -49,7 +49,7 @@ public class TerrainBlobType implements BuildType {
 	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<BlockPoint> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
-		List<Location> locs = new ArrayList<>();
+		List<Location> locs = new ArrayList<Location>();
 		int sm = new Random().nextInt(25 - 15) + 15;
 		long seed = System.currentTimeMillis();
 		boolean soft = true;

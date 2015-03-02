@@ -7,7 +7,7 @@ import org.bukkit.material.Directional;
 import org.bukkit.material.MaterialData;
 
 public class BTCopy {
-	private Map<String, MaterialData> materials = new HashMap<>();
+	private Map<String, MaterialData> materials = new HashMap<String, MaterialData>();
 	private boolean replacing = false;
 	
 	public void addState(IVector vec, MaterialData data){
@@ -17,7 +17,7 @@ public class BTCopy {
 	}
 	
 	public Map<IVector, MaterialData> getMaterials(){
-		Map<IVector, MaterialData> mats = new HashMap<>();
+		Map<IVector, MaterialData> mats = new HashMap<IVector, MaterialData>();
 		for(String v : materials.keySet()){
 			mats.put(IVector.fromString(v), materials.get(v));
 		}
@@ -45,7 +45,7 @@ public class BTCopy {
 			}
 			
 			if(angle == 90 || angle == -270){
-				Map<String, MaterialData> dat = new HashMap<>();
+				Map<String, MaterialData> dat = new HashMap<String, MaterialData>();
 				for(String s :materials.keySet()){
 					IVector vec = IVector.fromString(s);
 					int x = vec.getX();
@@ -73,7 +73,7 @@ public class BTCopy {
 				materials = dat;
 			}
 			else if(angle == 180 || angle == -180){
-				Map<String, MaterialData> dat = new HashMap<>();
+				Map<String, MaterialData> dat = new HashMap<String, MaterialData>();
 				for(String s :materials.keySet()){
 					IVector vec = IVector.fromString(s);
 					int x = vec.getX() * -1;
@@ -85,7 +85,7 @@ public class BTCopy {
 				materials = dat;
 			}
 			else if(angle == 270 || angle == -90){
-				Map<String, MaterialData> dat = new HashMap<>();
+				Map<String, MaterialData> dat = new HashMap<String, MaterialData>();
 				for(String s :materials.keySet()){
 					IVector vec = IVector.fromString(s);
 					int x = vec.getX();

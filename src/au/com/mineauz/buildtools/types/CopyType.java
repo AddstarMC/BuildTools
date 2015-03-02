@@ -44,7 +44,7 @@ public class CopyType implements BuildType{
 		Location[] mmt = BTUtils.createMinMaxTable(points.get(0), points.get(1));
 		Location temp = mmt[0].clone();
 		BTCopy cp = new BTCopy();
-		List<Location> locs = new ArrayList<>();
+		List<Location> locs = new ArrayList<Location>();
 		for(int y = mmt[0].getBlockY(); y <= mmt[1].getBlockY(); y++){
 			temp.setY(y);
 			for(int z = mmt[0].getBlockZ(); z <= mmt[1].getBlockZ(); z++){

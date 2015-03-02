@@ -40,7 +40,7 @@ public class SphereType implements BuildType {
 	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<BlockPoint> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
-		List<Location> locs = new ArrayList<>();
+		List<Location> locs = new ArrayList<Location>();
 		Location mid = points.get(0).getPoint();
 		Location tmp = mid.clone();
 		

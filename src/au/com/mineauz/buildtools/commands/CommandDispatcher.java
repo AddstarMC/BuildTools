@@ -163,7 +163,7 @@ loop:			for(ICommand ic : commands.values()){
 	}
 	
 	public static List<ICommand> getAllCommands(){
-		return new ArrayList<>(commands.values());
+		return new ArrayList<ICommand>(commands.values());
 	}
 
 }

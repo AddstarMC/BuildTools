@@ -165,7 +165,7 @@ public class BTUtils {
 	}
 	
 	public static List<String> tabComplete(String match, List<String> options){
-		List<String> fOpts = new ArrayList<>();
+		List<String> fOpts = new ArrayList<String>();
 		if(match != null && !match.equals("")){
 			for(String o : options){
 				if(o.startsWith(match))
@@ -347,7 +347,7 @@ public class BTUtils {
 	
 	public static List<String> makePages(String entry){
 		int ind = 0;
-		List<String> out = new ArrayList<>();
+		List<String> out = new ArrayList<String>();
 		
 		while(ind <= entry.length()){
 			int nind = ind + 245;

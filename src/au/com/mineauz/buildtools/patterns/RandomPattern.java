@@ -18,7 +18,7 @@ public class RandomPattern implements BuildPattern {
 
 	@Override
 	public List<String> compatibleSelections() {
-		List<String> c = new ArrayList<>();
+		List<String> c = new ArrayList<String>();
 		c.add("CUBOID");
 		c.add("OVERLAY");
 		return c;

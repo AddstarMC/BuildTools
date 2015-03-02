@@ -25,7 +25,7 @@ public class BuildTypes {
 	}
 	
 	public List<String> getAllTypes(){
-		return new ArrayList<>(selections.keySet());
+		return new ArrayList<String>(selections.keySet());
 	}
 	
 	public BuildType getType(String name) throws UnknownTypeException{

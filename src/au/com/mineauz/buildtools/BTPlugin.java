@@ -41,7 +41,9 @@ public class BTPlugin extends JavaPlugin{
 		}
 		try {
 			getConfig().load(conf);
-		} catch (IOException | InvalidConfigurationException e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidConfigurationException e){
 			e.printStackTrace();
 		}
 		getConfig().options().copyDefaults(true);

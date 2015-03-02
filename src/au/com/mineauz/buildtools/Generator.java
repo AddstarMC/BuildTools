@@ -68,7 +68,7 @@ public class Generator implements Runnable{
 		
 		Location temp = reference.clone();
 		Map<IVector, MaterialData> data = copy.getMaterials();
-		List<BlockState> states = new ArrayList<>();
+		List<BlockState> states = new ArrayList<BlockState>();
 		for(IVector vec : data.keySet()){
 			temp.setX(reference.getX() + vec.getX());
 			temp.setY(reference.getY() + vec.getY());

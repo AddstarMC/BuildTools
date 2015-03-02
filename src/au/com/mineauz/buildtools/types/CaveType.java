@@ -46,8 +46,8 @@ public class CaveType implements BuildType{
 	public List<Location> execute(BTPlayer player, BuildMode mode,
 			List<BlockPoint> points, BuildPattern pattern, String[] tSettings,
 			String[] pSettings) {
-		Map<String, IVector> cpoints = new HashMap<>();
-		List<Location> locs = new ArrayList<>();
+		Map<String, IVector> cpoints = new HashMap<String, IVector>();
+		List<Location> locs = new ArrayList<Location>();
 		int sm = new Random().nextInt(25 - 15) + 15;
 		long seed = System.currentTimeMillis();
 		int length = 200;
