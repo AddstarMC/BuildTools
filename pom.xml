@@ -74,7 +74,7 @@
     <dependency>
       <groupId>me.ryanhamshire</groupId>
       <artifactId>griefprevention</artifactId>
-      <version>10.5.3</version>
+      <version>10.7.1</version>
     </dependency>
     
     <dependency>
