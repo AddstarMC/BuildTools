@@ -18,28 +18,11 @@ import au.com.mineauz.buildtools.exceptions.UnknownLimitException;
 
 public class PlayerData {
 	private Map<UUID, BTPlayer> players = new HashMap<UUID, BTPlayer>();
-	private List<Material> tools = new ArrayList<Material>();
 	private Map<String, Integer[]> heightLimits = new HashMap<String, Integer[]>();
 	private Map<String, Integer> volumeLimits = new HashMap<String, Integer>();
 	private Map<String, List<Material>> blockLimits = new HashMap<String, List<Material>>();
 	
 	public PlayerData(){
-		tools.add(Material.WOOD_AXE);
-		tools.add(Material.WOOD_SPADE);
-		tools.add(Material.WOOD_PICKAXE);
-		tools.add(Material.STONE_AXE);
-		tools.add(Material.STONE_SPADE);
-		tools.add(Material.STONE_PICKAXE);
-		tools.add(Material.IRON_AXE);
-		tools.add(Material.IRON_SPADE);
-		tools.add(Material.IRON_PICKAXE);
-		tools.add(Material.GOLD_AXE);
-		tools.add(Material.GOLD_SPADE);
-		tools.add(Material.GOLD_PICKAXE);
-		tools.add(Material.DIAMOND_AXE);
-		tools.add(Material.DIAMOND_SPADE);
-		tools.add(Material.DIAMOND_PICKAXE);
-		
 		FileConfiguration conf = BTPlugin.plugin.getConfig();
 		Set<String> vols = conf.getConfigurationSection("maxVolume").getKeys(false);;
 		Set<String> heis = conf.getConfigurationSection("heightLimits").getKeys(false);;
@@ -96,10 +79,6 @@ public class PlayerData {
 	
 	public void clearAllBTPlayers(){
 		players.clear();
-	}
-	
-	public boolean hasTool(Material tool){
-		return tools.contains(tool);
 	}
 	
 	public void addHeightLimits(String name, int min, int max) throws DuplicateLimitException{

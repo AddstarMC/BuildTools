@@ -25,6 +25,15 @@ public class BTUtils {
 		return arrayToString(str);
 	}
 	
+	public static List<String> stringToList(String toList){
+		String[] st = toList.split(";");
+		List<String> list = new ArrayList<String>();
+		for(String s : st){
+			list.add(s);
+		}
+		return list;
+	}
+	
 	public static String arrayToString(String[] arr){
 		String st = ChatColor.GRAY + "";
 		boolean alt = false;
@@ -319,13 +328,21 @@ public class BTUtils {
 							+ "corner of your area, and then again at the second. The block you placed at both points "
 							+ "will then fill in the area. This does not remove any blocks already in the area.";
 		String remove = ChatColor.LIGHT_PURPLE + "Remove Type:\n" + ChatColor.RESET
-							+ "To remove blocks instead of place them, use an axe, pickaxe or shovel (any of these) "
-							+ "and break the blocks at each corner of your selection. This will remove all blocks (excluding "
-							+ "liquids like water and lava) from the area.";
+							+ "To remove blocks instead of place them, break the blocks at each corner of your selection. "
+							+ "This will remove all blocks (excluding liquids like water and lava) from the area.";
 		String replace = ChatColor.LIGHT_PURPLE + "Replace Type:\n" + ChatColor.RESET
 							+ "You can replace the blocks in an area too (excluding air blocks). To do this, break a block "
 							+ "in the first corner of the selection, then place a block in the second corner. This will replace "
 							+ "all the blocks with the block you placed at the end.";
+		String howItWorks = ChatColor.LIGHT_PURPLE + "How block generation works:\n" + ChatColor.RESET
+							+ "Something that isn't easy to understand is how the blocks generate."
+							+ "Think of it this way, when you select two points in the area you want to fill, BuildTools "
+							+ "will go through the area and depending on the pattern and type you selected, it will select "
+							+ "certain blocks in that area. So when it goes to the selection type, the blocks will change "
+							+ "depending on that (break, place or replace). "
+							+ "For example, the cave type will select blocks that resemble a cave "
+							+ "formation, therefore if you use a fill type, it'll only place new blocks, and not cut out "
+							+ "a cave. However if you use the remove selection type, you will get a cave.";
 		for(String page : makePages(intro)){
 			meta.addPage(page);
 		}
@@ -341,6 +358,9 @@ public class BTUtils {
 		for(String page : makePages(replace)){
 			meta.addPage(page);
 		}
+		for(String page : makePages(howItWorks)){
+			meta.addPage(page);
+		}
 		book.setItemMeta(meta);
 		return book;
 	}
@@ -352,8 +372,8 @@ public class BTUtils {
 		while(ind <= entry.length()){
 			int nind = ind + 245;
 			if(nind < entry.length()){
-				if(entry.charAt(nind) != " ".charAt(0)){
-					while(entry.charAt(nind) != " ".charAt(0) && nind != 0){
+				if(entry.charAt(nind) != ' '){
+					while(entry.charAt(nind) != ' ' && nind != 0){
 						nind--;
 					}
 					if(nind == 0){

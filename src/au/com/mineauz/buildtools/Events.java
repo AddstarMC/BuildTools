@@ -112,7 +112,6 @@ public class Events implements Listener{
 			pl.sendMessage("Removed point from selection.", ChatColor.RED);
 		}
 		else if(pl.isBuildModeActive() && 
-				pdata.hasTool(pl.getPlayer().getItemInHand().getType()) && 
 				!pl.getPlayer().isSneaking()){
 			if(!pl.canBuild()){
 				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);

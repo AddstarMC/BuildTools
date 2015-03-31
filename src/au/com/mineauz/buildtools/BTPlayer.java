@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
+import au.com.mineauz.buildtools.menu.MenuItem;
+import au.com.mineauz.buildtools.menu.MenuSession;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 import au.com.mineauz.buildtools.types.BuildType;
 
@@ -27,6 +30,11 @@ public class BTPlayer {
 	private String[] pSettings = new String[0];
 	private boolean canBuild = true;
 	private BTCopy copy = null;
+	
+	private MenuSession menu = null;
+	private boolean noClose = false;
+	private MenuItem manualEntry = null;
+	private BukkitTask manualEntryTimer = null;
 	
 	public BTPlayer(Player player){
 		this.player = player;
@@ -232,17 +240,6 @@ public class BTPlayer {
 			player.getInventory().remove(toClear);
 	}
 	
-	public void damageItem(ItemStack item){
-		if(item == null) return;
-		if(BTPlugin.plugin.getPlayerData().hasTool(item.getType())){
-			item.setDurability((short) (item.getDurability() + 1));
-			if(item.getDurability() >= item.getType().getMaxDurability()){
-				player.playSound(getLocation(), Sound.ITEM_BREAK, 1, 1);
-				removeItem(item);
-			}
-		}
-	}
-	
 	public String[] getTSettings(){
 		return tSettings;
 	}
@@ -277,5 +274,82 @@ public class BTPlayer {
 	
 	public BTCopy getCopy(){
 		return copy;
+	}
+	
+	public MenuSession getMenuSession() {
+		return menu;
+	}
+	
+	public void setMenuSession(MenuSession menu){
+		this.menu = menu;
+	}
+	
+	public boolean isInMenu(){
+		if(menu != null){
+			return true;
+		}
+		return false;
+	}
+	
+	public void showPreviousMenu() {
+		if (menu != null) {
+			MenuSession session = menu.previous;
+			if (session != null) {
+				session.current.displaySession(this, session);
+			}
+		}
+	}
+	
+	public void showPreviousMenu(int backCount) {
+		if (menu != null) {
+			MenuSession session = menu;
+			while(session != null && backCount > 0) {
+				session = session.previous;
+				--backCount;
+			}
+			
+			if (session != null) {
+				session.current.displaySession(this, session);
+			}
+		}
+	}
+	
+	public void setNoClose(boolean value){
+		noClose = value;
+	}
+	
+	public boolean getNoClose(){
+		return noClose;
+	}
+	
+	public void startManualEntry(MenuItem item, int time) {
+		manualEntry = item;
+		manualEntryTimer = Bukkit.getScheduler().runTaskLater(BTPlugin.plugin, new Runnable() {
+			@Override
+			public void run() {
+				noClose = false;
+				manualEntry = null;
+				manualEntryTimer = null;
+				if (menu != null) {
+					menu.current.displaySession(BTPlayer.this, menu);
+				}
+			}
+		}, (long)(time * 20));
+	}
+	
+	public void cancelMenuReopen() {
+		if (manualEntryTimer != null) {
+			manualEntryTimer.cancel();
+		}
+		manualEntry = null;
+	}
+	
+	public MenuItem getManualEntry(){
+		return manualEntry;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void updateInventory(){
+		getPlayer().updateInventory();
 	}
 }
