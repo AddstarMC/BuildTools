@@ -36,7 +36,7 @@ public class OverlayType implements BuildType {
 	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Height/Depth> " + ChatColor.GRAY + "How high/deep to overlay blocks."
+				ChatColor.GOLD + "<Height/Depth> " + ChatColor.GRAY + "How high/deep to overlay blocks."
 		};
 	}
 

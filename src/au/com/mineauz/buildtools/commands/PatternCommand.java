@@ -72,7 +72,7 @@ public class PatternCommand implements ICommand {
 					if(p.getParameters() != null){
 						pl.sendMessage(ChatColor.AQUA + "Parameters: ");
 						for(String par : p.getParameters()){
-							pl.sendMessage(ChatColor.GOLD + par);
+							pl.sendMessage(par);
 						}
 					}
 					if(p.compatibleSelections() != null){

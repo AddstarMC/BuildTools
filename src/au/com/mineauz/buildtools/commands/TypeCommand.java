@@ -72,7 +72,7 @@ public class TypeCommand implements ICommand {
 					if(t.getParameters() != null){
 						pl.sendMessage(ChatColor.AQUA + "Parameters: ");
 						for(String p : t.getParameters()){
-							pl.sendMessage(ChatColor.GOLD + p);
+							pl.sendMessage(p);
 						}
 					}
 					pl.sendMessage(ChatColor.AQUA + "Required Points: " + ChatColor.GRAY + t.getRequiredPointCount());

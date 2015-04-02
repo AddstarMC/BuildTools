@@ -37,9 +37,11 @@ public class TerrainType implements BuildType{
 	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Smoothness> " + ChatColor.GRAY + "The smoothness of the terrain. (15 - 25 by default)",
-				"<Smooth Edge> " + ChatColor.GRAY + "Should the edge of the terrain be smoothed out. (defaults to 'false')",
-				"<Seed> " + ChatColor.GRAY + "The seed of the terrain."
+				ChatColor.GOLD + "<Smoothness> " + ChatColor.GRAY + 
+					"The smoothness of the terrain. (15 - 25 by default)",
+				ChatColor.GOLD + "<Smooth Edge> " + ChatColor.GRAY + 
+					"Should the edge of the terrain be smoothed out. (defaults to 'false')",
+				ChatColor.GOLD + "<Seed> " + ChatColor.GRAY + "The seed of the terrain."
 		};
 	}
 

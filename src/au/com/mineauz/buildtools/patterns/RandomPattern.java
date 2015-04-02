@@ -37,7 +37,7 @@ public class RandomPattern implements BuildPattern {
 	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Chance> " + ChatColor.GRAY + "Chance of a block placing. (50 by default)"
+				ChatColor.GOLD + "<Chance> " + ChatColor.GRAY + "Chance of a block placing. (50 by default)"
 		};
 	}
 

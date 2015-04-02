@@ -37,11 +37,15 @@ public class TerrainBlobType implements BuildType {
 	@Override
 	public String[] getParameters(){
 		return new String[] {
-				"<Smoothness> " + ChatColor.GRAY + "The smoothness of the cave. (15 - 25 default)",
-				"<Smooth Edge> " + ChatColor.GRAY + "Should the edge of the cave selection be smoothed out. (defaults to 'true')",
-				"<Invert>" + ChatColor.GRAY + "Should the cave generation be inverted (defaults to false)",
-				"<Density> " + ChatColor.GRAY + "How big the caves should be, values between -1 and 1, -1 being most dense (defaults to 0.3)",
-				"<Seed> " + ChatColor.GRAY + "The seed of the cave."
+				ChatColor.GOLD + "<Smoothness> " + ChatColor.GRAY + 
+					"The smoothness of the cave. (15 - 25 default)",
+				ChatColor.GOLD + "<Smooth Edge> " + ChatColor.GRAY + 
+					"Should the edge of the cave selection be smoothed out. (defaults to 'true')",
+				ChatColor.GOLD + "<Invert>" + ChatColor.GRAY + 
+					"Should the cave generation be inverted (defaults to false)",
+				ChatColor.GOLD + "<Density> " + ChatColor.GRAY + 
+					"How big the caves should be, values between -1 and 1, -1 being most dense (defaults to 0.3)",
+				ChatColor.GOLD + "<Seed> " + ChatColor.GRAY + "The seed of the cave."
 		};
 	}
 

@@ -38,7 +38,7 @@ public class CaveType implements BuildType{
 	@Override
 	public String[] getParameters() {
 		return new String[] {
-				"<length> " + ChatColor.GRAY + "The length of the cave. (defaults to 200, max 500)"
+				ChatColor.GOLD + "<length> " + ChatColor.GRAY + "The length of the cave. (defaults to 200, max 500)"
 		};
 	}
 

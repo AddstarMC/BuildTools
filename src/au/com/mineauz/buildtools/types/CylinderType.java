@@ -34,7 +34,7 @@ public class CylinderType implements BuildType{
 	@Override
 	public String[] getParameters() {
 		return new String[] {
-				"<Direction> " + ChatColor.GRAY + "What direction to face the cylinder (defaults to 'y', possible 'x' and 'z')"
+				ChatColor.GOLD + "<Direction> " + ChatColor.GRAY + "What direction to face the cylinder (defaults to 'y', possible 'x' and 'z')"
 		};
 	}
 
