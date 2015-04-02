@@ -24,6 +24,7 @@ import au.com.mineauz.buildtools.menu.MenuItemPatterns;
 import au.com.mineauz.buildtools.menu.MenuItemString;
 import au.com.mineauz.buildtools.menu.MenuItemSubMenu;
 import au.com.mineauz.buildtools.menu.MenuItemSettings;
+import au.com.mineauz.buildtools.menu.MenuItemUndo;
 import au.com.mineauz.buildtools.menu.MenuSession;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 import au.com.mineauz.buildtools.types.BuildType;
@@ -452,6 +453,9 @@ public class BTPlayer {
 		m.addItem(new MenuItemNewLine());
 		m.addItem(new MenuItemSettings(getTSettingsCallback(), MenuItemSettings.SettingType.TYPE));
 		m.addItem(new MenuItemSettings(getPSettingsCallback(), MenuItemSettings.SettingType.PATTERN));
+		
+		m.insertItem(new MenuItemUndo(MenuItemUndo.Type.UNDO), 2, 0);
+		m.insertItem(new MenuItemUndo(MenuItemUndo.Type.REDO), 3, 0);
 		
 		m.displayMenu(this);
 	}
