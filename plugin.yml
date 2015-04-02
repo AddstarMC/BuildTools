@@ -10,7 +10,7 @@ commands:
     usage: Invalid command. Type "/buildtools help" for help
     permission: buildtools.command
     permisison-message: You don't have permission to use this command <permission>
-    aliases: [bt]
+    aliases: [bt, btm]
 
 permissions:
   buildtools.command:

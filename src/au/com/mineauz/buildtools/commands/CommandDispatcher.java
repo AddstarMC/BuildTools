@@ -143,20 +143,25 @@ loop:			for(ICommand ic : commands.values()){
 		}
 		else if(sender instanceof Player){
 			BTPlayer pl = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
-			if(!pl.isBuildModeActive()){
-				if(pl.isInCreative()){
-					pl.setBuildModeActive(true);
-					pl.sendMessage("Build mode active!", ChatColor.AQUA);
-					pl.sendMessage(ChatColor.AQUA + "Mode: " + ChatColor.WHITE + BTUtils.capitalize(pl.getType().getName()));
-					pl.sendMessage(ChatColor.AQUA + "Pattern: " + ChatColor.WHITE + BTUtils.capitalize(pl.getPattern().getName()));
-				}
-				else{
-					pl.sendMessage("You must be in creative mode to use BuildTools!", ChatColor.RED);
-				}
+			if(cmd.equals("btm")){
+				commands.get("menu").onCommand(sender, args);
 			}
 			else{
-				pl.setBuildModeActive(false);
-				pl.sendMessage("Build mode deactivated.", ChatColor.RED);
+				if(!pl.isBuildModeActive()){
+					if(pl.isInCreative()){
+						pl.setBuildModeActive(true);
+						pl.sendMessage("Build mode active!", ChatColor.AQUA);
+						pl.sendMessage(ChatColor.AQUA + "Mode: " + ChatColor.WHITE + BTUtils.capitalize(pl.getType().getName()));
+						pl.sendMessage(ChatColor.AQUA + "Pattern: " + ChatColor.WHITE + BTUtils.capitalize(pl.getPattern().getName()));
+					}
+					else{
+						pl.sendMessage("You must be in creative mode to use BuildTools!", ChatColor.RED);
+					}
+				}
+				else{
+					pl.setBuildModeActive(false);
+					pl.sendMessage("Build mode deactivated.", ChatColor.RED);
+				}
 			}
 			return true;
 		}
