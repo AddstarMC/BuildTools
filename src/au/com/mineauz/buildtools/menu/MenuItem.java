@@ -432,7 +432,7 @@ public class MenuItem {
 	public final void beginManualEntry(BTPlayer player, String message, int time) {
 		player.setNoClose(true);
 		player.getPlayer().closeInventory();
-		player.sendMessage(message, null);
+		player.sendMessage(message, ChatColor.AQUA);
 		player.startManualEntry(this, time);
 	}
 	

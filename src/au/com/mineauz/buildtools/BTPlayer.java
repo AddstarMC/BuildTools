@@ -1,6 +1,7 @@
 package au.com.mineauz.buildtools;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
+import au.com.mineauz.buildtools.menu.Callback;
+import au.com.mineauz.buildtools.menu.Menu;
 import au.com.mineauz.buildtools.menu.MenuItem;
+import au.com.mineauz.buildtools.menu.MenuItemBoolean;
+import au.com.mineauz.buildtools.menu.MenuItemBuildType;
+import au.com.mineauz.buildtools.menu.MenuItemNewLine;
+import au.com.mineauz.buildtools.menu.MenuItemPatterns;
+import au.com.mineauz.buildtools.menu.MenuItemString;
+import au.com.mineauz.buildtools.menu.MenuItemSubMenu;
+import au.com.mineauz.buildtools.menu.MenuItemSettings;
 import au.com.mineauz.buildtools.menu.MenuSession;
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 import au.com.mineauz.buildtools.types.BuildType;
@@ -244,12 +254,58 @@ public class BTPlayer {
 		return tSettings;
 	}
 	
+	public Callback<String> getTSettingsCallback(){
+		return new Callback<String>() {
+
+			@Override
+			public void setValue(String value) {
+				if(value != null){
+					String[] spl = value.split(" ");
+					tSettings = spl;
+				}
+			}
+
+			@Override
+			public String getValue() {
+				String set = null;
+				if(tSettings.length > 0)
+					set = "";
+				for(String s : tSettings)
+					set += s + " ";
+				return set;
+			}
+		};
+	}
+	
 	public void setTSettings(String[] settings){
 		tSettings = settings;
 	}
 	
 	public String[] getPSettings(){
 		return pSettings;
+	}
+	
+	public Callback<String> getPSettingsCallback(){
+		return new Callback<String>() {
+
+			@Override
+			public void setValue(String value) {
+				if(value != null){
+					String[] spl = value.split(" ");
+					pSettings = spl;
+				}
+			}
+
+			@Override
+			public String getValue() {
+				String set = null;
+				if(pSettings.length > 0)
+					set = "";
+				for(String s : pSettings)
+					set += s + " ";
+				return set;
+			}
+		};
 	}
 	
 	public void setPSettings(String[] settings){
@@ -352,4 +408,53 @@ public class BTPlayer {
 	public void updateInventory(){
 		getPlayer().updateInventory();
 	}
+	
+	public void openMenu(){
+		Menu m = new Menu(6, "BuildTools Menu");
+		Menu types = new Menu(6, "Build Types");
+		BTPlugin plugin = BTPlugin.plugin;
+		
+		MenuItemSubMenu typeSub = new MenuItemSubMenu("Build Types", Material.CHEST, types);
+		MenuItemPatterns patSub = new MenuItemPatterns(this);
+		typeSub.setDescription("Current Type: " + BTUtils.capitalize(getType().getName()));
+		
+		List<String> typeList = plugin.getBuildTypes().getAllTypes();
+		Collections.sort(typeList);
+		List<String> patternList = plugin.getBuildPatterns().getAllPatterns();
+		Collections.sort(patternList);
+		
+		MenuItemBuildType mt;
+		for(String t : typeList){
+			if(hasPermission("buildtools.type." + t.toLowerCase())){
+				mt = new MenuItemBuildType(Material.ENDER_PEARL, t, typeSub, patSub);
+				if(plugin.getBuildTypes().getType(t).getHelpInfo() != null)
+					mt.setDescription(BTUtils.wordWrap(plugin.getBuildTypes().getType(t).getHelpInfo()));
+				types.addItem(mt);
+			}
+		}
+		
+		m.addItem(new MenuItemBoolean("Enable BuildTools", Material.DIAMOND_PICKAXE, new Callback<Boolean>() {
+			
+			@Override
+			public void setValue(Boolean value) {
+				setBuildModeActive(value);
+			}
+			
+			@Override
+			public Boolean getValue() {
+				return isBuildModeActive();
+			}
+		}));
+		m.addItem(new MenuItemNewLine());
+		
+		m.addItem(typeSub);
+		m.addItem(patSub);
+		m.addItem(new MenuItemNewLine());
+		m.addItem(new MenuItemSettings(getTSettingsCallback(), MenuItemSettings.SettingType.TYPE));
+		m.addItem(new MenuItemSettings(getPSettingsCallback(), MenuItemSettings.SettingType.PATTERN));
+		
+		m.displayMenu(this);
+	}
+	
+	
 }

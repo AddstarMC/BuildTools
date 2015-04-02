@@ -384,7 +384,34 @@ public class BTUtils {
 				ind = nind + 1;
 			}
 			else{
-				out.add(entry.substring(ind, entry.length() - 1));
+				out.add(entry.substring(ind, entry.length()));
+				break;
+			}
+		}
+		
+		return out;
+	}
+	
+	public static List<String> wordWrap(String entry){
+		int ind = 0;
+		List<String> out = new ArrayList<String>();
+		
+		while(ind <= entry.length()){
+			int nind = ind + 40;
+			if(nind < entry.length()){
+				if(entry.charAt(nind) != ' '){
+					while(entry.charAt(nind) != ' ' && nind != 0){
+						nind--;
+					}
+					if(nind == 0){
+						nind = ind + 40;
+					}
+				}
+				out.add(entry.substring(ind, nind));
+				ind = nind + 1;
+			}
+			else{
+				out.add(entry.substring(ind, entry.length()));
 				break;
 			}
 		}

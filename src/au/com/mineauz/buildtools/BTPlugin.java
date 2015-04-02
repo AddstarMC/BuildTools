@@ -7,11 +7,13 @@ import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import au.com.mineauz.buildtools.commands.CommandDispatcher;
+import au.com.mineauz.buildtools.menu.MenuListener;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
 import au.com.mineauz.buildtools.protection.GPPlugin;
 import au.com.mineauz.buildtools.protection.PMPlugin;
@@ -62,6 +64,7 @@ public class BTPlugin extends JavaPlugin{
 		getCommand("buildtools").setTabCompleter(comd);
 		
 		getServer().getPluginManager().registerEvents(new Events(), this);
+		getServer().getPluginManager().registerEvents(new MenuListener(), this);
 		
 		pplugins = new ProtectionPlugins();
 		
@@ -95,6 +98,11 @@ public class BTPlugin extends JavaPlugin{
 		pplugins = null;
 		types = null;
 		patterns = null;
+		
+		getCommand("buildtools").setExecutor(null);
+		getCommand("buildtools").setTabCompleter(null);
+		
+		HandlerList.unregisterAll(this);
 		
 		getLogger().info(" successfully disabled!");
 	}

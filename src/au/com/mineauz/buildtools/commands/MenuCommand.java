@@ -3,6 +3,10 @@ package au.com.mineauz.buildtools.commands;
 import java.util.List;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import au.com.mineauz.buildtools.BTPlayer;
+import au.com.mineauz.buildtools.BTPlugin;
 
 public class MenuCommand implements ICommand {
 
@@ -48,7 +52,9 @@ public class MenuCommand implements ICommand {
 
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
-		return false;
+		BTPlayer player = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
+		player.openMenu();
+		return true;
 	}
 
 }

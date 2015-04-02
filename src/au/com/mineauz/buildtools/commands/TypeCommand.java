@@ -96,6 +96,7 @@ public class TypeCommand implements ICommand {
 					else{
 						pl.setTSettings(new String[0]);
 					}
+					pl.setPSettings(new String[0]);
 				}
 				else{
 					pl.sendMessage("You do not have permission to use this type!", ChatColor.RED);
