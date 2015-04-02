@@ -34,12 +34,18 @@ public class Events implements Listener{
 	private void placeBlock(BlockPlaceEvent event){
 		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
 		if(pl == null) return;
-		if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
+		
+		if(pl.isBuildModeActive() && pl.hasPoint(event.getBlock().getLocation())){
+			pl.removePoint(event.getBlock().getLocation());
+			pl.sendMessage("Removed point from selection.", ChatColor.RED);
+		}
+		else if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
 			if(!pl.canBuild()){
 				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);
 				event.setCancelled(true);
 				return;
 			}
+			
 			if(!pdata.getPlayerBlockLimits(pl).contains(event.getBlockPlaced().getType()) ||
 					pl.hasPermission("buildtools.bypassdisabledblocks")){
 				Integer[] hl = pdata.getPlayerHightLimits(pl);
@@ -96,10 +102,6 @@ public class Events implements Listener{
 					}
 				}
 			}
-		}
-		else if(pl.isBuildModeActive() && pl.hasPoint(event.getBlock().getLocation())){
-			pl.removePoint(event.getBlock().getLocation());
-			pl.sendMessage("Removed point from selection.", ChatColor.RED);
 		}
 	}
 	
