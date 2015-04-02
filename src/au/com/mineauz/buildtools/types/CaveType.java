@@ -32,7 +32,7 @@ public class CaveType implements BuildType{
 
 	@Override
 	public String getHelpInfo() {
-		return null;
+		return "Generates a standard cave. Currently starts generating from the middle of the selection (Will be changed).";
 	}
 
 	@Override
