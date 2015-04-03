@@ -68,6 +68,8 @@ public class HelpCommand implements ICommand {
 				ply.sendMessage("You have been given the basic help book.", ChatColor.AQUA);
 			}
 			else if(args[0].equalsIgnoreCase("commands")){
+				ply.sendMessage(ChatColor.AQUA + "/buildtools menu");
+				ply.sendMessage(ChatColor.GRAY + "Opens the menu, (/btm, /bt m)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools type");
 				ply.sendMessage(ChatColor.GRAY + "Sets your building type.");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools pattern");
