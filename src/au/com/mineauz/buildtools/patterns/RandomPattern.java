@@ -21,6 +21,8 @@ public class RandomPattern implements BuildPattern {
 		List<String> c = new ArrayList<String>();
 		c.add("CUBOID");
 		c.add("OVERLAY");
+		c.add("SPHERE");
+		c.add("CYLINDER");
 		return c;
 	}
 
