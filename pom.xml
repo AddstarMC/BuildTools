@@ -27,7 +27,7 @@
       	<enabled>true</enabled>
       </snapshots>
       <releases>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
       </releases>
     </repository>
 
@@ -61,7 +61,7 @@
     <dependency>
     	<groupId>com.worldcretornica</groupId>
     	<artifactId>PlotMe-Core</artifactId>
-    	<version>0.17-SNAPSHOT</version>
+    	<version>0.16.3</version>
     	<exclusions>
     	  <exclusion>
     	    <groupId>org.mcstats.bukkit</groupId>

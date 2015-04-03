@@ -21,7 +21,6 @@ import au.com.mineauz.buildtools.menu.MenuItemBoolean;
 import au.com.mineauz.buildtools.menu.MenuItemBuildType;
 import au.com.mineauz.buildtools.menu.MenuItemNewLine;
 import au.com.mineauz.buildtools.menu.MenuItemPatterns;
-import au.com.mineauz.buildtools.menu.MenuItemString;
 import au.com.mineauz.buildtools.menu.MenuItemSubMenu;
 import au.com.mineauz.buildtools.menu.MenuItemSettings;
 import au.com.mineauz.buildtools.menu.MenuItemUndo;
