@@ -58,9 +58,21 @@ public class HelpCommand implements ICommand {
 	public boolean onCommand(CommandSender sender, String[] args) {
 		BTPlayer ply = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
 		if(args == null){
+			ply.sendMessage(ChatColor.LIGHT_PURPLE + "------------------------------------");
 			ply.sendMessage("For basic info on usage, type '/bt help basics'\n"
-					+ "For info on a command, type '/bt help <Command>'\n"
-					+ "To view commands, type '/bt help commands'", ChatColor.AQUA);
+					+ "For info on a command, type '/bt help <Command>'\n", ChatColor.AQUA);
+			ply.sendMessage(ChatColor.LIGHT_PURPLE + "------------------------------------");
+			ply.sendMessage(ChatColor.LIGHT_PURPLE + "Main Commands: ");
+			ply.sendMessage(ChatColor.AQUA + "/buildtools");
+			ply.sendMessage(ChatColor.GRAY + "Toggles build mode on and off. (/bt, /bt on, /bt off)");
+			ply.sendMessage(ChatColor.AQUA + "/buildtools menu");
+			ply.sendMessage(ChatColor.GRAY + "Opens the menu, (/btm, /bt m)");
+			ply.sendMessage(ChatColor.AQUA + "/buildtools type");
+			ply.sendMessage(ChatColor.GRAY + "Sets your building type. (/bt t)");
+			ply.sendMessage(ChatColor.AQUA + "/buildtools pattern");
+			ply.sendMessage(ChatColor.GRAY + "Sets your building pattern. (/bt p)");
+			ply.sendMessage(ChatColor.AQUA + "For all commands, type '/bt help commands'");
+			ply.sendMessage(ChatColor.LIGHT_PURPLE + "------------------------------------");
 		}
 		else{
 			if(args[0].equalsIgnoreCase("basics")){
@@ -68,18 +80,22 @@ public class HelpCommand implements ICommand {
 				ply.sendMessage("You have been given the basic help book.", ChatColor.AQUA);
 			}
 			else if(args[0].equalsIgnoreCase("commands")){
+				ply.sendMessage(ChatColor.LIGHT_PURPLE + "------------------------------------");
+				ply.sendMessage(ChatColor.AQUA + "/buildtools");
+				ply.sendMessage(ChatColor.GRAY + "Toggles build mode on and off. (/bt, /bt on, /bt off)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools menu");
-				ply.sendMessage(ChatColor.GRAY + "Opens the menu, (/btm, /bt m)");
+				ply.sendMessage(ChatColor.GRAY + "Opens the menu. (/btm, /bt m)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools type");
-				ply.sendMessage(ChatColor.GRAY + "Sets your building type.");
+				ply.sendMessage(ChatColor.GRAY + "Sets your building type. (/bt t)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools pattern");
-				ply.sendMessage(ChatColor.GRAY + "Sets your building pattern.");
+				ply.sendMessage(ChatColor.GRAY + "Sets your building pattern. (/bt p)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools undo");
-				ply.sendMessage(ChatColor.GRAY + "Undo your last build.");
+				ply.sendMessage(ChatColor.GRAY + "Undo your last build. (/bt u)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools redo");
-				ply.sendMessage(ChatColor.GRAY + "Redoes your last undo.");
+				ply.sendMessage(ChatColor.GRAY + "Redoes your last undo. (/bt r)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools copyrotate");
-				ply.sendMessage(ChatColor.GRAY + "Rotates the last copy on your clipboard.");
+				ply.sendMessage(ChatColor.GRAY + "Rotates the last copy on your clipboard. (/bt cr)");
+				ply.sendMessage(ChatColor.LIGHT_PURPLE + "------------------------------------");
 			}
 			else{
 				List<ICommand> commands = CommandDispatcher.getAllCommands();
@@ -107,11 +123,14 @@ public class HelpCommand implements ICommand {
 					if(icmd.getAliases() != null){
 						sender.sendMessage(ChatColor.AQUA + "Aliases: " + BTUtils.arrayToString(icmd.getAliases()));
 					}
+					sender.sendMessage(ChatColor.AQUA + "Usage:");
 					if(icmd.getUsage() != null){
-						sender.sendMessage(ChatColor.AQUA + "Usage:");
 						for(String use : icmd.getUsage()){
 							sender.sendMessage(ChatColor.GRAY + "/buildtools" + " " + icmd.getName() + " " + use);
 						}
+					}
+					else{
+						sender.sendMessage(ChatColor.GRAY + "/buildtools" + " " + icmd.getName());
 					}
 				}
 			}

@@ -314,12 +314,14 @@ public class BTUtils {
 		String intro = "" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "Basic Help:\n" + ChatColor.RESET
 						+ "BuildTools is made around placing and breaking blocks rather than using commands to "
 						+ "build structures. To enable BuildTools, simply type '/buildtools' or '/bt'. "
-						+ "To disable it again, simply type this command again.\n"
-						+ "Alternatively you can use the BuildTools Menu by typing /btm (/bt m, /buildtools menu). "
+						+ "To disable it again, simply type this command again. You can also use '/bt on' and "
+						+ "'/bt off' to turn BuildTools on and off respectively.\n"
+						+ "Alternatively you can use the BuildTools Menu by typing '/btm' ('/bt m', '/buildtools menu'). "
 						+ "Here you can change settings and enable or disable BuildTools.\n"
 						+ "By default, you'll have the 'Cuboid' type and 'None' pattern selected, this will "
 						+ "generate a basic cuboid, depending on your selection type, more on these on the next "
-						+ "page. While having BuildTools enabled, you can sneak to be able to place blocks without "
+						+ "page. While having BuildTools enabled, you can sneak (shift + left/right click by default) "
+						+ "to be able to break/place blocks without "
 						+ "using the BuildTools functions. This is useful if you need to tower up to a point to fill "
 						+ "your selection in.";
 		String selections = "" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "Selection Types:\n" + ChatColor.RESET
@@ -345,6 +347,11 @@ public class BTUtils {
 							+ "For example, the cave type will select blocks that resemble a cave "
 							+ "formation, therefore if you use a fill type, it'll only place new blocks, and not cut out "
 							+ "a cave. However if you use the remove selection type, you will get a cave.";
+		String needMoreHelp = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Need More Help?\n" + ChatColor.RESET
+							+ "If you want more information on using commands, you can use '/bt help <command name>' and "
+							+ "it will bring up some info on the command you entered. Remember you don't have to use these "
+							+ "commands, the menu can do all the functions as well. Use '/bt help commands' to show a list "
+							+ "of all commands so you know what to enter when using the command help.";
 		for(String page : makePages(intro)){
 			meta.addPage(page);
 		}
@@ -361,6 +368,9 @@ public class BTUtils {
 			meta.addPage(page);
 		}
 		for(String page : makePages(howItWorks)){
+			meta.addPage(page);
+		}
+		for(String page : makePages(needMoreHelp)){
 			meta.addPage(page);
 		}
 		book.setItemMeta(meta);
