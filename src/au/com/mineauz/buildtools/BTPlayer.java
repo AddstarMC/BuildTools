@@ -19,8 +19,10 @@ import au.com.mineauz.buildtools.menu.Menu;
 import au.com.mineauz.buildtools.menu.MenuItem;
 import au.com.mineauz.buildtools.menu.MenuItemBoolean;
 import au.com.mineauz.buildtools.menu.MenuItemBuildType;
+import au.com.mineauz.buildtools.menu.MenuItemHelp;
 import au.com.mineauz.buildtools.menu.MenuItemNewLine;
 import au.com.mineauz.buildtools.menu.MenuItemPatterns;
+import au.com.mineauz.buildtools.menu.MenuItemRotate;
 import au.com.mineauz.buildtools.menu.MenuItemSubMenu;
 import au.com.mineauz.buildtools.menu.MenuItemSettings;
 import au.com.mineauz.buildtools.menu.MenuItemUndo;
@@ -433,7 +435,7 @@ public class BTPlayer {
 			}
 		}
 		
-		m.addItem(new MenuItemBoolean("Enable BuildTools", Material.DIAMOND_PICKAXE, new Callback<Boolean>() {
+		m.insertItem(new MenuItemBoolean("Enable BuildTools", Material.DIAMOND_PICKAXE, new Callback<Boolean>() {
 			
 			@Override
 			public void setValue(Boolean value) {
@@ -444,17 +446,20 @@ public class BTPlayer {
 			public Boolean getValue() {
 				return isBuildModeActive();
 			}
-		}));
-		m.addItem(new MenuItemNewLine());
+		}), 4, 0);
 		
-		m.addItem(typeSub);
-		m.addItem(patSub);
-		m.addItem(new MenuItemNewLine());
-		m.addItem(new MenuItemSettings(getTSettingsCallback(), MenuItemSettings.SettingType.TYPE));
-		m.addItem(new MenuItemSettings(getPSettingsCallback(), MenuItemSettings.SettingType.PATTERN));
-		
-		m.insertItem(new MenuItemUndo(MenuItemUndo.Type.UNDO), 2, 0);
-		m.insertItem(new MenuItemUndo(MenuItemUndo.Type.REDO), 3, 0);
+		m.insertItem(typeSub, 9+3, 0);
+		m.insertItem(patSub, 9+5, 0);
+		m.insertItem(new MenuItemSettings(getTSettingsCallback(), MenuItemSettings.SettingType.TYPE), 9*2+3, 0);
+		m.insertItem(new MenuItemSettings(getPSettingsCallback(), MenuItemSettings.SettingType.PATTERN), 9*2+5, 0);
+
+		m.insertItem(new MenuItemUndo(MenuItemUndo.Type.REDO), 9*4-4, 0);
+		m.insertItem(new MenuItemUndo(MenuItemUndo.Type.UNDO), 9*4-6, 0);
+		m.insertItem(new MenuItemRotate(180), 9*5-3, 0);
+		m.insertItem(new MenuItemRotate(90), 9*5-4, 0);
+		m.insertItem(new MenuItemRotate(-90), 9*5-6, 0);
+		m.insertItem(new MenuItemRotate(-180), 9*5-7, 0);
+		m.setControlItem(new MenuItemHelp(), 4);
 		
 		m.displayMenu(this);
 	}
