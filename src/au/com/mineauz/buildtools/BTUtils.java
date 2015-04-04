@@ -347,7 +347,7 @@ public class BTUtils {
 							+ "For example, the cave type will select blocks that resemble a cave "
 							+ "formation, therefore if you use a fill type, it'll only place new blocks, and not cut out "
 							+ "a cave. However if you use the remove selection type, you will get a cave.";
-		String cancelling = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Canceling a Large Generation:" + ChatColor.RESET
+		String cancelling = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Canceling a Large Generation:\n" + ChatColor.RESET
 							+ "You may want to cancel a generation if you find its taking too long or is too large. To do this "
 							+ "use '/bt cancel' and the generation will stop as soon as it can.";
 		String needMoreHelp = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Need More Help?\n" + ChatColor.RESET

@@ -54,7 +54,7 @@ public class OffCommand implements ICommand{
 	@Override
 	public boolean onCommand(CommandSender sender, String[] args) {
 		BTPlayer player = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
-		player.setBuildModeActive(true);
+		player.setBuildModeActive(false);
 		player.sendMessage("Build mode deactivated.", ChatColor.RED);
 		return true;
 	}
