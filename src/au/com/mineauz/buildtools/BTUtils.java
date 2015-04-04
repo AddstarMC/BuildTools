@@ -315,6 +315,8 @@ public class BTUtils {
 						+ "BuildTools is made around placing and breaking blocks rather than using commands to "
 						+ "build structures. To enable BuildTools, simply type '/buildtools' or '/bt'. "
 						+ "To disable it again, simply type this command again.\n"
+						+ "Alternatively you can use the BuildTools Menu by typing /btm (/bt m, /buildtools menu). "
+						+ "Here you can change settings and enable or disable BuildTools.\n"
 						+ "By default, you'll have the 'Cuboid' type and 'None' pattern selected, this will "
 						+ "generate a basic cuboid, depending on your selection type, more on these on the next "
 						+ "page. While having BuildTools enabled, you can sneak to be able to place blocks without "
