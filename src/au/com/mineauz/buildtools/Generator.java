@@ -27,6 +27,8 @@ public class Generator implements Runnable{
 	private BTCopy copy;
 	private Chunk curChunk = null;
 	
+	private boolean cancel = false;
+	
 	public Generator(List<Location> locs, BlockState block, BTPlayer player, BuildMode mode, BTUndo undo){
 		this.block = block;
 		this.player = player;
@@ -99,63 +101,65 @@ public class Generator implements Runnable{
 	@Override
 	public void run() {
 		long time = System.nanoTime();
-		if(locs != null){
-			MaterialData data = block.getData();
-			while(locs.hasNext()){
-				Location loc = locs.next();
-				
-				if(curChunk == null || loc.getChunk() != curChunk){
-					if(curChunk != null)
-						BTPlugin.plugin.getGeneratingChunks().removeGeneratingChunk(curChunk);
-					curChunk = loc.getChunk();
-					BTPlugin.plugin.getGeneratingChunks().addGeneratingChunk(curChunk);
-				}
-				
-				BTUtils.placeBlock(player, loc, data, mode, undo);
-				if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
-					return;
-			}
-		}
-		else if(copy != null){
-			while(states.hasNext()){
-				BlockState state = states.next();
-				
-				if(curChunk == null || state.getChunk() != curChunk){
-					if(curChunk != null)
-						BTPlugin.plugin.getGeneratingChunks().removeGeneratingChunk(curChunk);
-					curChunk = state.getChunk();
-					BTPlugin.plugin.getGeneratingChunks().addGeneratingChunk(curChunk);
-				}
-				
-				if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
-					Integer[] lim = BTPlugin.plugin.getPlayerData().getPlayerHightLimits(player);
-					if(state.getLocation().getBlockY() >= lim[0] && state.getLocation().getY() <= lim[1]){
-						BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, undo);
+		if(!cancel){
+			if(locs != null){
+				MaterialData data = block.getData();
+				while(locs.hasNext()){
+					Location loc = locs.next();
+					
+					if(curChunk == null || loc.getChunk() != curChunk){
+						if(curChunk != null)
+							BTPlugin.plugin.getGeneratingChunks().removeGeneratingChunk(curChunk);
+						curChunk = loc.getChunk();
+						BTPlugin.plugin.getGeneratingChunks().addGeneratingChunk(curChunk);
 					}
-				}
-				if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
-					return;
-			}
-		}
-		else{
-			while(states.hasNext()){
-				BlockState state = states.next();
-				
-				if(curChunk == null || state.getChunk() != curChunk){
-					if(curChunk != null)
-						BTPlugin.plugin.getGeneratingChunks().removeGeneratingChunk(curChunk);
-					curChunk = state.getChunk();
-					BTPlugin.plugin.getGeneratingChunks().addGeneratingChunk(curChunk);
-				}
-				
-				if(player != null){
-					BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, nundo);
-
+					
+					BTUtils.placeBlock(player, loc, data, mode, undo);
 					if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
 						return;
 				}
-				else{
-					break;
+			}
+			else if(copy != null){
+				while(states.hasNext()){
+					BlockState state = states.next();
+					
+					if(curChunk == null || state.getChunk() != curChunk){
+						if(curChunk != null)
+							BTPlugin.plugin.getGeneratingChunks().removeGeneratingChunk(curChunk);
+						curChunk = state.getChunk();
+						BTPlugin.plugin.getGeneratingChunks().addGeneratingChunk(curChunk);
+					}
+					
+					if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
+						Integer[] lim = BTPlugin.plugin.getPlayerData().getPlayerHightLimits(player);
+						if(state.getLocation().getBlockY() >= lim[0] && state.getLocation().getY() <= lim[1]){
+							BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, undo);
+						}
+					}
+					if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
+						return;
+				}
+			}
+			else{
+				while(states.hasNext()){
+					BlockState state = states.next();
+					
+					if(curChunk == null || state.getChunk() != curChunk){
+						if(curChunk != null)
+							BTPlugin.plugin.getGeneratingChunks().removeGeneratingChunk(curChunk);
+						curChunk = state.getChunk();
+						BTPlugin.plugin.getGeneratingChunks().addGeneratingChunk(curChunk);
+					}
+					
+					if(player != null){
+						BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, nundo);
+	
+						if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
+							return;
+					}
+					else{
+						break;
+					}
 				}
 			}
 		}
@@ -164,5 +168,10 @@ public class Generator implements Runnable{
 		if(curChunk != null)
 			BTPlugin.plugin.getGeneratingChunks().removeGeneratingChunk(curChunk);
 		task.cancel();
+		player.setGenerator(null);
+	}
+	
+	public void cancelGeneration(){
+		cancel = true;
 	}
 }

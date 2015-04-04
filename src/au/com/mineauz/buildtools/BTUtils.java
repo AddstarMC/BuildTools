@@ -120,7 +120,7 @@ public class BTUtils {
 			}
 			else{
 				player.setCanBuild(false);
-				new Generator(locs, points.get(points.size() - 1).getPoint().getBlock().getState(), player, mode, undo);
+				player.setGenerator(new Generator(locs, points.get(points.size() - 1).getPoint().getBlock().getState(), player, mode, undo));
 			}
 			
 			for(BlockPoint p : player.getPoints()){
@@ -347,6 +347,9 @@ public class BTUtils {
 							+ "For example, the cave type will select blocks that resemble a cave "
 							+ "formation, therefore if you use a fill type, it'll only place new blocks, and not cut out "
 							+ "a cave. However if you use the remove selection type, you will get a cave.";
+		String cancelling = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Canceling a Large Generation:" + ChatColor.RESET
+							+ "You may want to cancel a generation if you find its taking too long or is too large. To do this "
+							+ "use '/bt cancel' and the generation will stop as soon as it can.";
 		String needMoreHelp = ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "Need More Help?\n" + ChatColor.RESET
 							+ "If you want more information on using commands, you can use '/bt help <command name>' and "
 							+ "it will bring up some info on the command you entered. Remember you don't have to use these "
@@ -368,6 +371,9 @@ public class BTUtils {
 			meta.addPage(page);
 		}
 		for(String page : makePages(howItWorks)){
+			meta.addPage(page);
+		}
+		for(String page : makePages(cancelling)){
 			meta.addPage(page);
 		}
 		for(String page : makePages(needMoreHelp)){

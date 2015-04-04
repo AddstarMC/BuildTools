@@ -20,7 +20,6 @@ import au.com.mineauz.buildtools.menu.MenuItem;
 import au.com.mineauz.buildtools.menu.MenuItemBoolean;
 import au.com.mineauz.buildtools.menu.MenuItemBuildType;
 import au.com.mineauz.buildtools.menu.MenuItemHelp;
-import au.com.mineauz.buildtools.menu.MenuItemNewLine;
 import au.com.mineauz.buildtools.menu.MenuItemPatterns;
 import au.com.mineauz.buildtools.menu.MenuItemRotate;
 import au.com.mineauz.buildtools.menu.MenuItemSubMenu;
@@ -42,6 +41,8 @@ public class BTPlayer {
 	private String[] pSettings = new String[0];
 	private boolean canBuild = true;
 	private BTCopy copy = null;
+	
+	private Generator currentGeneration = null;
 	
 	private MenuSession menu = null;
 	private boolean noClose = false;
@@ -332,6 +333,14 @@ public class BTPlayer {
 	
 	public BTCopy getCopy(){
 		return copy;
+	}
+	
+	public void setGenerator(Generator gen){
+		currentGeneration = gen;
+	}
+	
+	public Generator getGenerator(){
+		return currentGeneration;
 	}
 	
 	public MenuSession getMenuSession() {

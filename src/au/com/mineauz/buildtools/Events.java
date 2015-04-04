@@ -40,9 +40,14 @@ public class Events implements Listener{
 			pl.sendMessage("Removed point from selection.", ChatColor.RED);
 		}
 		else if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
-			if(!pl.canBuild()){
+			if(!pl.canBuild() && !pl.hasPoint(event.getBlock().getLocation())){
 				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);
 				event.setCancelled(true);
+				return;
+			}
+			else if(!pl.canBuild() && pl.hasPoint(event.getBlock().getLocation())){
+				pl.sendMessage("Cancelling block generation...", ChatColor.RED);
+				pl.getGenerator().cancelGeneration();
 				return;
 			}
 			
@@ -113,13 +118,18 @@ public class Events implements Listener{
 			pl.removePoint(event.getBlock().getLocation());
 			pl.sendMessage("Removed point from selection.", ChatColor.RED);
 		}
-		else if(pl.isBuildModeActive() && 
-				!pl.getPlayer().isSneaking()){
-			if(!pl.canBuild()){
+		else if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
+			if(!pl.canBuild() && !pl.hasPoint(event.getBlock().getLocation())){
 				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);
 				event.setCancelled(true);
 				return;
 			}
+			else if(!pl.canBuild() && pl.hasPoint(event.getBlock().getLocation())){
+				pl.sendMessage("Cancelling block generation...", ChatColor.RED);
+				pl.getGenerator().cancelGeneration();
+				return;
+			}
+			
 			if(!pdata.getPlayerBlockLimits(pl).contains(Material.AIR) || 
 					pl.hasPermission("buildtools.bypassdisabledblocks")){
 				Integer[] hl = pdata.getPlayerHightLimits(pl);

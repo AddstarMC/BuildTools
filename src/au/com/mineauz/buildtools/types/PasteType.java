@@ -46,7 +46,7 @@ public class PasteType implements BuildType {
 				player.getCopy().setReplacing(true);
 			else
 				player.getCopy().setReplacing(false);
-			new Generator(player.getCopy(), points.get(0).getPoint(), undo);
+			player.setGenerator(new Generator(player.getCopy(), points.get(0).getPoint(), undo));
 			player.sendMessage("Pasting selection from clipboard.", ChatColor.AQUA);
 		}
 		else{

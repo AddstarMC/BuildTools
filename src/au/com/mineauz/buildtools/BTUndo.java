@@ -26,7 +26,7 @@ public class BTUndo {
 		BTUndo undo;
 		undo = new BTUndo(player);
 		player.setCanBuild(false);
-		new Generator(this.clone(), undo);
+		player.setGenerator(new Generator(this.clone(), undo));
 		return undo;
 	}
 	
