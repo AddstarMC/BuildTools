@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTPlugin;
+import au.com.mineauz.buildtools.BTUtils;
 
 public class OnCommand implements ICommand{
 
@@ -56,6 +57,8 @@ public class OnCommand implements ICommand{
 		BTPlayer player = BTPlugin.plugin.getPlayerData().getBTPlayer((Player)sender);
 		player.setBuildModeActive(true);
 		player.sendMessage("Build mode active!", ChatColor.AQUA);
+		player.sendMessage(ChatColor.AQUA + "Mode: " + ChatColor.WHITE + BTUtils.capitalize(player.getType().getName()));
+		player.sendMessage(ChatColor.AQUA + "Pattern: " + ChatColor.WHITE + BTUtils.capitalize(player.getPattern().getName()));
 		return true;
 	}
 
