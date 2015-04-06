@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTPlugin;
+import au.com.mineauz.buildtools.exceptions.UnknownBTPlayerException;
 
 public class MenuListener implements Listener{
 
@@ -130,8 +131,13 @@ public class MenuListener implements Listener{
 		if (!(event.getPlayer() instanceof Player))
 			return;
 		
-		BTPlayer ply = plugin.getPlayerData().getBTPlayer((Player)event.getPlayer());
-		if(ply == null) return;
+		BTPlayer ply;
+		try{
+			ply = plugin.getPlayerData().getBTPlayer((Player)event.getPlayer());
+		}
+		catch (UnknownBTPlayerException e){
+			return;
+		}
 		
 		MenuSession session = ply.getMenuSession();
 		if (session == null) {

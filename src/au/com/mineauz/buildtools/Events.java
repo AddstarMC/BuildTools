@@ -15,12 +15,14 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import au.com.mineauz.buildtools.exceptions.UnknownBTPlayerException;
+
 public class Events implements Listener{
 	
 	private PlayerData pdata = BTPlugin.plugin.getPlayerData();
 	private BTPlugin plugin = BTPlugin.plugin;
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	private void playerLogin(PlayerJoinEvent event){
 		pdata.addBTPlayer(event.getPlayer());
 	}
@@ -32,8 +34,13 @@ public class Events implements Listener{
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void placeBlock(BlockPlaceEvent event){
-		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
-		if(pl == null) return;
+		BTPlayer pl;
+		try{
+			pl = pdata.getBTPlayer(event.getPlayer());
+		}
+		catch (UnknownBTPlayerException e){
+			return;
+		}
 		
 		if(pl.isBuildModeActive() && pl.hasPoint(event.getBlock().getLocation())){
 			pl.removePoint(event.getBlock().getLocation());
@@ -112,8 +119,14 @@ public class Events implements Listener{
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void breakBlock(BlockBreakEvent event){
-		BTPlayer pl = pdata.getBTPlayer(event.getPlayer());
-		if(pl == null) return;
+		BTPlayer pl;
+		try{
+			pl = pdata.getBTPlayer(event.getPlayer());
+		}
+		catch (UnknownBTPlayerException e){
+			return;
+		}
+		
 		if(pl.isBuildModeActive() && pl.hasPoint(event.getBlock().getLocation())){
 			pl.removePoint(event.getBlock().getLocation());
 			pl.sendMessage("Removed point from selection.", ChatColor.RED);
@@ -191,19 +204,31 @@ public class Events implements Listener{
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void gamemodeChange(PlayerGameModeChangeEvent event){
-		BTPlayer ply = pdata.getBTPlayer(event.getPlayer());
-		if(ply != null){
-			if(event.getNewGameMode() != GameMode.CREATIVE && ply.isBuildModeActive()){
-				ply.setBuildModeActive(false);
-				ply.sendMessage("Build mode deactivated.", ChatColor.RED);
-			}
+		BTPlayer ply;
+		try{
+			ply = pdata.getBTPlayer(event.getPlayer());
+		}
+		catch (UnknownBTPlayerException e){
+			return;
+		}
+		
+		if(event.getNewGameMode() != GameMode.CREATIVE && ply.isBuildModeActive()){
+			ply.setBuildModeActive(false);
+			ply.sendMessage("Build mode deactivated.", ChatColor.RED);
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	private void worldChange(PlayerChangedWorldEvent event){
-		BTPlayer ply = pdata.getBTPlayer(event.getPlayer());
-		if(ply != null && ply.isBuildModeActive()){
+		BTPlayer ply;
+		try{
+			ply = pdata.getBTPlayer(event.getPlayer());
+		}
+		catch (UnknownBTPlayerException e){
+			return;
+		}
+		
+		if(ply.isBuildModeActive()){
 			ply.setBuildModeActive(false);
 			ply.sendMessage("Build mode deactivated.", ChatColor.RED);
 		}
