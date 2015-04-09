@@ -163,7 +163,7 @@ public class MenuListener implements Listener{
 		session.current.onCloseMenu(ply);
 	}
 	
-	@EventHandler(priority=EventPriority.MONITOR)
+	@EventHandler
 	private void onManualItemEntry(AsyncPlayerChatEvent event){
 		BTPlayer ply = plugin.getPlayerData().getBTPlayer(event.getPlayer());
 		
