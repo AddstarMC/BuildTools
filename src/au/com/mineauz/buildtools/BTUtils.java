@@ -105,8 +105,8 @@ public class BTUtils {
 			player.sendMessage("You are currently generating something else, please wait...", ChatColor.AQUA);
 			return;
 		}
-		if(player.getPoint(0).getMode() == BuildMode.BREAK && 
-				player.getPoint(player.getPointCount() - 1).getMode() == BuildMode.PLACE){
+		if(points.get(0).getMode() == BuildMode.BREAK && 
+				points.get(points.size() - 1).getMode() == BuildMode.PLACE){
 			mode = BuildMode.REPLACE;
 		}
 		
@@ -123,7 +123,7 @@ public class BTUtils {
 				player.setGenerator(new Generator(locs, points.get(points.size() - 1).getPoint().getBlock().getState(), player, mode, undo));
 			}
 			
-			for(BlockPoint p : player.getPoints()){
+			for(BlockPoint p : points){
 				undo.addBlock(p.getPreviousState());
 			}
 			

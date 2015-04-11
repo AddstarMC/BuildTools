@@ -1,5 +1,8 @@
 package au.com.mineauz.buildtools;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -16,6 +19,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import au.com.mineauz.buildtools.exceptions.UnknownBTPlayerException;
+import au.com.mineauz.buildtools.patterns.BuildPattern;
+import au.com.mineauz.buildtools.types.BuildType;
 
 public class Events implements Listener{
 	
@@ -74,11 +79,14 @@ public class Events implements Listener{
 							vol = BTUtils.getVolume(pl.getPoint(0).getPoint(), pl.getPoint(1).getPoint());
 						if(vol == -1 || vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
 							final BTPlayer fpl = pl;
+							final List<BlockPoint> fpoints = new ArrayList<BlockPoint>(pl.getPoints());
+							final BuildPattern fpattern = pl.getPattern();
+							final BuildType ftype = pl.getType();
 							Bukkit.getScheduler().scheduleSyncDelayedTask(BTPlugin.plugin, new Runnable() {
 								
 								@Override
 								public void run() {
-									BTUtils.generateBlocks(fpl, fpl.getType(), fpl.getPattern(), fpl.getPoints(), BuildMode.PLACE);
+									BTUtils.generateBlocks(fpl, ftype, fpattern, fpoints, BuildMode.PLACE);
 									fpl.clearPoints();
 								}
 							});
@@ -159,11 +167,14 @@ public class Events implements Listener{
 							vol = BTUtils.getVolume(pl.getPoint(0).getPoint(), pl.getPoint(1).getPoint());
 						if(vol == -1 || vol <= volLimit || pl.hasPermission("buildtools.bypassvolumelimit")){
 							final BTPlayer fpl = pl;
+							final List<BlockPoint> fpoints = new ArrayList<BlockPoint>(pl.getPoints());
+							final BuildPattern fpattern = pl.getPattern();
+							final BuildType ftype = pl.getType();
 							Bukkit.getScheduler().scheduleSyncDelayedTask(BTPlugin.plugin, new Runnable() {
 								
 								@Override
 								public void run() {
-									BTUtils.generateBlocks(fpl, fpl.getType(), fpl.getPattern(), fpl.getPoints(), BuildMode.BREAK);
+									BTUtils.generateBlocks(fpl, ftype, fpattern, fpoints, BuildMode.BREAK);
 									fpl.clearPoints();
 								}
 							});
