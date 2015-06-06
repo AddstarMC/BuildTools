@@ -1,10 +1,8 @@
 package au.com.mineauz.buildtools.protection;
 
-import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class GPPlugin implements ProtectionPlugin {
@@ -22,10 +20,10 @@ public class GPPlugin implements ProtectionPlugin {
 
 	@Override
 	public boolean canBuild(Player player, Location location) {
-		Claim claim = plugin.dataStore.getClaimAt(location, false, null);
-		if(claim == null) return true;
-		String msg = claim.allowBuild(player, Material.STONE);
-		if(msg == null) return true;
+		if(plugin.allowBuild(player, location) == null && 
+				plugin.allowBreak(player, location.getBlock(), location) == null){
+			return true;
+		}
 		return false;
 	}
 
