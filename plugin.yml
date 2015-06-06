@@ -37,6 +37,7 @@ permissions:
       buildtools.command.heightlimit: true
       buildtools.command.blocklimit: true
       buildtools.command.menu: true
+      buildtools.command.protectionoverride: true
   buildtools.command.basic:
     description: Basic command permissions for players.
     children:
@@ -66,6 +67,8 @@ permissions:
   buildtools.command.blocklimit:
     default: op
   buildtools.command.menu:
+    default: op
+  buildtools.command.protectionoverride:
     default: op
   
   buildtools.bypasslimits:

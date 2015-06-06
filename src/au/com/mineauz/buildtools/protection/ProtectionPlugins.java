@@ -40,6 +40,8 @@ public class ProtectionPlugins {
 	
 	public boolean canBuild(BTPlayer player, Location location){
 		boolean canBuild = true;
+		if(player.hasProtectionOverride()) return true;
+		
 		for(ProtectionPlugin plugin : pp.values()){
 			if(!plugin.canBuild(player.getPlayer(), location)){
 				canBuild = false;

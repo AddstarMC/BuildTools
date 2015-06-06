@@ -41,6 +41,7 @@ public class BTPlayer {
 	private String[] pSettings = new String[0];
 	private boolean canBuild = true;
 	private BTCopy copy = null;
+	private boolean protectionOverride = false;
 	
 	private Generator currentGeneration = null;
 	
@@ -471,6 +472,18 @@ public class BTPlayer {
 		m.setControlItem(new MenuItemHelp(), 4);
 		
 		m.displayMenu(this);
+	}
+	
+	public boolean hasProtectionOverride(){
+		return protectionOverride;
+	}
+	
+	public boolean toggleProtectionOverride(){
+		if(protectionOverride)
+			protectionOverride = false;
+		else
+			protectionOverride = true;
+		return protectionOverride;
 	}
 	
 	
