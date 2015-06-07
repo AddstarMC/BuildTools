@@ -108,6 +108,7 @@ public class BTUtils {
 		if(points.get(0).getMode() == BuildMode.BREAK && 
 				points.get(points.size() - 1).getMode() == BuildMode.PLACE){
 			mode = BuildMode.REPLACE;
+			points.get(0).getPreviousState().update(true);
 		}
 		
 		List<Location> locs = selection.execute(player, mode, points, pattern, player.getTSettings(), player.getPSettings());
