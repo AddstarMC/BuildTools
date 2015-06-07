@@ -95,6 +95,7 @@ permissions:
       buildtools.type.sphere: true
       buildtools.type.terrain: true
       buildtools.type.terrain_blob: true
+      buildtools.type.measure: true
   buildtools.type.cave:
     default: true
   buildtools.type.copy:
@@ -112,6 +113,8 @@ permissions:
   buildtools.type.terrain:
     default: true
   buildtools.type.terrain_blob:
+    default: true
+  buildtools.type.measure:
     default: true
     
   buildtools.pattern.*:
