@@ -42,6 +42,7 @@ public class BTPlayer {
 	private boolean canBuild = true;
 	private BTCopy copy = null;
 	private boolean protectionOverride = false;
+	private boolean sneakInverted = false;
 	
 	private Generator currentGeneration = null;
 	
@@ -470,6 +471,12 @@ public class BTPlayer {
 		m.insertItem(new MenuItemRotate(-90), 9*5-6, 0);
 		m.insertItem(new MenuItemRotate(-180), 9*5-7, 0);
 		m.setControlItem(new MenuItemHelp(), 4);
+		MenuItemBoolean snki = new MenuItemBoolean("Sneak Inversion", Material.EYE_OF_ENDER, getSneakInversionCallback());
+		snki.setDescription(BTUtils.wordWrap("Inverts sneaking mode on BuildTools. By default, "
+				+ "sneaking will stop BuildTools from working, if this "
+				+ "is toggled, it will only work while sneaking."));
+		m.setControlItem(snki, 3);
+		
 		
 		m.displayMenu(this);
 	}
@@ -486,5 +493,34 @@ public class BTPlayer {
 		return protectionOverride;
 	}
 	
+	public boolean hasSneakInverted(){
+		return sneakInverted;
+	}
 	
+	public boolean toggleSneakInversion(){
+		sneakInverted = !sneakInverted;
+		return sneakInverted;
+	}
+	
+	public Callback<Boolean> getSneakInversionCallback(){
+		return new Callback<Boolean>() {
+
+			@Override
+			public void setValue(Boolean value) {
+				sneakInverted = value;
+			}
+
+			@Override
+			public Boolean getValue() {
+				return sneakInverted;
+			}
+		};
+	}
+	
+	public boolean canPlacePoint(){
+		if((!hasSneakInverted() && player.isSneaking()) || 
+				(hasSneakInverted() && !player.isSneaking()))
+			return false;
+		return true;
+	}
 }

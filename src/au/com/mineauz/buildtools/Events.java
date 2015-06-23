@@ -51,7 +51,7 @@ public class Events implements Listener{
 			pl.removePoint(event.getBlock().getLocation());
 			pl.sendMessage("Removed point from selection.", ChatColor.RED);
 		}
-		else if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
+		else if(pl.isBuildModeActive() && pl.canPlacePoint()){
 			if(!pl.canBuild() && !pl.hasPoint(event.getBlock().getLocation())){
 				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);
 				event.setCancelled(true);
@@ -139,7 +139,7 @@ public class Events implements Listener{
 			pl.removePoint(event.getBlock().getLocation());
 			pl.sendMessage("Removed point from selection.", ChatColor.RED);
 		}
-		else if(pl.isBuildModeActive() && !pl.getPlayer().isSneaking()){
+		else if(pl.isBuildModeActive() && pl.canPlacePoint()){
 			if(!pl.canBuild() && !pl.hasPoint(event.getBlock().getLocation())){
 				pl.sendMessage("Still generating, please wait...", ChatColor.AQUA);
 				event.setCancelled(true);

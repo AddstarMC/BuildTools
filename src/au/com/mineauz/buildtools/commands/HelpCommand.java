@@ -97,6 +97,8 @@ public class HelpCommand implements ICommand {
 				ply.sendMessage(ChatColor.GRAY + "Rotates the last copy on your clipboard. (/bt cr)");
 				ply.sendMessage(ChatColor.AQUA + "/buildtools cancel");
 				ply.sendMessage(ChatColor.GRAY + "Cancels the blocks you're currently generating (/bt cnl, /bt c)");
+				ply.sendMessage(ChatColor.AQUA + "/buildtools invertsneak");
+				ply.sendMessage(ChatColor.GRAY + "Inverts sneak toggle for placing blocks.");
 				ply.sendMessage(ChatColor.LIGHT_PURPLE + "------------------------------------");
 			}
 			else{
