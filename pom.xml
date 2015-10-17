@@ -54,9 +54,14 @@
     <dependency>
     	<groupId>org.bukkit</groupId>
     	<artifactId>bukkit</artifactId>
-    	<version>1.8.7-R0.1-SNAPSHOT</version>
+    	<version>1.8.8-R0.1-SNAPSHOT</version>
+    	<exclusions>
+    		<exclusion>
+    			<artifactId>junit</artifactId>
+    			<groupId>junit</groupId>
+    		</exclusion>
+    	</exclusions>
     </dependency>
-	
 	
     <dependency>
     	<groupId>com.worldcretornica</groupId>
@@ -78,6 +83,46 @@
     </dependency>
     
     <dependency>
+      <groupId>com.intellectualcrafters</groupId>
+      <artifactId>PlotSquared</artifactId>
+      <version>3.2.9</version>
+      <exclusions>
+      	<exclusion>
+      		<artifactId>spongeapi</artifactId>
+      		<groupId>org.spongepowered</groupId>
+      	</exclusion>
+      	<exclusion>
+      		<artifactId>junit</artifactId>
+      		<groupId>junit</groupId>
+      	</exclusion>
+        <exclusion>
+          <groupId>org.bukkit</groupId>
+          <artifactId>bukkit</artifactId>
+        </exclusion>
+      	<exclusion>
+      		<artifactId>BarAPI</artifactId>
+      		<groupId>me.confuser</groupId>
+      	</exclusion>
+      	<exclusion>
+        	<artifactId>worldedit</artifactId>
+        	<groupId>com.sk89q</groupId>
+        </exclusion>
+        <exclusion>
+    		<artifactId>gson</artifactId>
+    		<groupId>com.google.code.gson</groupId>
+    	</exclusion>
+    	<exclusion>
+        	<artifactId>commons-math3</artifactId>
+        	<groupId>org.apache.commons</groupId>
+        </exclusion>
+        <exclusion>
+    		<artifactId>javax.websocket-api</artifactId>
+    		<groupId>javax.websocket</groupId>
+    	</exclusion>
+      </exclusions>
+    </dependency>
+    
+    <dependency>
       <groupId>com.sk89q</groupId>
       <artifactId>worldguard</artifactId>
       <version>6.0.0-SNAPSHOT</version>
@@ -93,6 +138,26 @@
         <exclusion>
           <groupId>org.bukkit</groupId>
           <artifactId>craftbukkit</artifactId>
+        </exclusion>
+        <exclusion>
+        	<artifactId>bukkit-classloader-check</artifactId>
+        	<groupId>com.sk89q.spigot</groupId>
+        </exclusion>
+        <exclusion>
+        	<artifactId>truezip</artifactId>
+        	<groupId>de.schlichtherle</groupId>
+        </exclusion>
+        <exclusion>
+        	<artifactId>js</artifactId>
+        	<groupId>rhino</groupId>
+        </exclusion>
+        <exclusion>
+        	<artifactId>jchronic</artifactId>
+        	<groupId>com.sk89q</groupId>
+        </exclusion>
+        <exclusion>
+        	<artifactId>jsr305</artifactId>
+        	<groupId>com.google.code.findbugs</groupId>
         </exclusion>
       </exclusions>
     </dependency>

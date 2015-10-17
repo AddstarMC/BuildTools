@@ -17,6 +17,7 @@ import au.com.mineauz.buildtools.menu.MenuListener;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
 import au.com.mineauz.buildtools.protection.GPPlugin;
 import au.com.mineauz.buildtools.protection.PMPlugin;
+import au.com.mineauz.buildtools.protection.PSPlugin;
 import au.com.mineauz.buildtools.protection.ProtectionPlugins;
 import au.com.mineauz.buildtools.protection.WGPlugin;
 import au.com.mineauz.buildtools.types.BuildTypes;
@@ -82,6 +83,11 @@ public class BTPlugin extends JavaPlugin{
 			pplugins.addProtectionPlugin(new PMPlugin());
 			if(isDebugging())
 				getLogger().info("PlotMe protection enabled.");
+		}
+		if(plugin.getServer().getPluginManager().isPluginEnabled("PlotSquared")){
+			pplugins.addProtectionPlugin(new PSPlugin());
+			if(isDebugging())
+				getLogger().info("PlotSquared protection enabled.");
 		}
 		
 		types = new BuildTypes();
