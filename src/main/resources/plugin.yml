@@ -1,0 +1,136 @@
+name: ${project.name}
+main: ${mainClass}
+version: ${plugin.version}
+author: _Razz_
+softdepend: [GriefPrevention, WorldGuard, PlotMe]
+
+commands:
+  buildtools:
+    description: The BuildTools base command.
+    usage: Invalid command. Type "/buildtools help" for help
+    permission: buildtools.command
+    permisison-message: You don't have permission to use this command <permission>
+    aliases: [bt, btm]
+
+permissions:
+  buildtools.command:
+    description: Allows a player to use the base command.
+    default: op
+  
+  buildtools.*:
+    children:
+      buildtools.command.*: true
+      buildtools.bypasslimits: true
+      buildtools.type.*: true
+      buildtools.pattern.*: true
+  
+  buildtools.command.*:
+    children:
+      buildtools.command: true
+      buildtools.command.debug: true
+      buildtools.command.pattern: true
+      buildtools.command.undo: true
+      buildtools.command.redo: true
+      buildtools.command.type: true
+      buildtools.command.help: true
+      buildtools.command.volumelimit: true
+      buildtools.command.heightlimit: true
+      buildtools.command.blocklimit: true
+      buildtools.command.menu: true
+      buildtools.command.protectionoverride: true
+  buildtools.command.basic:
+    description: Basic command permissions for players.
+    children:
+      buildtools.command: true
+      buildtools.command.pattern: true
+      buildtools.command.undo: true
+      buildtools.command.redo: true
+      buildtools.command.type: true
+      buildtools.command.help: true
+      buildtools.command.menu: true
+  buildtools.command.debug:
+    default: op
+  buildtools.command.pattern:
+    default: op
+  buildtools.command.undo:
+    default: op
+  buildtools.command.redo:
+    default: op
+  buildtools.command.type:
+    default: op
+  buildtools.command.help:
+    default: op
+  buildtools.command.volumelimit:
+    default: op
+  buildtools.command.heightlimit:
+    default: op
+  buildtools.command.blocklimit:
+    default: op
+  buildtools.command.menu:
+    default: op
+  buildtools.command.protectionoverride:
+    default: op
+  
+  buildtools.bypasslimits:
+    description: Allows a player to bypass all limits.
+    children:
+      buildtools.bypassheightlimit: true
+      buildtools.bypassvolumelimit: true
+      buildtools.bypassdisabledblocks: true
+  buildtools.bypassheightlimit:
+    default: op
+  buildtools.bypassvolumelimit:
+    default: false
+  buildtools.bypassdisabledblocks:
+    default: false
+  
+  buildtools.type.*:
+    children:
+      buildtools.type.cave: true
+      buildtools.type.copy: true
+      buildtools.type.cuboid: true
+      buildtools.type.cylinder: true
+      buildtools.type.overlay: true
+      buildtools.type.paste: true
+      buildtools.type.sphere: true
+      buildtools.type.terrain: true
+      buildtools.type.terrain_blob: true
+      buildtools.type.measure: true
+  buildtools.type.cave:
+    default: true
+  buildtools.type.copy:
+    default: true
+  buildtools.type.cuboid:
+    default: true
+  buildtools.type.cylinder:
+    default: true
+  buildtools.type.overlay:
+    default: true
+  buildtools.type.paste:
+    default: true
+  buildtools.type.sphere:
+    default: true
+  buildtools.type.terrain:
+    default: true
+  buildtools.type.terrain_blob:
+    default: true
+  buildtools.type.measure:
+    default: true
+    
+  buildtools.pattern.*:
+    children:
+      buildtools.pattern.frame: true
+      buildtools.pattern.hollow: true
+      buildtools.pattern.none: true
+      buildtools.pattern.random: true
+      buildtools.pattern.wall: true
+  buildtools.pattern.frame:
+    default: true
+  buildtools.pattern.hollow:
+    default: true
+  buildtools.pattern.none:
+    default: true
+  buildtools.pattern.random:
+    default: true
+  buildtools.pattern.wall:
+    default: true
