@@ -86,14 +86,12 @@
             <id>maven-central</id>
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
-
-        <!-- PlotMe Repo -->
+        <!--GriefPrevention -->
         <repository>
-            <id>worldcretornica</id>
-            <url>http://ci.worldcretornica.com/plugin/repository/everything/</url>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
         </repository>
     </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -117,12 +115,11 @@
 
         <!-- GriefPrevention -->
         <dependency>
-            <groupId>me.ryanhamshire</groupId>
+            <groupId>com.github.TechFortress</groupId>
             <artifactId>griefprevention</artifactId>
-            <version>14.6</version>
+            <version>16.8</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.intellectualcrafters</groupId>
             <artifactId>PlotSquared</artifactId>
