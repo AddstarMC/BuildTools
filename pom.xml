@@ -101,19 +101,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.worldcretornica</groupId>
-            <artifactId>PlotMe-Core</artifactId>
-            <version>0.16.3</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.mcstats.bukkit</groupId>
-                    <artifactId>metrics</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
         <!-- GriefPrevention -->
         <dependency>
             <groupId>com.github.TechFortress</groupId>
