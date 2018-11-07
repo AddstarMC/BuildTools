@@ -16,7 +16,6 @@ import au.com.mineauz.buildtools.commands.CommandDispatcher;
 import au.com.mineauz.buildtools.menu.MenuListener;
 import au.com.mineauz.buildtools.patterns.BuildPatterns;
 import au.com.mineauz.buildtools.protection.GPPlugin;
-import au.com.mineauz.buildtools.protection.PMPlugin;
 import au.com.mineauz.buildtools.protection.PSPlugin;
 import au.com.mineauz.buildtools.protection.ProtectionPlugins;
 import au.com.mineauz.buildtools.protection.WGPlugin;
@@ -76,11 +75,6 @@ public class BTPlugin extends JavaPlugin{
 			pplugins.addProtectionPlugin(new GPPlugin((GriefPrevention) plugin.getServer().getPluginManager().getPlugin("GriefPrevention")));
 			if(isDebugging())
 				getLogger().info("GriefPrevention protection enabled.");
-		}
-		if(plugin.getServer().getPluginManager().isPluginEnabled("PlotMe")){
-			pplugins.addProtectionPlugin(new PMPlugin());
-			if(isDebugging())
-				getLogger().info("PlotMe protection enabled.");
 		}
 		if(plugin.getServer().getPluginManager().isPluginEnabled("PlotSquared")){
 			pplugins.addProtectionPlugin(new PSPlugin());
