@@ -53,12 +53,11 @@ public class FramePattern implements BuildPattern {
 			int x = block.getBlockX();
 			int y = block.getBlockY();
 			int z = block.getBlockZ();
-			
-			if(((z == minz || z == maxz) && (x == minx || x == maxx) && (y == miny || y == maxy)) ||
-					((x == minx || x == maxx) && (y == miny || y == maxy)) ||
-					((z == minz || z == maxz) && (y == miny || y == maxy)) || 
-					((z == minz || z == maxz) && (x == minx || x == maxx)))
-				return true;
+            
+            return ((z == minz || z == maxz) && (x == minx || x == maxx) && (y == miny || y == maxy)) ||
+                    ((x == minx || x == maxx) && (y == miny || y == maxy)) ||
+                    ((z == minz || z == maxz) && (y == miny || y == maxy)) ||
+                    ((z == minz || z == maxz) && (x == minx || x == maxx));
 		}
 		else if(player.getType() == BTPlugin.plugin.getBuildTypes().getType("SPHERE")){
 			double rad = Double.valueOf(settings[settings.length - 1]);
@@ -68,11 +67,10 @@ public class FramePattern implements BuildPattern {
 						Math.pow(block.getZ() - points.get(0).getPoint().getZ(), 2);
 			double r = Math.pow(rad, 2);
 			double r2 = Math.pow(rad2, 2);
-			if(((m < r && m > r2) || m == Math.ceil(r2)) &&
-					(block.getBlockX() == points.get(0).getPoint().getBlockX() || 
-					block.getBlockY() == points.get(0).getPoint().getBlockY() ||
-					block.getBlockZ() == points.get(0).getPoint().getBlockZ()))
-				return true;
+            return ((m < r && m > r2) || m == Math.ceil(r2)) &&
+                    (block.getBlockX() == points.get(0).getPoint().getBlockX() ||
+                            block.getBlockY() == points.get(0).getPoint().getBlockY() ||
+                            block.getBlockZ() == points.get(0).getPoint().getBlockZ());
 		}
 		return false;
 	}

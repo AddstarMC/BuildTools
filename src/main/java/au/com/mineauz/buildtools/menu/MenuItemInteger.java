@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.BTPlayer;
 
@@ -13,11 +12,6 @@ public class MenuItemInteger extends MenuItemValue<Integer> {
 	private int min;
 	private int max;
 	
-	public MenuItemInteger(String name, MaterialData displayItem, Callback<Integer> callback, int min, int max) {
-		super(name, displayItem, callback);
-		this.min = min;
-		this.max = max;
-	}
 	public MenuItemInteger(String name, String description, Material displayItem, Callback<Integer> callback, int min, int max) {
 		super(name, description, displayItem, callback);
 		this.min = min;
@@ -25,11 +19,6 @@ public class MenuItemInteger extends MenuItemValue<Integer> {
 	}
 	public MenuItemInteger(String name, Material displayItem, Callback<Integer> callback, int min, int max) {
 		super(name, null, displayItem, callback);
-		this.min = min;
-		this.max = max;
-	}
-	public MenuItemInteger(String name, String description, MaterialData displayItem, Callback<Integer> callback, int min, int max) {
-		super(name, description, displayItem, callback);
 		this.min = min;
 		this.max = max;
 	}

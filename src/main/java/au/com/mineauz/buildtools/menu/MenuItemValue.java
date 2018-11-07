@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.BTPlayer;
 
@@ -24,12 +23,6 @@ public abstract class MenuItemValue<T> extends MenuItem {
 	private final Callback<T> valueCallback;
 	private List<String> baseDescription;
 	
-	public MenuItemValue(String name, MaterialData displayItem, Callback<T> callback) {
-		super(name, displayItem);
-		baseDescription = Collections.emptyList();
-		valueCallback = callback;
-		updateDescription();
-	}
 	public MenuItemValue(String name, String description, Material displayItem, Callback<T> callback) {
 		super(name, description, displayItem);
 		baseDescription = getDescription();
@@ -42,12 +35,7 @@ public abstract class MenuItemValue<T> extends MenuItem {
 		valueCallback = callback;
 		updateDescription();
 	}
-	public MenuItemValue(String name, String description, MaterialData displayItem, Callback<T> callback) {
-		super(name, description, displayItem);
-		baseDescription = getDescription();
-		valueCallback = callback;
-		updateDescription();
-	}
+
 	
 	/**
 	 * This rebuilds the description of this MenuItemValue and applies it

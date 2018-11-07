@@ -228,8 +228,7 @@ public class BTPlayer {
 	public boolean hasItem(ItemStack item){
 		if(item == null) return false;
 		for(ItemStack i : player.getInventory().getContents()){
-			if(i != null && i.getType() == item.getType() &&
-					i.getDurability() == item.getDurability()){
+			if(i != null && i.getType() == item.getType()){
 				return true;
 			}
 		}
@@ -240,8 +239,7 @@ public class BTPlayer {
 		if(item == null) return;
 		ItemStack toClear = null;
 		for(ItemStack i : player.getInventory().getContents()){
-			if(i != null && i.getType() == item.getType() &&
-					i.getDurability() == item.getDurability()){
+			if(i != null && i.getType() == item.getType()){
 				if(i.getAmount() > 1)
 					i.setAmount(i.getAmount() - 1);
 				else
@@ -463,7 +461,7 @@ public class BTPlayer {
 		m.insertItem(new MenuItemRotate(-90), 9*5-6, 0);
 		m.insertItem(new MenuItemRotate(-180), 9*5-7, 0);
 		m.setControlItem(new MenuItemHelp(), 4);
-		MenuItemBoolean snki = new MenuItemBoolean("Sneak Inversion", Material.EYE_OF_ENDER, getSneakInversionCallback());
+		MenuItemBoolean snki = new MenuItemBoolean("Sneak Inversion", Material.ENDER_EYE, getSneakInversionCallback());
 		snki.setDescription(BTUtils.wordWrap("Inverts sneaking mode on BuildTools. By default, "
 				+ "sneaking will stop BuildTools from working, if this "
 				+ "is toggled, it will only work while sneaking."));

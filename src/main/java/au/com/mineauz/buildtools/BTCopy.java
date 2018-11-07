@@ -3,21 +3,21 @@ package au.com.mineauz.buildtools;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.block.data.BlockData;
 import org.bukkit.material.Directional;
-import org.bukkit.material.MaterialData;
 
 public class BTCopy {
-	private Map<String, MaterialData> materials = new HashMap<>();
+	private Map<String, BlockData> materials = new HashMap<>();
 	private boolean replacing = false;
 	
-	public void addState(IVector vec, MaterialData data){
+	public void addState(IVector vec, BlockData data){
 		if(!materials.containsKey(vec.toString())){
-			materials.put(vec.toString(), data.clone());
+			materials.put(vec.toString(), data);
 		}
 	}
 	
-	public Map<IVector, MaterialData> getMaterials(){
-		Map<IVector, MaterialData> mats = new HashMap<>();
+	public Map<IVector, BlockData> getMaterials(){
+		Map<IVector, BlockData> mats = new HashMap<>();
 		for(String v : materials.keySet()){
 			mats.put(IVector.fromString(v), materials.get(v));
 		}
@@ -37,7 +37,7 @@ public class BTCopy {
 			for(String s : materials.keySet()){
 				if(materials.get(s) instanceof Directional){
 					Directional d = (Directional)materials.get(s);
-					if(materials.get(s).getItemType().toString().contains("STAIRS"))
+					if(materials.get(s).getMaterial().toString().contains("STAIRS"))
 						d.setFacingDirection(BTUtils.rotate(d.getFacing(), angle * -1));
 					else
 						d.setFacingDirection(BTUtils.rotate(d.getFacing(), angle));
@@ -45,7 +45,7 @@ public class BTCopy {
 			}
 			
 			if(angle == 90 || angle == -270){
-				Map<String, MaterialData> dat = new HashMap<>();
+				Map<String, BlockData> dat = new HashMap<>();
 				for(String s :materials.keySet()){
 					IVector vec = IVector.fromString(s);
 					int x = vec.getX();
@@ -73,7 +73,7 @@ public class BTCopy {
 				materials = dat;
 			}
 			else if(angle == 180 || angle == -180){
-				Map<String, MaterialData> dat = new HashMap<>();
+				Map<String, BlockData> dat = new HashMap<>();
 				for(String s :materials.keySet()){
 					IVector vec = IVector.fromString(s);
 					int x = vec.getX() * -1;
@@ -85,7 +85,7 @@ public class BTCopy {
 				materials = dat;
 			}
 			else if(angle == 270 || angle == -90){
-				Map<String, MaterialData> dat = new HashMap<>();
+				Map<String, BlockData> dat = new HashMap<>();
 				for(String s :materials.keySet()){
 					IVector vec = IVector.fromString(s);
 					int x = vec.getX();

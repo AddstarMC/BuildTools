@@ -9,7 +9,7 @@ public class MenuItemUndo extends MenuItem{
 	private Type type;
 
 	public MenuItemUndo(Type t) {
-		super("Undo", Material.EYE_OF_ENDER);
+		super("Undo", Material.ENDER_EYE);
 		type = t;
 		if(t == Type.REDO)
 			setName("Redo");

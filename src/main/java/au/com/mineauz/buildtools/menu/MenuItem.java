@@ -8,7 +8,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.BTPlayer;
 import au.com.mineauz.buildtools.BTUtils;
@@ -29,24 +28,17 @@ public class MenuItem {
 	private IMenuItemClickItem clickItemCallback;
 	
 	public MenuItem(String name, Material displayItem){
-		this(name, null, (displayItem == null ? null : displayItem.getNewData((byte)0)));
-	}
-	
-	public MenuItem(String name, MaterialData displayItem) {
 		this(name, null, displayItem);
 	}
 	
-	public MenuItem(String name, String description, Material displayItem){
-		this(name, description, (displayItem == null ? null : displayItem.getNewData((byte)0)));
-	}
 	
-	public MenuItem(String name, String description, MaterialData displayItem) {
+	public MenuItem(String name, String description, Material displayItem) {
 		Validate.notNull(name);
 		if(displayItem == null) {
-			displayItem = Material.STAINED_GLASS_PANE.getNewData((byte)14);
+			displayItem = Material.RED_STAINED_GLASS_PANE;
 		}
 		
-		ItemStack display = displayItem.toItemStack(1);
+		ItemStack display = new ItemStack(displayItem,1);
 		ItemMeta meta = display.getItemMeta();
 		meta.setDisplayName(ChatColor.RESET + name);
 		if (description != null) {
@@ -60,31 +52,16 @@ public class MenuItem {
 	/**
 	 * Set the icon for this MenuItem.<br>
 	 * If this MenuItem is already added to a menu and that menu is visible, you must call {@link Menu#refresh()} or {@link Menu#refreshLater()} to show this change
-	 * @param material The material to use. Most materials work however some materials do not have an item form (eg. AIR, DOUBLE_STEP, and more) and cannot be used
-	 * @return This MenuItem for chaining
-	 */
-	public MenuItem setIcon(Material material) {
-		if (material != null) {
-			setIcon(material.getNewData((byte)0));
-		} else {
-			setIcon((MaterialData)null);
-		}
-		return this;
-	}
-	
-	/**
-	 * Set the icon for this MenuItem.<br>
-	 * If this MenuItem is already added to a menu and that menu is visible, you must call {@link Menu#refresh()} or {@link Menu#refreshLater()} to show this change
 	 * @param material The material to use with data value. Most materials work however some materials do not have an item form (eg. AIR, DOUBLE_STEP, and more) and cannot be used
 	 * @return This MenuItem for chaining
 	 */
-	public MenuItem setIcon(MaterialData material) {
+	public MenuItem setIcon(Material material) {
 		if(material == null) {
-			material = Material.STAINED_GLASS_PANE.getNewData((byte)14);
+			material = Material.RED_STAINED_GLASS_PANE;
 		}
 		
 		ItemMeta oldMeta = displayItem.getItemMeta();
-		ItemStack display = material.toItemStack(1);
+		ItemStack display = new ItemStack(material,1);
 		display.setItemMeta(oldMeta);
 		
 		this.displayItem = display;

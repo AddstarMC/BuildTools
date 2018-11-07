@@ -1,13 +1,12 @@
 package au.com.mineauz.buildtools.menu;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
+import com.google.common.collect.Iterators;
 import org.apache.commons.lang.Validate;
 import org.bukkit.inventory.ItemStack;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterators;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class MenuPageNormal extends MenuPage implements Iterable<MenuItem> {
 	private MenuItem[] slots;
@@ -139,6 +138,6 @@ public class MenuPageNormal extends MenuPage implements Iterable<MenuItem> {
 	
 	@Override
 	public Iterator<MenuItem> iterator() {
-		return Iterators.filter(Iterators.forArray(slots), Predicates.notNull());
+		return Iterators.filter(Iterators.forArray(slots), Objects::nonNull);
 	}
 }

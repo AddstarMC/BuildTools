@@ -8,7 +8,7 @@ public class MenuItemBack extends MenuItem{
 	private MenuSession previous;
 	
 	public MenuItemBack(MenuSession previous) {
-		super("Back", Material.REDSTONE_TORCH_ON);
+		super("Back", Material.REDSTONE_TORCH);
 		this.previous = previous;
 	}
 	

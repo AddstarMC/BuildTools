@@ -11,7 +11,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
-import org.bukkit.material.MaterialData;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.scheduler.BukkitTask;
 
 public class Generator implements Runnable{
@@ -64,15 +64,14 @@ public class Generator implements Runnable{
 		player = undo.getPlayer();
 		
 		Location temp = reference.clone();
-		Map<IVector, MaterialData> data = copy.getMaterials();
+		Map<IVector, BlockData> data = copy.getMaterials();
 		List<BlockState> states = new ArrayList<>();
 		for(IVector vec : data.keySet()){
 			temp.setX(reference.getX() + vec.getX());
 			temp.setY(reference.getY() + vec.getY());
 			temp.setZ(reference.getZ() + vec.getZ());
 			BlockState state = temp.getBlock().getState();
-			state.setType(data.get(vec).getItemType());
-			state.setData(data.get(vec));
+			state.setBlockData(data.get(vec));
 			states.add(state);
 		}
 		states.sort((o1, o2) -> {
@@ -94,7 +93,7 @@ public class Generator implements Runnable{
 		long time = System.nanoTime();
 		if(!cancel){
 			if(locs != null){
-				MaterialData data = block.getData();
+				BlockData data = block.getBlockData();
 				while(locs.hasNext()){
 					Location loc = locs.next();
 					
@@ -124,7 +123,7 @@ public class Generator implements Runnable{
 					if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
 						Integer[] lim = BTPlugin.plugin.getPlayerData().getPlayerHightLimits(player);
 						if(state.getLocation().getBlockY() >= lim[0] && state.getLocation().getY() <= lim[1]){
-							BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, undo);
+							BTUtils.placeBlock(player, state.getLocation(), state.getBlockData(), BuildMode.OVERWRITE, undo);
 						}
 					}
 					if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
@@ -143,7 +142,7 @@ public class Generator implements Runnable{
 					}
 					
 					if(player != null){
-						BTUtils.placeBlock(player, state.getLocation(), state.getData(), BuildMode.OVERWRITE, nundo);
+						BTUtils.placeBlock(player, state.getLocation(), state.getBlockData(), BuildMode.OVERWRITE, nundo);
 	
 						if(System.nanoTime() - time > BTPlugin.plugin.getMaxGeneratorDelay() * 1000000)
 							return;

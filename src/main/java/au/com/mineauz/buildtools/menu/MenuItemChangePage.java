@@ -9,7 +9,7 @@ public class MenuItemChangePage extends MenuItem {
 	private int page;
 	
 	public MenuItemChangePage(String name, MenuSession session, int page) {
-		super(name, Material.REDSTONE_TORCH_ON);
+		super(name, Material.REDSTONE_TORCH);
 		this.session = session;
 		this.page = page;
 	}

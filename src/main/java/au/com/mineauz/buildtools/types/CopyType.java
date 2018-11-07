@@ -55,7 +55,7 @@ public class CopyType implements BuildType{
 							getRelativeCoord(y, points.get(0).getPoint().getBlockY()), 
 							getRelativeCoord(z, points.get(0).getPoint().getBlockZ()));
 					if(!BTPlugin.plugin.getPlayerData().getPlayerBlockLimits(player).contains(temp.getBlock().getType()))
-						cp.addState(vec, temp.getBlock().getState().getData());
+						cp.addState(vec, temp.getBlock().getBlockData());
 					if(mode == BuildMode.BREAK)
 						locs.add(temp.clone());
 				}

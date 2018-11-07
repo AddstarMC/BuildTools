@@ -9,9 +9,9 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.patterns.BuildPattern;
 import au.com.mineauz.buildtools.types.BuildType;
@@ -28,8 +28,7 @@ public class BTUtils {
 	
 	public static List<String> stringToList(String toList){
 		String[] st = toList.split(";");
-		List<String> list = new ArrayList<>();
-		list.addAll(Arrays.asList(st));
+		List<String> list = new ArrayList<>(Arrays.asList(st));
 		return list;
 	}
 	
@@ -132,15 +131,14 @@ public class BTUtils {
 		}
 	}
 	
-	public static void placeBlock(BTPlayer player, Location loc, MaterialData data, BuildMode mode, BTUndo undo){
+	public static void placeBlock(BTPlayer player, Location loc, BlockData data, BuildMode mode, BTUndo undo){
 		if(BTPlugin.plugin.getProtectionPlugins().canBuild(player, loc)){
 			if(mode == BuildMode.PLACE && (loc.getBlock().getType() == Material.AIR || loc.getBlock().isLiquid())){
-				if(!data.getItemType().hasGravity() ||
+				if(!data.getMaterial().hasGravity() ||
 						loc.clone().subtract(0, 1, 0).getBlock().getType().isSolid()){
 					undo.addBlock(loc.getBlock().getState());
 					BlockState state = loc.getBlock().getState();
-					state.setType(data.getItemType());
-					state.setData(data);
+					state.setBlockData(data);
 					state.update(true);
 				}
 			}
@@ -151,15 +149,13 @@ public class BTUtils {
 			else if(mode == BuildMode.REPLACE && loc.getBlock().getType() != Material.AIR){
 				undo.addBlock(loc.getBlock().getState());
 				BlockState state = loc.getBlock().getState();
-				state.setType(data.getItemType());
-				state.setData(data);
+				state.setBlockData(data);
 				state.update(true);
 			}
 			else if(mode == BuildMode.OVERWRITE){
 				undo.addBlock(loc.getBlock().getState());
 				BlockState state = loc.getBlock().getState();
-				state.setType(data.getItemType());
-				state.setData(data);
+				state.setBlockData(data);
 				state.update(true);
 			}
 		}
@@ -402,7 +398,7 @@ public class BTUtils {
 				ind = nind + 1;
 			}
 			else{
-				out.add(entry.substring(ind, entry.length()));
+				out.add(entry.substring(ind));
 				break;
 			}
 		}
@@ -429,7 +425,7 @@ public class BTUtils {
 				ind = nind + 1;
 			}
 			else{
-				out.add(entry.substring(ind, entry.length()));
+				out.add(entry.substring(ind));
 				break;
 			}
 		}

@@ -6,24 +6,17 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.material.MaterialData;
 
 import au.com.mineauz.buildtools.BTPlayer;
 
 public class MenuItemString extends MenuItemValue<String> {
 	private boolean allowNull = false;
-
-	public MenuItemString(String name, MaterialData displayItem, Callback<String> callback) {
-		super(name, displayItem, callback);
-	}
+	
 	public MenuItemString(String name, String description, Material displayItem, Callback<String> callback) {
 		super(name, description, displayItem, callback);
 	}
 	public MenuItemString(String name, Material displayItem, Callback<String> callback) {
 		super(name, null, displayItem, callback);
-	}
-	public MenuItemString(String name, String description, MaterialData displayItem, Callback<String> callback) {
-		super(name, description, displayItem, callback);
 	}
 	
 	public void setAllowNull(boolean allow){
