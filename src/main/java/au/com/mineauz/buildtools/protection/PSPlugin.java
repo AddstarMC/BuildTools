@@ -1,15 +1,14 @@
 package au.com.mineauz.buildtools.protection;
 
+import com.github.intellectualsites.plotsquared.api.PlotAPI;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.intellectualcrafters.plot.api.PlotAPI;
 
 public class PSPlugin implements ProtectionPlugin {
 	
 	private PlotAPI api;
 	
-	@SuppressWarnings("deprecation")
 	public PSPlugin(){
 		api = new PlotAPI();
 	}
@@ -21,7 +20,13 @@ public class PSPlugin implements ProtectionPlugin {
 
 	@Override
 	public boolean canBuild(Player player, Location location) {
-		return !api.getMain().hasPlotArea(location.getWorld().getName()) || api.getPlot(location) != null && api.getPlot(location).isAdded(player.getUniqueId());
+		com.github.intellectualsites.plotsquared.plot.object.Location l = new com.github.intellectualsites.plotsquared.plot.object.Location(location.getWorld().getName(),
+				location.getBlockX(),location.getBlockY(),location.getBlockZ());
+		if(l.getPlotAbs() != null) {
+			return l.getPlotAbs().isAdded(player.getUniqueId());
+		}else{
+			return false;
+		}
 	}
 
 }
