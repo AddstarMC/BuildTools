@@ -122,7 +122,7 @@
         <dependency>
             <groupId>com.github.intellectualsites.plotsquared</groupId>
             <artifactId>PlotSquared-API</artifactId>
-            <version>4.400</version>
+            <version>4.453</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
