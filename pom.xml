@@ -71,33 +71,26 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>p2 </id>
-            <url>https://ci.athion.net/job/PlotSquared-Breaking/ws/mvn/</url>
-        </repository>
-
-        <!-- WorldEdit, WorldGuard, etc -->
-        <repository>
-            <id>sk89q-mvn2</id>
-            <url>http://maven.sk89q.com/repo</url>
-        </repository>
-
         <!-- Maven central -->
         <repository>
             <id>maven-central</id>
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
-
         <!--GriefPrevention -->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
 
-        <!-- PlotSquared repository -->
+        <!-- WorldEdit -->
         <repository>
-            <id>p2-repo</id>
-            <url>http://ci.athion.net/job/PlotSquared-Releases/ws/mvn/</url>
+            <id>enginehub</id>
+            <url>https://maven.enginehub.org/repo/</url>
+        </repository>
+        <!-- PlotSquared -->
+        <repository>
+            <id>IntellectualSites</id>
+            <url>https://mvn.intellectualsites.com/content/groups/public/</url>
         </repository>
     </repositories>
 
@@ -120,50 +113,16 @@
 
         <!-- PlotSquared API -->
         <dependency>
-            <groupId>com.github.intellectualsites.plotsquared</groupId>
-            <artifactId>PlotSquared-API</artifactId>
-            <version>4.453</version>
+            <groupId>com.plotsquared</groupId>
+            <artifactId>PlotSquared</artifactId>
+            <version>5.11.1</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spongeapi</artifactId>
-                    <groupId>org.spongepowered</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>junit</artifactId>
-                    <groupId>junit</groupId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>bukkit</artifactId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>BarAPI</artifactId>
-                    <groupId>me.confuser</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>worldedit</artifactId>
-                    <groupId>com.sk89q</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>gson</artifactId>
-                    <groupId>com.google.code.gson</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-math3</artifactId>
-                    <groupId>org.apache.commons</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>javax.websocket-api</artifactId>
-                    <groupId>javax.websocket</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
-            <artifactId>worldguard-legacy</artifactId>
-            <version>7.0.0-SNAPSHOT</version>
+            <artifactId>worldguard-bukkit</artifactId>
+            <version>7.0.3-SNAPSHOT</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>

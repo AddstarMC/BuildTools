@@ -1,6 +1,6 @@
 package au.com.mineauz.buildtools.protection;
 
-import com.github.intellectualsites.plotsquared.api.PlotAPI;
+import com.plotsquared.core.api.PlotAPI;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -20,7 +20,7 @@ public class PSPlugin implements ProtectionPlugin {
 
 	@Override
 	public boolean canBuild(Player player, Location location) {
-		com.github.intellectualsites.plotsquared.plot.object.Location l = new com.github.intellectualsites.plotsquared.plot.object.Location(location.getWorld().getName(),
+		com.plotsquared.core.location.Location l = new com.plotsquared.core.location.Location(location.getWorld().getName(),
 				location.getBlockX(),location.getBlockY(),location.getBlockZ());
 		if(l.getPlotAbs() != null) {
 			return l.getPlotAbs().isAdded(player.getUniqueId());
