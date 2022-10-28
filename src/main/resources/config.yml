@@ -10,8 +10,8 @@ maxVolume:
 # Permission for added groups: buildtools.hightlimit.<groupName>
 heightLimits:
   default:
-  - 0
-  - 255
+  - -63
+  - 320
 
 # Block materials that cannot be used in BuildTools.
 # More groups can be added to disallow specific blocks per group.
@@ -50,8 +50,9 @@ disabledBlocks:
   - CAULDRON
   - CHAIN
   - CHEST
+  - CHEST_MINECART
   - COMMAND
-  - COMMAND_MINECART
+  - COMMAND_BLOCK_MINECART
   - CRIMSON_ROOTS
   - CROPS
   - CYAN_CANDLE
@@ -67,12 +68,14 @@ disabledBlocks:
   - DROPPER
   - EMPTY_MAP
   - ENCHANTMENT_TABLE
+  - END_CRYSTAL
   - ENDER_PORTAL
   - ENDER_PORTAL_FRAME
   - END_ROD
   - EXPLOSIVE_MINECART
   - FIRE
   - FLOWER_POT
+  - FURNACE_MINECART
   - GLOW_BERRIES
   - GLOW_LICHEN
   - GRAY_CANDLE
@@ -96,12 +99,15 @@ disabledBlocks:
   - LIGHTNING_ROD
   - LIME_CANDLE
   - MAGENTA_CANDLE
+  - MANGROVE_PROPAGULe
   - MEDIUM_AMETHYST_BUD
   - MINECART
   - MOB_SPAWNER
   - NETHER_SPROUTS
+  - OCHRE_FROGLIGHT
   - ORANGE_CANDLE
   - PAINTING
+  - PEARLESCENT_FROGLIGHT
   - PINK_CANDLE
   - PISTON_BASE
   - PISTON_EXTENSION
@@ -127,6 +133,9 @@ disabledBlocks:
   - RED_MUSHROOM
   - RED_ROSE
   - SAPLING
+  - SCULK_SENSOR
+  - SCULK_SHRIEKER
+  - SEA_PICKLE
   - SIGN
   - SIGN_POST
   - SKULL
@@ -141,11 +150,13 @@ disabledBlocks:
   - STORAGE_MINECART
   - TALL_GRASS
   - TNT
+  - TNT_MINECART
   - TORCH
   - TRAPPED_CHEST
   - TRAP_DOOR
   - TRIPWIRE_HOOK
   - TWISTING_VINES
+  - VERDANT_FROGLIGHT
   - VINE
   - WALL_BANNER
   - WALL_SIGN

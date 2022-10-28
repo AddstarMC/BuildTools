@@ -18,6 +18,10 @@ public class PSPlugin implements ProtectionPlugin {
 				location.getBlockZ()
 		);
 
+		// Checks if world is not a Plot world, then ignore
+		if (l.getPlotArea() == null) return true;
+
+		// Checks if player is in a plot and added
 		if (l.getPlotAbs() != null) {
 			return l.getPlotAbs().isAdded(player.getUniqueId());
 		} else {
