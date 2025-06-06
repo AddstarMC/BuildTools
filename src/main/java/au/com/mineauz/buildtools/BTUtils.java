@@ -19,11 +19,7 @@ import au.com.mineauz.buildtools.types.BuildType;
 public class BTUtils {
 	
 	public static String listToString(List<String> list){
-		String[] str = new String[list.size()];
-		for(int i = 0; i < list.size(); i++){
-			str[i] = list.get(i);
-		}
-		return arrayToString(str);
+		return arrayToString(list.toArray(new String[0]));
 	}
 	
 	public static List<String> stringToList(String toList){
@@ -33,23 +29,23 @@ public class BTUtils {
 	}
 	
 	public static String arrayToString(String[] arr){
-		String st = ChatColor.GRAY + "";
+		StringBuilder st = new StringBuilder(ChatColor.GRAY.toString());
 		boolean alt = false;
-		for(String s : arr){
-			st += s;
-			if(!arr[arr.length - 1 ].equals(s)){
-				st += ", ";
+		for(int i = 0; i < arr.length; i++){
+			st.append(arr[i]);
+			if(i < arr.length - 1){
+				st.append(", ");
 				if(alt){
-					st += ChatColor.GRAY;
+					st.append(ChatColor.GRAY);
 					alt = false;
 				}
 				else{
-					st += ChatColor.WHITE;
+					st.append(ChatColor.WHITE);
 					alt = true;
 				}
 			}
 		}
-		return st;
+		return st.toString();
 	}
 	
 	public static String capitalize(String input){

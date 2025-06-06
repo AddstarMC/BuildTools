@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.Iterator;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -111,18 +112,16 @@ public class BTPlayer {
 	}
 	
 	public void removePoint(Location loc){
-		for(BlockPoint point : new ArrayList<>(points)){
+		Iterator<BlockPoint> it = points.iterator();
+		while(it.hasNext()){
+			BlockPoint point = it.next();
 			if(loc.getBlockX() == point.getPoint().getBlockX() &&
 					loc.getBlockY() == point.getPoint().getBlockY() &&
 					loc.getBlockZ() == point.getPoint().getBlockZ() &&
 					loc.getWorld() == point.getPoint().getWorld()){
-				points.remove(point);
+				it.remove();
 			}
 		}
-	}
-	
-	public int getPointCount(){
-		return points.size();
 	}
 	
 	public void clearPoints(){

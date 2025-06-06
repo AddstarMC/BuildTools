@@ -149,13 +149,14 @@ public class MenuListener implements Listener{
 	@EventHandler(priority = EventPriority.LOW)
 	private void onDisconnect(PlayerQuitEvent event) {
 		BTPlayer ply = plugin.getPlayerData().getBTPlayer(event.getPlayer());
-		
+
 		MenuSession session = ply.getMenuSession();
 		if (session == null) {
 			return;
 		}
-		
+
 		session.current.onCloseMenu(ply);
+		ply.cancelMenuReopen();
 	}
 	
 	@EventHandler
