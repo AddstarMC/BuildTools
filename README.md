@@ -5,5 +5,5 @@ BuildTools is based around simple block breaking and placing as opposed to a sel
 commands.
 </p>
 <p>
-Compiling currently requires the latest Bukkit, WorldGuard, GriefPrevention and PlotMe. The plugins 
+Compiling currently requires the latest Paper API, WorldGuard, GriefPrevention and PlotMe. The plugins
 are required for stopping players from building in protected areas using this plugin.</p>

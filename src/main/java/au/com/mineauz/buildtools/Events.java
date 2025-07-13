@@ -65,7 +65,7 @@ public class Events implements Listener{
 			
 			if(!pdata.getPlayerBlockLimits(pl).contains(event.getBlockPlaced().getType()) ||
 					pl.hasPermission("buildtools.bypassdisabledblocks")){
-				Integer[] hl = pdata.getPlayerHightLimits(pl);
+                                Integer[] hl = pdata.getPlayerHeightLimits(pl);
 				if((event.getBlock().getLocation().getBlockY() <= hl[1] && 
 						event.getBlock().getLocation().getBlockY() >= hl[0]) ||
 						pl.hasPermission("buildtools.bypassheightlimit")){
@@ -149,7 +149,7 @@ public class Events implements Listener{
 			
 			if(!pdata.getPlayerBlockLimits(pl).contains(Material.AIR) || 
 					pl.hasPermission("buildtools.bypassdisabledblocks")){
-				Integer[] hl = pdata.getPlayerHightLimits(pl);
+                                Integer[] hl = pdata.getPlayerHeightLimits(pl);
 				if((event.getBlock().getLocation().getBlockY() <= hl[1] && 
 						event.getBlock().getLocation().getBlockY() >= hl[0]) ||
 						pl.hasPermission("buildtools.bypassheightlimit")){

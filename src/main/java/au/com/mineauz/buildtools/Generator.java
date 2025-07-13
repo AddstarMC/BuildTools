@@ -121,7 +121,7 @@ public class Generator implements Runnable{
 					}
 					
 					if(copy.isReplacing() || state.getBlock().getState().getType() == Material.AIR){
-						Integer[] lim = BTPlugin.plugin.getPlayerData().getPlayerHightLimits(player);
+                Integer[] lim = BTPlugin.plugin.getPlayerData().getPlayerHeightLimits(player);
 						if(state.getLocation().getBlockY() >= lim[0] && state.getLocation().getY() <= lim[1]){
 							BTUtils.placeBlock(player, state.getLocation(), state.getBlockData(), BuildMode.OVERWRITE, undo);
 						}

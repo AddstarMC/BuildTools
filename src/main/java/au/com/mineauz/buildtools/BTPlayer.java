@@ -266,16 +266,13 @@ public class BTPlayer {
 			}
 
 			@Override
-			public String getValue() {
-				String set = null;
-				if(tSettings.length > 0)
-					set = "";
-				for(String s : tSettings)
-					set += s + " ";
-				return set;
-			}
-		};
-	}
+                        public String getValue() {
+                                if (tSettings.length == 0)
+                                        return null;
+                                return String.join(" ", tSettings);
+                        }
+                };
+        }
 	
 	public void setTSettings(String[] settings){
 		tSettings = settings;
@@ -297,16 +294,13 @@ public class BTPlayer {
 			}
 
 			@Override
-			public String getValue() {
-				String set = null;
-				if(pSettings.length > 0)
-					set = "";
-				for(String s : pSettings)
-					set += s + " ";
-				return set;
-			}
-		};
-	}
+                        public String getValue() {
+                                if (pSettings.length == 0)
+                                        return null;
+                                return String.join(" ", pSettings);
+                        }
+                };
+        }
 	
 	public void setPSettings(String[] settings){
 		pSettings = settings;

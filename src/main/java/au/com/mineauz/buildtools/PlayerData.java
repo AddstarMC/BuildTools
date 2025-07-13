@@ -137,14 +137,14 @@ public class PlayerData {
 		plugin.saveConfig();
 	}
 	
-	public Integer[] getPlayerHightLimits(BTPlayer player){
-		for(String l : heightLimits.keySet()){
-			if(player.hasPermission("buildtools.heightlimit." + l)){
-				return heightLimits.get(l);
-			}
-		}
-		return getHeightLimits("default");
-	}
+        public Integer[] getPlayerHeightLimits(BTPlayer player){
+                for(String l : heightLimits.keySet()){
+                        if(player.hasPermission("buildtools.heightlimit." + l)){
+                                return heightLimits.get(l);
+                        }
+                }
+                return getHeightLimits("default");
+        }
 	
 	public void addVolumeLimit(String name, int limit) throws DuplicateLimitException{
 		name = name.toLowerCase();
