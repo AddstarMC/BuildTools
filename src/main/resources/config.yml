@@ -7,7 +7,7 @@ maxVolume:
 # Height limits for players to use BuildTools, Min 0, Max 255.
 # More groups can be added to allow certain players to build higher/lower.
 # First item on list is minimum height, second is maximum.
-# Permission for added groups: buildtools.hightlimit.<groupName>
+# Permission for added groups: buildtools.heightlimit.<groupName>
 heightLimits:
   default:
   - -63

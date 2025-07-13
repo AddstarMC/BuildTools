@@ -3,15 +3,15 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>au.com.mineauz</groupId>
     <artifactId>BuildTools</artifactId>
-    <version>1.19.2-SNAPSHOT</version>
+    <version>1.21.7-SNAPSHOT</version>
     <name>BuildTools</name>
     <properties>
         <build.number/>
         <plugin.version>${project.version}-${build.number}</plugin.version>
         <mainClass>au.com.mineauz.buildtools.BTPlugin</mainClass>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spigot.api.version>1.19</spigot.api.version>
-        <spigot.version>1.19.2-R0.1-SNAPSHOT</spigot.version>
+        <paper.api.version>1.21</paper.api.version>
+        <paper.version>1.21.7-R0.1-SNAPSHOT</paper.version>
     </properties>
     <licenses>
         <license>
@@ -96,9 +96,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>${spigot.version}</version>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>${paper.version}</version>
             <scope>provided</scope>
         </dependency>
 

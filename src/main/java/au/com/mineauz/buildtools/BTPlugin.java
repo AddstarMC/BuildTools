@@ -102,7 +102,7 @@ public class BTPlugin extends JavaPlugin{
 		
 		HandlerList.unregisterAll(this);
 		
-		getLogger().info(" successfully disabled!");
+                getLogger().info("Successfully disabled!");
 	}
 	
 	public PlayerData getPlayerData(){
